@@ -120,7 +120,8 @@ const services = await client.fetch(`*[_type == "service"] | order(_createdAt as
         
         {/* Only show arrows if there are more than 3 services */}
         {services.length > 3 && (
-    <div class="flex gap-4">
+    /* Add 'hidden' for mobile and 'md:flex' for desktop */
+    <div class="hidden md:flex gap-4">
         <button class="swiper-prev-btn group cursor-pointer flex items-center justify-center p-2 outline-none">
             <svg 
                 viewBox="0 0 24 24" 

@@ -34,8 +34,10 @@ const services = await client.fetch(`*[_type == "service"]{
             <p class="text-lg text-slate-600 leading-relaxed mb-8">
               {service.description}
             </p>
-            <a href="/kontakt" class="inline-block border-b-2 border-black pb-1 text-xs font-black uppercase tracking-widest hover:text-brand hover:border-brand transition-all">
-              Jetzt Anfragen
+              <a href="/kontakt" 
+              class="inline-block bg-brand text-white px-6 py-4 md:px-12 md:py-5 text-sm md:text-base font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all"
+            >
+              Individuelles Angebot
             </a>
           </div>
 
