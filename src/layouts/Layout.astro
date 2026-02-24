@@ -39,24 +39,7 @@ const { title } = Astro.props;
         <span class="w-6 h-0.5 bg-black transition-all duration-300" id="line3"></span>
     </button>
 
-    <div id="menu-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] opacity-0 pointer-events-none transition-opacity duration-300"></div>
-
-    <div 
-    id="sidebar" 
-    class="fixed top-0 right-0 w-[80%] max-w-[400px] h-full bg-white z-[999] translate-x-full invisible transition-all duration-500 ease-in-out p-12"
->
-        <div class="mt-20 flex flex-col gap-6">
-            <p class="text-brand font-bold uppercase tracking-widest text-[10px]">Navigation</p>
-            <a href="/dienstleistungen" class="text-3xl font-black uppercase italic hover:text-brand transition-colors">Dienstleistungen</a>
-            <a href="/ueber-uns" class="text-3xl font-black uppercase italic hover:text-brand transition-colors">über uns</a>
-            <div class="h-px bg-slate-100 my-4"></div>
-            <a href="/kontakt" class="text-3xl font-black uppercase italic text-brand">Kontakt</a>
-        </div>
-        
-        <div class="mt-auto">
-             <p class="text-[10px] font-bold uppercase text-slate-400">© 2026 Attar Dienstleistungen</p>
-        </div>
-    </div>
+    
 </nav>
 
 <script>
@@ -107,6 +90,24 @@ const { title } = Astro.props;
 		<main>
 			<slot />
 		</main>
+    <div id="menu-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+    <div 
+    id="sidebar" 
+    class="fixed top-0 right-0 w-[80%] max-w-[400px] h-full bg-white z-[999] translate-x-full invisible transition-all duration-500 ease-in-out p-12"
+>
+        <div class="mt-20 flex flex-col gap-6">
+            <p class="text-brand font-bold uppercase tracking-widest text-[10px]">Navigation</p>
+            <a href="/dienstleistungen" class="text-3xl font-black uppercase italic hover:text-brand transition-colors">Dienstleistungen</a>
+            <a href="/ueber-uns" class="text-3xl font-black uppercase italic hover:text-brand transition-colors">über uns</a>
+            <div class="h-px bg-slate-100 my-4"></div>
+            <a href="/kontakt" class="text-3xl font-black uppercase italic text-brand">Kontakt</a>
+        </div>
+        
+        <div class="mt-auto">
+             <p class="text-[10px] font-bold uppercase text-slate-400">© 2026 Attar Dienstleistungen</p>
+        </div>
+    </div>
 		<footer class="relative z-10 bg-slate-900 text-slate-300 border-t border-white/5 px-8 md:px-24 pt-24 pb-12 overflow-hidden">
   <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
     
