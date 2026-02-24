@@ -1,17 +1,238 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import { client } from '../lib/sanity';
 
+// Updated Fetch: Now including the image URL
+const services = await client.fetch(`*[_type == "service"] | order(_createdAt asc) {
+  title,
+  "image": image.asset->url,
+  "id": _id
+}`);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Modern Building Services">
+    <section class="w-full relative p-0 mb-20 overflow-hidden">
+        <video 
+            autoplay 
+            muted 
+            loop 
+            playsinline 
+            class="w-full h-auto block" 
+        >
+            <source src="/test1.mp4" type="video/mp4" />
+        </video>
+		<div class="mouse-wrapper">
+    <div class="mouse"></div>
+    <p class="text-[9px] font-bold uppercase tracking-[0.3em] text-white/60">Scroll</p>
+  </div>
+    </section>
+    
+
+	<section class="relative min-h-[80vh] flex flex-col justify-center px-8 md:px-24 py-20">
+		<div class="max-w-6xl">
+			<p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-xs">
+				Attar Dienstleistungen
+			</p>
+			<h1 class="text-[clamp(3rem,10vw,8rem)] font-black mb-8 ">
+				Ein Partner<br />
+				<span class="block mt-4 text-transparent stroke-black" style="-webkit-text-stroke: 2px black;">
+        Alle Lösungen.
+    </span>
+			</h1>
+			
+			<div class="grid md:grid-cols-2 gap-12 items-end">
+				<p class="text-xl text-slate-600 font-medium leading-relaxed">
+					Chaos bewältigen, Werte erhalten, Freiraum schaffen. Wir nehmen Ihr Projekt in die Hand – zuverlässig, diskret und professionell. Ob Entrümpelung, Hausmeisterservice oder Grünpflege: Genießen Sie das Ergebnis, während wir uns um die Details kümmern. 
+				</p>
+				<a href="/kontakt" class="group flex items-center gap-4 text-2xl font-black uppercase italic">
+					Angebot anfragen
+					<span class="bg-brand text-white p-3 rounded-full group-hover:translate-x-2 transition-transform">
+						→
+					</span>
+				</a>
+			</div>
+		</div>
+	</section>
+	<section class="px-8 md:px-24 py-32 border-t border-slate-100">
+	  <div class="grid md:grid-cols-12 gap-8">
+	    <div class="md:col-span-4">
+	      <p class="text-brand font-bold uppercase tracking-widest text-xs mb-4 italic">Über uns</p>
+	      <h2 class="text-5xl font-black uppercase leading-none">Ehrliches <br/> Handwerk.</h2>
+	    </div>
+	    <div class="md:col-span-8">
+	      <p class="text-2xl font-medium text-slate-700 leading-relaxed max-w-2xl">
+	        Hinter Attar Dienstleistungen steht die Überzeugung, dass Ordnung und Pflege die Basis für Wohlbefinden sind. Seit Jahren unterstützen wir Privat- und Geschäftskunden dabei, ihre Immobilien in Bestform zu halten. Wir sind kein anonymer Großkonzern – wir sind Ihr lokaler Partner, der anpackt, wo Hilfe gebraucht wird.
+	      </p>
+	    </div>
+	  </div>
+	</section>
+	<section class="px-8 md:px-24 py-32 bg-slate-900 text-white">
+	  <h2 class="text-brand text-xs font-bold uppercase tracking-widest mb-12 italic">Kundenstimmen</h2>
+	  <div class="grid md:grid-cols-3 gap-8">
+	    {[
+	      { name: "M. Schmidt", text: "Die Entrümpelung verlief absolut reibungslos. Diskret und extrem schnell." },
+	      { name: "K. Weber", text: "Unser Garten sah noch nie so gepflegt aus. Ein zuverlässiges Team!" },
+	      { name: "Hausverwaltung Meyer", text: "Professioneller Hausmeisterservice, den man blind vertrauen kann." }
+	    ].map((review) => (
+	      <div class="border-l border-white/20 pl-8 py-4">
+	        <p class="text-xl mb-6 italic">"{review.text}"</p>
+	        <p class="font-black uppercase tracking-tighter text-brand">— {review.name}</p>
+	      </div>
+	    ))}
+	  </div>
+	</section>
+	<section class="px-8 md:px-24 py-32 border-b border-slate-100">
+  <div class="grid md:grid-cols-2 gap-20">
+    <div>
+      <h2 class="text-[clamp(2rem,5vw,4rem)] font-black uppercase mb-12">
+        Bereit für <br />
+        <span class="text-transparent stroke-black" style="-webkit-text-stroke: 1px black;">Neues?</span>
+      </h2>
+      
+      <div class="flex flex-col gap-8">
+        <a href="tel:+49123456789" class="group">
+          <p class="text-[10px] font-bold uppercase text-slate-400 mb-1">Telefon</p>
+          <p class="text-3xl font-black group-hover:text-brand transition-colors">+49 (0) 123 456 789</p>
+        </a>
+        
+        <a href="mailto:info@attar.de" class="group">
+          <p class="text-[10px] font-bold uppercase text-slate-400 mb-1">E-Mail</p>
+          <p class="text-3xl font-black group-hover:text-brand transition-colors">info@attar.de</p>
+        </a>
+      </div>
+    </div>
+    
+    <div class="bg-slate-50 p-12 flex flex-col justify-center border border-slate-100">
+      <p class="font-bold uppercase tracking-widest text-xs mb-4">Schnellanfrage</p>
+      <p class="text-lg text-slate-600 mb-8">Schreiben Sie uns eine kurze Nachricht und wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
+      <a href="/kontakt" class="bg-black text-white text-center py-5 font-black uppercase tracking-widest hover:bg-brand transition-all">
+        Zum Formular
+      </a>
+    </div>
+  </div>
+</section>
+	<section class="px-8 md:px-24 py-32 bg-slate-50 overflow-hidden">
+    <div class="flex justify-between items-end mb-12">
+        <div>
+            <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-xs italic">Portfolio</p>
+            <h2 class="text-5xl font-black uppercase">Leistungen</h2>
+        </div>
+        
+        {/* Only show arrows if there are more than 3 services */}
+        {services.length > 3 && (
+    <div class="flex gap-4">
+        <button class="swiper-prev-btn group cursor-pointer flex items-center justify-center p-2 outline-none">
+            <svg 
+                viewBox="0 0 24 24" 
+                class="w-10 h-10 fill-none stroke-brand stroke-[3px] transition-transform duration-300 group-hover:-translate-x-2"
+            >
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+        </button>
+        <button class="swiper-next-btn group cursor-pointer flex items-center justify-center p-2 outline-none">
+            <svg 
+                viewBox="0 0 24 24" 
+                class="w-10 h-10 fill-none stroke-brand stroke-[3px] transition-transform duration-300 group-hover:translate-x-2"
+            >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+        </button>
+    </div>
+)}
+    </div>
+
+    <div class="swiper-services !overflow-visible">
+        <div class="swiper-wrapper">
+            {services.map((service, index) => (
+  <div class="swiper-slide h-auto">
+    <a href="/dienstleistungen" class="relative bg-slate-900 aspect-[4/5] flex flex-col justify-between border-r border-slate-200 hover:border-brand transition-all group cursor-pointer h-full overflow-hidden">
+      
+      <div class="absolute inset-0 z-0 overflow-hidden bg-white">
+        <img 
+          src={service.image} 
+          alt={service.title} 
+          class="w-full h-full object-cover grayscale opacity-70 scale-110 group-hover:opacity-100 group-hover:scale-100 group-hover:grayscale-0 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-500"></div>
+      </div>
+
+      <div class="relative z-10 p-10 flex flex-col justify-between h-full">
+        <div class="flex justify-between items-start">
+          <span class="text-6xl font-black text-white/40 group-hover:text-brand group-hover:-translate-y-2 transition-all duration-500 italic leading-none drop-shadow-md">
+            0{index + 1}
+          </span>
+          <span class="opacity-0 group-hover:opacity-100 text-white text-2xl transition-all duration-500 translate-x-4 group-hover:translate-x-0">
+            →
+          </span>
+        </div>
+
+        <div class="space-y-4">
+          <h3 class="text-3xl font-black uppercase leading-[0.9] break-words text-white drop-shadow-lg group-hover:translate-x-2 transition-transform duration-500">
+            {service.title}
+          </h3>
+          <div class="w-0 group-hover:w-full h-1 bg-brand transition-all duration-500"></div>
+        </div>
+      </div>
+      
+    </a>
+  </div>
+))}
+        </div>
+    </div>
+</section>
+</Layout>
+
+<script>
+import Swiper from 'swiper';
+    import { Navigation } from 'swiper/modules';
+    import 'swiper/css';
+
+    new Swiper('.swiper-services', {
+        modules: [Navigation],
+        slidesPerView: 1.1,
+        spaceBetween: 20,
+        navigation: {
+            nextEl: '.swiper-next-btn',
+            prevEl: '.swiper-prev-btn',
+        },
+        breakpoints: {
+            640: { slidesPerView: 2 },
+            1024: { 
+                slidesPerView: 3,
+                spaceBetween: 1 // Maintains that thin grid-line look
+            },
+        }
+    });
+    const mouseIcon = document.querySelector('.mouse-wrapper') as HTMLElement;
+    
+    window.addEventListener('scroll', () => {
+        const scrollValue = window.scrollY;
+
+        if (mouseIcon) {
+            if (scrollValue > 0 && scrollValue < 150) {
+                // 1. Move it down slightly as we scroll (Parallax)
+                // We keep the -50% for horizontal centering and add the vertical pixels
+                const moveAmount = scrollValue * 0.5; // Adjust 0.5 to move faster or slower
+                mouseIcon.style.transform = `translate(-50%, ${moveAmount}px)`;
+                
+                // 2. Gradually fade it out instead of a hard cut at 50px
+                const fadeStart = 100;
+				const newOpacity = 1 - (Math.max(0, scrollValue - fadeStart) / 200);
+                mouseIcon.style.opacity = newOpacity.toString();
+                mouseIcon.style.visibility = 'visible';
+            } 
+            else if (scrollValue >= 150) {
+                // Fully hide it once past the threshold
+                mouseIcon.style.opacity = '0';
+                mouseIcon.style.visibility = 'hidden';
+            }
+            else {
+                // Reset to initial state at the very top
+                mouseIcon.style.transform = `translate(-50%, 0)`;
+                mouseIcon.style.opacity = '1';
+                mouseIcon.style.visibility = 'visible';
+            }
+        }
+    });
+    
+</script>

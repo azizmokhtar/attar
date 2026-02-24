@@ -9,6 +9,22 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.17.1"
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/vercel": "^9.0.4",
+    "@sanity/astro": "^3.2.11",
+    "@sanity/client": "^7.15.0",
+    "@sanity/image-url": "^2.0.3",
+    "@tailwindcss/vite": "^4.2.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "astro": "^5.17.1",
+    "lucide-react": "^0.575.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-is": "^19.2.4",
+    "sanity": "^5.11.0",
+    "styled-components": "^6.3.11",
+    "swiper": "^12.1.2",
+    "tailwindcss": "^4.2.1"
   }
 }

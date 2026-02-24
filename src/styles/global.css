@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+
+@theme {
+  --color-brand: #ff5f00; /* Turner-style Orange */
+}
+
+:root {
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  /* This creates subtle horizontal lines every 100px */
+  background-image: 
+    linear-gradient(to bottom, #f1f5f9 1px, transparent 1px),
+    linear-gradient(to bottom, #f8fafc 1px, transparent 1px),
+    linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+  
+  /* Different heights (using prime numbers like 137, 271, 463 helps prevent patterns) */
+  background-size: 100% 137px, 100% 271px, 100% 463px;
+  
+  background-attachment: local;
+}
+
+/* Big bold "Turner" headlines */
+h1, h2, h3 {
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+/* Default state: hidden on mobile */
+.mouse-wrapper {
+    display: none;
+}
+/* Update this in your global.css */
+@media (min-width: 768px) {
+    .mouse-wrapper {
+        display: flex;
+        position: absolute;
+        bottom: 20%;
+        left: 50%;
+        transform: translateX(-50%); /* Base centering */
+        z-index: 20;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        pointer-events: none;
+        /* Smooth out both opacity and movement */
+        transition: opacity 0.4s ease-out, visibility 0.4s, transform 0.1s linear;
+        opacity: 1;
+    }
+}
+/* Class to trigger the fade out */
+.mouse-hidden {
+    opacity: 0 !important;
+    visibility: hidden;
+}
+/* Make the mouse icon white and thinner for a more architectural look */
+.mouse {
+    width: 26px;
+    height: 44px;
+    border: 2px solid rgba(255, 255, 255, 0.8); /* White with transparency */
+    border-radius: 20px;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    width: 4px;
+    height: 8px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff5f00; /* Use your brand orange for the wheel! */
+    border-radius: 2px;
+    animation: wheel 2s infinite;
+}
+
+/* Adjust the animation for the smaller mouse size */
+@keyframes wheel {
+    0% { opacity: 1; top: 6px; }
+    100% { opacity: 0; top: 25px; }
+}
+/* Add this if the zoom feels "jittery" */
+.swiper-slide img {
+  will-change: transform;
+}

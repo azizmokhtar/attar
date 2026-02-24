@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Über uns | Das Team hinter Attar">
+  <section class="pt-40 pb-20 px-8 md:px-24">
+    <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-xs italic">Unsere DNA</p>
+    <h1 class="text-[clamp(3rem,8vw,6rem)] font-black uppercase leading-[0.85] mb-12">
+      Präzision <br />
+      <span class="text-transparent stroke-black" style="-webkit-text-stroke: 1.5px black;">aus Leidenschaft.</span>
+    </h1>
+  </section>
+
+  <section class="px-8 md:px-24 py-32 border-y border-slate-100 bg-slate-50/50">
+    <div class="grid md:grid-cols-12 gap-8">
+      <div class="md:col-span-4">
+        <h2 class="text-xs font-bold uppercase tracking-widest text-brand italic">Unsere Mission</h2>
+      </div>
+      <div class="md:col-span-8">
+        <p class="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] mb-8">
+          Wir pflegen Werte, <br/> damit Sie sich auf das Wesentliche konzentrieren können.
+        </p>
+        <p class="text-lg text-slate-600 font-medium leading-relaxed max-w-2xl">
+          Attar Dienstleistungen wurde mit einem einfachen Ziel gegründet: Die Professionalität großer Bauprojekte in den Bereich der Hausmeister- und Entrümpelungsservices zu übertragen. Wir glauben, dass jede Immobilie—egal ob privat oder gewerblich—höchste Aufmerksamkeit verdient.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-8 md:px-24 py-32">
+    <div class="grid md:grid-cols-3 gap-1">
+      {[
+        { title: "Verlässlichkeit", text: "Termintreue ist für uns kein Versprechen, sondern die Basis." },
+        { title: "Transparenz", text: "Klare Angebote ohne versteckte Kosten oder Kleingedrucktes." },
+        { title: "Qualität", text: "Wir arbeiten so, als wäre es unsere eigene Immobilie." }
+      ].map((val) => (
+        <div class="p-12 border border-slate-100 flex flex-col gap-6 hover:bg-slate-50 transition-colors">
+          <div class="w-8 h-1 bg-brand"></div>
+          <h3 class="text-2xl font-black uppercase italic">{val.title}</h3>
+          <p class="text-sm text-slate-500 font-bold uppercase tracking-tight">{val.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="px-8 md:px-24 py-32 bg-black text-white">
+  <div class="flex flex-wrap justify-between gap-12 text-center md:text-left">
+    
+    <div class="flex-1 min-w-[150px]">
+      <p class="text-6xl font-black italic text-brand mb-2">150+</p>
+      <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Abgeschlossene Projekte</p>
+    </div>
+
+    <div class="flex-1 min-w-[150px]">
+      <p class="text-6xl font-black italic text-brand mb-2">100%</p>
+      <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Zufriedenheitsgarantie</p>
+    </div>
+
+    <div class="flex-1 min-w-[150px]">
+      <p class="text-6xl font-black italic text-brand mb-2">24h</p>
+      <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Reaktionszeit</p>
+    </div>
+
+    <div class="flex-1 min-w-[150px]">
+      <p class="text-6xl font-black italic text-brand mb-2">12</p>
+      <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Teammitglieder</p>
+    </div>
+
+  </div>
+</section>
+  <section class="px-8 md:px-24 py-32 text-center">
+    <h2 class="text-4xl font-black uppercase mb-8">Lernen Sie uns kennen.</h2>
+    <p class="text-slate-500 font-bold uppercase tracking-widest text-xs mb-10">Ein persönliches Gespräch ist durch nichts zu ersetzen.</p>
+    <a href="/kontakt" class="bg-black text-white px-12 py-5 font-black uppercase tracking-widest hover:bg-brand transition-all inline-block">
+      Beratungsgespräch vereinbaren
+    </a>
+  </section>
+</Layout>

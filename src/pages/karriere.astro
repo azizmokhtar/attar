@@ -1,0 +1,76 @@
+
+---
+import Layout from '../layouts/Layout.astro';
+import { client } from '../lib/sanity'; // Ensure you created this lib file in the previous step
+
+// Fetch jobs from Sanity instead of the hardcoded array
+const jobs = await client.fetch(`*[_type == "job"] | order(publishedAt desc)`);
+---
+
+
+<Layout title="Karriere | Werde Teil des Teams">
+  <section class="pt-40 pb-20 px-8 md:px-24">
+    <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-xs italic">Wachstum</p>
+    <h1 class="text-[clamp(3rem,8vw,6rem)] font-black uppercase leading-[0.85] mb-12">
+      Werde Teil <br />
+      <span class="text-transparent stroke-black" style="-webkit-text-stroke: 1.5px black;">des Teams.</span>
+    </h1>
+  </section>
+
+  <section class="px-8 md:px-24 py-20 bg-slate-50 border-y border-slate-100 grid md:grid-cols-3 gap-12">
+    <div>
+        <h3 class="font-black uppercase text-xl mb-4 italic">Faire Vergütung</h3>
+        <p class="text-sm text-slate-600 leading-relaxed uppercase font-bold tracking-tighter">Wir schätzen harte Arbeit und zahlen pünktlich und fair über dem Marktdurchschnitt.</p>
+    </div>
+    <div>
+        <h3 class="font-black uppercase text-xl mb-4 italic">Modernes Equipment</h3>
+        <p class="text-sm text-slate-600 leading-relaxed uppercase font-bold tracking-tighter">Arbeite mit professionellen Maschinen und hochwertiger Arbeitskleidung.</p>
+    </div>
+    <div>
+        <h3 class="font-black uppercase text-xl mb-4 italic">Echtes Team</h3>
+        <p class="text-sm text-slate-600 leading-relaxed uppercase font-bold tracking-tighter">Bei uns bist du keine Nummer. Wir arbeiten auf Augenhöhe und unterstützen uns gegenseitig.</p>
+    </div>
+  </section>
+
+  <section class="px-8 md:px-24 py-32">
+    <h2 class="text-[10px] font-bold uppercase tracking-widest text-brand mb-16 italic">Offene Positionen</h2>
+    
+    <div class="flex flex-col border-t border-slate-200">
+      {jobs.map((job) => (
+        <div class="group border-b border-slate-200 py-12 grid md:grid-cols-12 gap-8 items-center hover:bg-slate-50 transition-colors px-4">
+          <div class="md:col-span-5">
+            <h3 class="text-2xl font-black uppercase mb-2">{job.title}</h3>
+            <div class="flex gap-4 text-[10px] font-bold uppercase text-slate-400">
+                <span>{job.type}</span>
+                <span>•</span>
+                <span>{job.location}</span>
+            </div>
+          </div>
+          <div class="md:col-span-4">
+            <p class="text-sm text-slate-600 uppercase font-bold tracking-tight">{job.description}</p>
+          </div>
+          <div class="md:col-span-3 md:text-right">
+            <a 
+              href={`/bewerben?job=${encodeURIComponent(job.title)}`} 
+              class="inline-block bg-black text-white px-8 py-4 font-black uppercase text-[10px] tracking-widest hover:bg-brand transition-all"
+            >
+                Jetzt Bewerben
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="px-8 md:px-24 py-32 text-center bg-white">
+    <div class="max-w-3xl mx-auto border-2 border-dashed border-slate-200 p-16">
+        <h2 class="text-3xl font-black uppercase mb-6">Nichts Passendes dabei?</h2>
+        <p class="text-slate-500 font-bold uppercase tracking-widest text-xs mb-10 leading-loose">
+            Wir sind immer auf der Suche nach motivierten Talenten. Schick uns einfach eine Initiativbewerbung mit deinen Stärken.
+        </p>
+        <a href="mailto:karriere@attar-service.de" class="text-brand font-black uppercase italic text-xl border-b-2 border-brand pb-1 hover:text-black hover:border-black transition-all">
+            karriere@attar-service.de
+        </a>
+    </div>
+  </section>
+</Layout>

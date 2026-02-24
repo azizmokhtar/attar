@@ -1,0 +1,161 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title} | ATTAR</title>
+	</head>
+	<body class="bg-white text-slate-900 selection:bg-brand selection:text-white">
+		<div class="fixed inset-0 flex justify-between px-8 md:px-24 pointer-events-none -z-10" aria-hidden="true">
+    <div class="border-r border-dashed border-slate-300 h-full"></div>
+    <div class="border-r border-dashed border-slate-300 h-full hidden md:block"></div>
+    <div class="border-r border-dashed border-slate-300 h-full hidden md:block"></div>
+    <div class="border-r border-dashed border-slate-300 h-full"></div>
+</div>
+
+	<nav class="sticky top-0 z-[100] flex justify-between items-center p-8 md:px-24 bg-white/80 backdrop-blur-md">
+    	<a href="/" class="text-2xl font-black tracking-tighter leading-none relative z-[110]">ATTAR</a>
+
+    <div class="hidden md:flex items-center gap-8 text-[10px] font-bold uppercase tracking-widest">
+        <a href="/dienstleistungen" class=" text-[11px] hover:text-brand transition-colors">Dienstleistungen</a>
+        <a href="/ueber-uns" class="text-[11px] hover:text-brand transition-colors">Über uns</a>
+        <a href="/kontakt" class="bg-black text-white px-4 py-2 hover:bg-brand transition-colors">Kontakt</a>
+    </div>
+
+    <button id="menu-button" class="md:hidden relative z-[110] flex flex-col gap-1.5 p-2" aria-label="Toggle Menu">
+        <span class="w-6 h-0.5 bg-black transition-all duration-300" id="line1"></span>
+        <span class="w-6 h-0.5 bg-black transition-all duration-300" id="line2"></span>
+        <span class="w-6 h-0.5 bg-black transition-all duration-300" id="line3"></span>
+    </button>
+
+    <div id="menu-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+    <div id="sidebar" class="fixed top-0 right-0 w-[80%] max-w-[400px] h-full bg-white z-[105] translate-x-full transition-transform duration-500 ease-in-out p-12">
+        <div class="mt-20 flex flex-col gap-6">
+            <p class="text-brand font-bold uppercase tracking-widest text-[10px]">Navigation</p>
+            <a href="/dienstleistungen" class="text-3xl font-black uppercase italic hover:text-brand transition-colors">Dienstleistungen</a>
+            <a href="/ueber-uns" class="text-3xl font-black uppercase italic hover:text-brand transition-colors">über uns</a>
+            <div class="h-px bg-slate-100 my-4"></div>
+            <a href="/kontakt" class="text-3xl font-black uppercase italic text-brand">Kontakt</a>
+        </div>
+        
+        <div class="mt-auto">
+             <p class="text-[10px] font-bold uppercase text-slate-400">© 2026 Attar Dienstleistungen</p>
+        </div>
+    </div>
+</nav>
+
+<script>
+    const btn = document.getElementById('menu-button');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('menu-overlay');
+    const line1 = document.getElementById('line1');
+    const line2 = document.getElementById('line2');
+    const line3 = document.getElementById('line3');
+
+    function toggleMenu() {
+        const isOpen = sidebar?.classList.contains('translate-x-0');
+        
+        // Slide Sidebar
+        sidebar?.classList.toggle('translate-x-full');
+        sidebar?.classList.toggle('translate-x-0');
+
+        // Fade Overlay
+        overlay?.classList.toggle('opacity-0');
+        overlay?.classList.toggle('opacity-100');
+        overlay?.classList.toggle('pointer-events-none');
+        overlay?.classList.toggle('pointer-events-auto');
+
+        // Hamburger to X Animation
+        if (!isOpen) {
+            line1!.style.transform = 'translateY(8px) rotate(45deg)';
+            line2!.style.opacity = '0';
+            line3!.style.transform = 'translateY(-8px) rotate(-45deg)';
+            document.body.style.overflow = 'hidden';
+        } else {
+            line1!.style.transform = 'none';
+            line2!.style.opacity = '1';
+            line3!.style.transform = 'none';
+            document.body.style.overflow = '';
+        }
+    }
+
+    btn?.addEventListener('click', toggleMenu);
+    overlay?.addEventListener('click', toggleMenu); // Close when clicking outside
+</script>
+		<main>
+			<slot />
+		</main>
+		<footer class="relative z-10 bg-slate-900 text-slate-300 border-t border-white/5 px-8 md:px-24 pt-24 pb-12 overflow-hidden">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
+    
+    <div class="md:col-span-4">
+      <h2 class="text-4xl font-black tracking-tighter mb-6 text-white">ATTAR.</h2>
+      <p class="text-xs font-bold uppercase tracking-widest leading-relaxed text-slate-500">
+        Präzision in der Ausführung.<br/> Verlässlichkeit im Service.
+      </p>
+    </div>
+
+    <div class="md:col-span-2">
+      <p class="text-[10px] font-bold uppercase text-brand mb-6 tracking-[0.2em]">Navigation</p>
+      <ul class="flex flex-col gap-4 text-xs font-bold uppercase tracking-widest text-slate-100">
+        <li><a href="/dienstleistungen" class="hover:text-brand transition-colors">Services</a></li>
+        <li><a href="/ueber-uns" class="hover:text-brand transition-colors">Über uns</a></li>
+        <li><a href="/karriere" class="hover:text-brand transition-colors">Karriere</a></li>
+        <li><a href="/karriere" class="hover:text-brand transition-colors">Angebot anfragen</a></li>
+      </ul>
+    </div>
+
+    <div class="md:col-span-3">
+      <p class="text-[10px] font-bold uppercase text-brand mb-6 tracking-[0.2em]">Kontakt </p>
+      <div class="flex flex-col gap-6">
+        <a href="tel:+49691234567" class="group">
+          <p class="text-[9px] font-bold text-slate-500 uppercase mb-1">Telefon</p>
+          <p class="text-[12px] font-black text-white group-hover:text-brand transition-colors uppercase italic">+49 (0) 69 123 456 7</p>
+        </a>
+        <a href="mailto:info@attar-service.de" class="group">
+          <p class="text-[9px] font-bold text-slate-500 uppercase mb-1">E-Mail</p>
+          <p class="text-[12px] font-black text-white group-hover:text-brand transition-colors lowercase italic">info@attar-service.de</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="md:col-span-3 text-slate-100">
+      <p class="text-[10px] font-bold uppercase text-brand mb-6 tracking-[0.2em]">Standort</p>
+      <address class="not-italic text-xs font-bold uppercase tracking-widest leading-loose">
+        Attar Dienstleistungen<br />
+        Musterstraße 123<br />
+        60311 Frankfurt am Main
+      </address>
+    </div>
+  </div>
+
+  <div class="mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500">
+    <div class="flex gap-8 text-[9px] font-bold uppercase tracking-[0.1em]">
+      <a href="/impressum" class="hover:text-white transition-colors">Impressum</a>
+      <a href="/datenschutz" class="hover:text-white transition-colors">Datenschutz</a>
+      <a href="/agb" class="hover:text-white transition-colors">AGB</a>
+    </div>
+    
+    <p class="text-[9px] font-bold uppercase tracking-[0.1em]">
+      © 2026 Attar Dienstleistungen. All Rights Reserved.
+    </p>
+
+    <div class="flex gap-6 text-[10px] font-bold uppercase italic text-slate-100">
+      <a href="mailto:mohamedazizelmokhtar27@gmail.com" class="hover:text-brand transition-colors lowercase italic text-slate-400">developed by:mohamedazizelmokhtar27@gmail.com</a>
+    </div>
+  </div>
+</footer>
+	</body>
+</html>
