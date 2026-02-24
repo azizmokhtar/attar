@@ -11,24 +11,24 @@ const services = await client.fetch(`*[_type == "service"] | order(_createdAt as
 ---
 
 <Layout title="Modern Building Services">
-    <section class="w-full relative p-0 mb-20 overflow-hidden">
-        <video 
-            autoplay 
-            muted 
-            loop 
-            playsinline 
-            class="w-full h-auto block" 
-        >
-            <source src="/test1.mp4" type="video/mp4" />
-        </video>
-		<div class="mouse-wrapper">
-    <div class="mouse"></div>
-    <p class="text-[9px] font-bold uppercase tracking-[0.3em] text-white/60">Scroll</p>
-  </div>
-    </section>
+    <section class="w-full relative p-0 mb-4 md:mb-20 overflow-hidden">
+    <video 
+        autoplay 
+        muted 
+        loop 
+        playsinline 
+        class="w-full h-auto block" 
+    >
+        <source src="/test1.mp4" type="video/mp4" />
+    </video>
+    <div class="mouse-wrapper">
+        <div class="mouse"></div>
+        <p class="text-[9px] font-bold uppercase tracking-[0.3em] text-white/60">Scroll</p>
+    </div>
+</section>
     
 
-	<section class="relative min-h-[80vh] flex flex-col justify-center px-8 md:px-24 py-20">
+	<section class="relative min-h-[80vh] flex flex-col justify-center px-8 md:px-24 pt-10 pb-20 md:py-20">
 		<div class="max-w-6xl">
 			<p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-xs">
 				Attar Dienstleistungen
