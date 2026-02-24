@@ -3,80 +3,80 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Angebot anfragen">
-  <section class="pt-40 pb-20 px-8 md:px-24">
-    <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-xs italic">Kontakt</p>
-    <h1 class="text-[clamp(3rem,8vw,6rem)] font-black uppercase leading-[0.85] mb-12">
-      Projekt <br />
-      <span class="text-transparent stroke-black" style="-webkit-text-stroke: 1.5px black;">Besprechen.</span>
-    </h1>
-  </section>
+  <section class="pt-24 pb-12 md:pt-40 md:pb-20 px-6 md:px-24">
+  <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs italic">Kontakt</p>
+  <h1 class="text-[clamp(2.5rem,10vw,6rem)] font-black uppercase leading-[0.9] mb-8">
+    Projekt <br />
+    <span class="text-transparent stroke-black" style="-webkit-text-stroke: 1px black;">Besprechen.</span>
+  </h1>
+</section>
 
-  <section class="pb-32 px-8 md:px-24 grid md:grid-cols-12 gap-16">
-    
-    <div class="md:col-span-4 space-y-12">
-      <div>
-        <h3 class="text-[10px] font-bold uppercase tracking-widest text-brand mb-4">Direktkontakt</h3>
-        <p class="text-xl font-black uppercase italic">+49 (0) 69 123 456 7</p>
-        <p class="text-xl font-black uppercase italic">info@attar-service.de</p>
-      </div>
-
-      <div>
-        <h3 class="text-[10px] font-bold uppercase tracking-widest text-brand mb-4">Bürozeiten</h3>
-        <p class="text-sm font-bold uppercase leading-relaxed text-slate-500">
-          Mo — Fr: 08:00 - 18:00<br/>
-          Sa: 09:00 - 14:00
-        </p>
-      </div>
+  <section class="pb-32 px-6 md:px-24 grid md:grid-cols-12 gap-12 md:gap-16">
+  
+  <div class="md:col-span-4 space-y-8 md:space-y-12">
+    <div>
+      <h3 class="text-[10px] font-bold uppercase tracking-widest text-brand mb-4">Direktkontakt</h3>
+      <p class="text-lg md:text-xl font-black uppercase italic break-words">+49 (0) 69 123 456 7</p>
+      <p class="text-lg md:text-xl font-black uppercase italic break-words">info@attar-service.de</p>
     </div>
 
-    <div class="md:col-span-8 bg-slate-50 p-8 md:p-16 border border-slate-100 relative">
-        <form action="https://formspree.io/f/xdalynzd" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        <div class="flex flex-col gap-2">
-          <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Vollständiger Name</label>
-          <input type="text" name="name" required class="bg-transparent border-b-2 border-slate-200 py-3 focus:border-brand outline-none transition-colors font-bold uppercase text-sm" placeholder="MAX MUSTERMANN" />
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400">E-Mail Adresse</label>
-          <input type="email" name="email" required class="bg-transparent border-b-2 border-slate-200 py-3 focus:border-brand outline-none transition-colors font-bold uppercase text-sm" placeholder="EMAIL@BEISPIEL.DE" />
-        </div>
-        <div class="flex flex-col gap-2 md:col-span-2">
-          <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Telefonnummer</label>
-          <input 
-            type="tel" 
-            name="phone" 
-            required 
-            pattern="[+]{0,1}[0-9\s\-]{7,20}" 
-            title="Bitte geben Sie eine gültige Telefonnummer ein (z.B. +49 123 456789)"
-            class="bg-transparent border-b-2 border-slate-200 py-3 focus:border-brand outline-none transition-colors font-bold uppercase text-sm" 
-            placeholder="+49 123 456789" 
-          />
-        </div>
-        <div class="flex flex-col gap-2 md:col-span-2">
-          <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Gewünschte Dienstleistung</label>
-          <select name="service" class="bg-transparent border-b-2 border-slate-200 py-3 focus:border-brand outline-none transition-colors font-bold uppercase text-sm cursor-pointer">
-            <option value="entruempelung">ENTRÜMPELUNG</option>
-            <option value="hausmeister">HAUSMEISTERSERVICE</option>
-            <option value="gruenpflege">GRÜNPFLEGE</option>
-            <option value="sonstiges">SONSTIGES / ALLGEMEIN</option>
-          </select>
-        </div>
-
-        <div class="flex flex-col gap-2 md:col-span-2">
-          <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Nachricht / Details</label>
-          <textarea name="message" rows="4" required class="bg-transparent border-b-2 border-slate-200 py-3 focus:border-brand outline-none transition-colors font-bold uppercase text-sm resize-none" placeholder="BESCHREIBEN SIE IHR PROJEKT..."></textarea>
-        </div>
-
-        <div class="md:col-span-2 pt-8">
-          <button type="submit" class="w-full bg-black text-white py-6 font-black uppercase tracking-[0.2em] hover:bg-brand transition-all flex justify-between px-8 items-center group">
-            Anfrage Absenden
-            <span class="group-hover:translate-x-2 transition-transform">→</span>
-          </button>
-        </div>
-        
-        <input type="text" name="_gotcha" style="display:none" />
-      </form>
+    <div>
+      <h3 class="text-[10px] font-bold uppercase tracking-widest text-brand mb-4">Bürozeiten</h3>
+      <p class="text-sm font-bold uppercase leading-relaxed text-slate-500">
+        Mo — Fr: 08:00 - 18:00<br/>
+        Sa: 09:00 - 14:00
+      </p>
     </div>
-  </section>
+  </div>
+
+  <div class="md:col-span-8 bg-slate-50 p-6 md:p-16 border border-slate-100 relative">
+      <form action="https://formspree.io/f/xdalynzd" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      
+      <div class="flex flex-col gap-2">
+        <label class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-400">Vollständiger Name</label>
+        <input type="text" name="name" required class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold uppercase text-sm" placeholder="MAX MUSTERMANN" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-400">E-Mail Adresse</label>
+        <input type="email" name="email" required class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold uppercase text-sm" placeholder="EMAIL@BEISPIEL.DE" />
+      </div>
+
+      <div class="flex flex-col gap-2 md:col-span-2">
+        <label class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-400">Telefonnummer</label>
+        <input 
+          type="tel" 
+          name="phone" 
+          required 
+          class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold uppercase text-sm" 
+          placeholder="+49 123 456789" 
+        />
+      </div>
+
+      <div class="flex flex-col gap-2 md:col-span-2">
+        <label class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-400">Gewünschte Dienstleistung</label>
+        <select name="service" class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold uppercase text-sm cursor-pointer appearance-none">
+          <option value="entruempelung">ENTRÜMPELUNG</option>
+          <option value="hausmeister">HAUSMEISTERSERVICE</option>
+          <option value="gruenpflege">GRÜNPFLEGE</option>
+          <option value="sonstiges">SONSTIGES / ALLGEMEIN</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-2 md:col-span-2">
+        <label class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-400">Nachricht / Details</label>
+        <textarea name="message" rows="3" required class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold uppercase text-sm resize-none" placeholder="BESCHREIBEN SIE IHR PROJEKT..."></textarea>
+      </div>
+
+      <div class="md:col-span-2 pt-4 md:pt-8">
+        <button type="submit" class="w-full bg-black text-white py-5 md:py-6 font-black uppercase tracking-[0.2em] hover:bg-brand transition-all flex justify-between px-6 md:px-8 items-center group">
+          Anfrage Absenden
+          <span class="group-hover:translate-x-2 transition-transform">→</span>
+        </button>
+      </div>
+      
+      <input type="text" name="_gotcha" style="display:none" />
+    </form>
+  </div>
+</section>
 </Layout>
