@@ -10,6 +10,7 @@
 }
 
 body {
+  overflow-x: hidden;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   /* This creates subtle horizontal lines every 100px */
@@ -53,6 +54,7 @@ h1, h2, h3 {
         opacity: 1;
     }
 }
+
 /* Class to trigger the fade out */
 .mouse-hidden {
     opacity: 0 !important;
