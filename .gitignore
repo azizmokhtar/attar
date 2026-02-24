@@ -1,25 +1,25 @@
-# build output
-dist/
-# generated types
-.astro/
-
-# dependencies
+# --- ASTRO & BUILD ---
 node_modules/
+dist/
+.astro/
+.vercel/
 
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-
-# environment variables
+# --- ENVIRONMENT VARIABLES ---
+# This is the most important section for production hardening
 .env
-.env.production
+.env.*
+!.env.example 
 
-# macOS-specific files
+# --- SANITY ---
+# If you ever build the studio locally, ignore the output
+/static/studio
+sanity/dist
+
+# --- SYSTEM FILES ---
 .DS_Store
+Thumbs.db
+*.log
 
-# jetbrains setting folder
+# --- IDEs ---
 .idea/
-.vercel
+.vscode/
