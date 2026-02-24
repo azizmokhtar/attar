@@ -68,17 +68,22 @@ const services = await client.fetch(`*[_type == "service"] | order(_createdAt as
 </section>
 
 <section class="px-6 md:px-24 py-20 md:py-32 bg-slate-900 text-white">
-  <h2 class="text-brand text-[10px] md:text-xs font-bold uppercase tracking-widest mb-10 md:mb-12 italic">Kundenstimmen</h2>
-  <div class="grid md:grid-cols-3 gap-10 md:gap-8">
-    {/* Reviews logic remains same, but adjust text size */}
-    {[...].map((review) => (
-      <div class="border-l border-white/20 pl-6 md:pl-8 py-2">
-        <p class="text-lg md:text-xl mb-4 md:mb-6 italic">"{review.text}"</p>
-        <p class="font-black uppercase tracking-tighter text-brand text-sm md:text-base">— {review.name}</p>
-      </div>
-    ))}
-  </div>
-</section>
+	  <h2 class="text-brand text-[10px] md:text-xs font-bold uppercase tracking-widest mb-10 md:mb-12 italic">
+      Kundenstimmen
+    </h2>
+	  <div class="grid md:grid-cols-3 gap-10 md:gap-8">
+	    {[
+	      { name: "M. Schmidt", text: "Die Entrümpelung verlief absolut reibungslos. Diskret und extrem schnell." },
+	      { name: "K. Weber", text: "Unser Garten sah noch nie so gepflegt aus. Ein zuverlässiges Team!" },
+	      { name: "Hausverwaltung Meyer", text: "Professioneller Hausmeisterservice, den man blind vertrauen kann." }
+	    ].map((review) => (
+	      <div class="border-l border-white/20 pl-6 md:pl-8 py-2">
+	        <p class="text-lg md:text-xl mb-4 md:mb-6 italic">"{review.text}"</p>
+	        <p class="font-black uppercase tracking-tighter text-brand text-sm md:text-base">— {review.name}</p>
+	      </div>
+	    ))}
+	  </div>
+	</section>
 	<section class="px-8 md:px-24 py-32 bg-slate-900 text-white">
 	  <h2 class="text-brand text-xs font-bold uppercase tracking-widest mb-12 italic">Kundenstimmen</h2>
 	  <div class="grid md:grid-cols-3 gap-8">
