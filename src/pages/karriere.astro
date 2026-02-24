@@ -13,7 +13,12 @@ const jobs = await client.fetch(`*[_type == "job"] | order(publishedAt desc)`);
     <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs italic">Wachstum</p>
     <h1 class="text-[clamp(2.5rem,10vw,6rem)] font-black uppercase leading-[0.9] mb-8">
       Werde Teil <br />
-      <span class="architectural-outline">des Teams.</span>
+      <span 
+  class="block mt-2 md:mt-4 text-transparent" 
+  style="stroke: black; -webkit-text-stroke: 0.5px black; @media (min-width: 768px) { -webkit-text-stroke: 1.5px black; }"
+>
+  des Teams.
+</span>
     </h1>
   </section>
 
