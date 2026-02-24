@@ -33,12 +33,12 @@ const services = await client.fetch(`*[_type == "service"] | order(_createdAt as
         <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs">
             Attar Dienstleistungen
         </p>
-        <h1 class="text-[clamp(2.2rem,10vw,8rem)] font-black mb-6 md:mb-8 leading-[0.9]">
-            Ein Partner<br />
-            <span class="block mt-2 md:mt-4 text-transparent stroke-black" style="-webkit-text-stroke: 1px black;">
-                Alle Lösungen.
-            </span>
-        </h1>
+        <h1 class="text-[clamp(2.2rem,10vw,8rem)] font-black mb-6 md:mb-8 leading-[1.1] md:leading-[0.9]">
+    Ein Partner<br />
+    <span class="block mt-3 text-transparent stroke-black" style="-webkit-text-stroke: 0.8px black;">
+        Alle Lösungen.
+    </span>
+</h1>
         
         <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-end">
             <p class="text-lg md:text-xl text-slate-600 font-medium leading-relaxed">
@@ -84,27 +84,15 @@ const services = await client.fetch(`*[_type == "service"] | order(_createdAt as
 	    ))}
 	  </div>
 	</section>
-	<section class="px-8 md:px-24 py-32 bg-slate-900 text-white">
-	  <h2 class="text-brand text-xs font-bold uppercase tracking-widest mb-12 italic">Kundenstimmen</h2>
-	  <div class="grid md:grid-cols-3 gap-8">
-	    {[
-	      { name: "M. Schmidt", text: "Die Entrümpelung verlief absolut reibungslos. Diskret und extrem schnell." },
-	      { name: "K. Weber", text: "Unser Garten sah noch nie so gepflegt aus. Ein zuverlässiges Team!" },
-	      { name: "Hausverwaltung Meyer", text: "Professioneller Hausmeisterservice, den man blind vertrauen kann." }
-	    ].map((review) => (
-	      <div class="border-l border-white/20 pl-8 py-4">
-	        <p class="text-xl mb-6 italic">"{review.text}"</p>
-	        <p class="font-black uppercase tracking-tighter text-brand">— {review.name}</p>
-	      </div>
-	    ))}
-	  </div>
-	</section>
+	
 	<section class="px-6 md:px-24 py-20 md:py-32 border-b border-slate-100">
   <div class="grid md:grid-cols-2 gap-12 md:gap-20">
     <div>
-      <h2 class="text-[clamp(2rem,8vw,4rem)] font-black uppercase mb-8 md:mb-12">
+      <h2 class="text-[clamp(2rem,8vw,4rem)] font-black uppercase mb-8 md:mb-12 leading-[1.1] md:leading-none">
         Bereit für <br />
-        <span class="text-transparent stroke-black" style="-webkit-text-stroke: 1px black;">Neues?</span>
+        <span class="text-transparent stroke-black block mt-2" style="-webkit-text-stroke: 0.5px black; @media (min-width: 768px) { -webkit-text-stroke: 1px black; }">
+          Neues?
+        </span>
       </h2>
       
       <div class="flex flex-col gap-6 md:gap-8">
@@ -112,15 +100,21 @@ const services = await client.fetch(`*[_type == "service"] | order(_createdAt as
           <p class="text-[9px] md:text-[10px] font-bold uppercase text-slate-400 mb-1">Telefon</p>
           <p class="text-2xl md:text-3xl font-black group-hover:text-brand transition-colors">+49 (0) 123 456 789</p>
         </a>
-        {/* Same for Email */}
+        
+        <a href="mailto:info@attar.de" class="group">
+          <p class="text-[9px] md:text-[10px] font-bold uppercase text-slate-400 mb-1">E-Mail</p>
+          <p class="text-2xl md:text-3xl font-black group-hover:text-brand transition-colors lowercase">info@attar.de</p>
+        </a>
       </div>
     </div>
     
     <div class="bg-slate-50 p-8 md:p-12 flex flex-col justify-center border border-slate-100">
       <p class="font-bold uppercase tracking-widest text-[10px] md:text-xs mb-4">Schnellanfrage</p>
-      <p class="text-base md:text-lg text-slate-600 mb-6 md:mb-8">Schreiben Sie uns eine kurze Nachricht und wir melden uns innerhalb von 24 Stunden.</p>
+      <p class="text-base md:text-lg text-slate-600 mb-6 md:mb-8 leading-relaxed">
+        Schreiben Sie uns eine kurze Nachricht und wir melden uns innerhalb von 24 Stunden bei Ihnen.
+      </p>
       <a href="/kontakt" class="bg-black text-white text-center py-4 md:py-5 text-sm md:text-base font-black uppercase tracking-widest hover:bg-brand transition-all">
-        Zum Formular.
+        Zum Formular
       </a>
     </div>
   </div>
