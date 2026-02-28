@@ -1,0 +1,33 @@
+---
+interface Props {
+  text: string;
+  className?: string;
+}
+
+const { text, className } = Astro.props;
+---
+
+<div class={`stroke-container ${className}`}>
+  <svg viewBox="0 0 150 25" preserveAspectRatio="xMinYMid meet" class="w-full h-auto overflow-visible">
+    <text 
+      x="0" 
+      y="18" 
+      class="font-black uppercase italic fill-none stroke-black stroke-[0.5px]"
+      style="font-family: inherit;"
+    >
+      {text}
+    </text>
+  </svg>
+</div>
+
+<style>
+  .stroke-container {
+    /* Helps define the scale of the SVG */
+    display: block;
+    width: 100%;
+  }
+  
+  svg text {
+    paint-order: stroke fill; /* Ensures the stroke behaves correctly */
+  }
+</style>

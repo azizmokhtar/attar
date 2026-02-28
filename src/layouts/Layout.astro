@@ -25,7 +25,13 @@ const { title } = Astro.props;
 </div>
 
 	<nav class="sticky top-0 z-[1001] flex justify-between items-center p-8 md:px-24 bg-white/80 backdrop-blur-md">
-    	<a href="/" class="text-3xl font-black tracking-tighter leading-none relative z-[110]">ATTAR</a>
+    	<a href="/" class="relative z-[110] block">
+        <img 
+            src="/logo.png" 
+            alt="Attar Dienstleistungen Logo" 
+            class="h-8 md:h-10 w-auto object-contain"
+        />
+    </a>
       <button id="menu-button" class="md:hidden relative z-[1110] flex flex-col gap-1.5 p-2" aria-label="Toggle Menu">
         <span class="w-6 h-0.5 bg-black transition-all duration-300" id="line1"></span>
         <span class="w-6 h-0.5 bg-black transition-all duration-300" id="line2"></span>
@@ -34,6 +40,7 @@ const { title } = Astro.props;
 
     <div class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest">
     <a href="/dienstleistungen" class="text-sm hover:text-brand transition-colors">Dienstleistungen</a>
+    <a href="/ueber-uns" class="text-sm hover:text-brand transition-colors">Projekte</a>
     <a href="/ueber-uns" class="text-sm hover:text-brand transition-colors">Über uns</a>
     <a href="/kontakt" class="bg-black text-white px-5 py-2.5 text-sm hover:bg-brand transition-colors">Kontakt</a>
 </div>
@@ -169,5 +176,6 @@ const { title } = Astro.props;
     </div>
   </div>
 </footer>
+
 	</body>
 </html>
