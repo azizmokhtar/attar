@@ -104,3 +104,26 @@ h1, h2, h3 {
   will-change: transform;
 }
 
+/* Stroke/outlined headings — solid on mobile, outlined on desktop */
+.stroke-dark {
+  color: #0d1b2a;
+  -webkit-text-stroke: 0;
+}
+@media (min-width: 768px) {
+  .stroke-dark {
+    color: transparent;
+    -webkit-text-stroke: 1px #0d1b2a;
+  }
+}
+
+.stroke-black {
+  color: #111;
+  -webkit-text-stroke: 0;
+}
+@media (min-width: 768px) {
+  .stroke-black {
+    color: transparent;
+    -webkit-text-stroke: 1px black;
+  }
+}
+
