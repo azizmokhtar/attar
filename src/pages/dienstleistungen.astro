@@ -1,15 +1,44 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { client } from '../lib/sanity';
 
-// Fetch services from Sanity with all needed fields
-const services = await client.fetch(`*[_type == "service"]{
-  title,
-  "subtitle": subtitle, 
-  description,
-  "image": image.asset->url,
-  "id": _id
-}`);
+const services = [
+  {
+    id: "1",
+    title: "Reinigungsservice",
+    subtitle: "Professionell & Zuverlässig",
+    description: "Von der regelmäßigen Unterhaltsreinigung bis zur intensiven Spezialreinigung sorgen wir für hygienische, gepflegte und repräsentative Räumlichkeiten. Unsere Arbeitsweise ist strukturiert, zuverlässig und effizient – mit einem klaren Fokus auf Qualität.\n\nOb Büroflächen, Gewerbeobjekte oder private Immobilien – wir schaffen Sauberkeit, auf die Sie sich verlassen können.",
+    bullets: [],
+    tagline: "Attar Dienstleistungen – Präzision bis ins Detail.",
+    image: "/projekte/WASWIRTUNReinigungservice.jpg"
+  },
+  {
+    id: "2",
+    title: "Hausmeisterservice",
+    subtitle: "Verantwortung & Reaktionsschnelle",
+    description: "Unser Hausmeisterservice steht für Verantwortung, schnelle Reaktionszeiten und professionelle Ausführung. Wir kümmern uns um die laufende Betreuung Ihrer Immobilie – effizient, vorausschauend und lösungsorientiert.\n\nOb Wohnanlage, Gewerbeobjekt oder Unternehmensstandort – wir sorgen für Ordnung, Funktionalität und ein gepflegtes Erscheinungsbild.",
+    bullets: [],
+    tagline: "Attar Dienstleistungen – Betreuung mit System.",
+    image: "/projekte/WASWIRTUNHausmeisterservice.jpg"
+  },
+  {
+    id: "3",
+    title: "Umzugsservice",
+    subtitle: "Struktur, Planung & Erfahrung",
+    description: "Wir begleiten Ihren Umzug professionell, effizient und zuverlässig. Ob privat oder gewerblich – wir sorgen für einen sicheren Transport, eine klare Organisation und eine stressfreie Umsetzung.",
+    bullets: ["Sorgfalt im Detail.", "Struktur in der Planung.", "Zuverlässigkeit in der Ausführung."],
+    tagline: "Attar Dienstleistungen – Wir bringen Sie sicher ans Ziel.",
+    image: "/projekte/WASWIRTUNUmzugsserviice.jpg"
+  },
+  {
+    id: "4",
+    title: "Gartenservice",
+    subtitle: "Gepflegt & Nachhaltig",
+    description: "Unser Gartenservice steht für professionelle Pflege, saubere Ausführung und termingerechte Umsetzung. Wir kümmern uns um Ihre Außenanlagen mit Sorgfalt, Effizienz und Verantwortung.",
+    bullets: ["Strukturiert in der Planung.", "Präzise in der Ausführung.", "Nachhaltig im Ergebnis."],
+    tagline: "Attar Dienstleistungen – Qualität bis ins Grüne.",
+    image: "/projekte/WASWIRTUNGartenservice.jpg"
+  }
+];
 ---
 
 <Layout title="Unsere Leistungen">
@@ -25,62 +54,79 @@ const services = await client.fetch(`*[_type == "service"]{
     <div class="flex flex-col gap-16 md:gap-32">
       {services.map((service, index) => (
         <div class="grid md:grid-cols-12 gap-8 md:gap-16 items-center">
-          
-          {/* Text Content: Ordered 2nd on mobile, varies on desktop */}
+
           <div class={`order-2 md:col-span-5 ${index % 2 !== 0 ? 'md:order-2 md:col-start-8' : 'md:order-1'}`}>
             <div class="relative">
               <span class="text-5xl md:text-7xl font-black text-slate-100 block mb-2 md:mb-4 italic leading-none select-none">
                 0{index + 1}
               </span>
-              
+
               <div class="relative z-10">
                 <p class="text-brand font-bold uppercase tracking-widest text-[9px] md:text-[10px] mb-2">
                   {service.subtitle}
                 </p>
-                
+
                 <h2 class="text-2xl md:text-4xl lg:text-5xl font-black uppercase mb-4 md:mb-6 tracking-tighter leading-[1.1]">
                   {service.title}
                 </h2>
-                
-                <p class="text-sm md:text-base lg:text-lg text-slate-600 font-medium leading-relaxed mb-6 md:mb-8 max-w-prose">
-                  {service.description}
-                </p>
-                
+
+                <div class="text-sm md:text-base text-slate-600 font-medium leading-relaxed mb-4 md:mb-6 max-w-prose space-y-3">
+                  {service.description.split('\n\n').map((para) => (
+                    <p>{para}</p>
+                  ))}
+                </div>
+
+                {service.bullets.length > 0 && (
+                  <ul class="mb-4 md:mb-6 space-y-1">
+                    {service.bullets.map((b) => (
+                      <li class="flex items-center gap-2 text-sm font-bold text-[#0d1b2a]">
+                        <span class="w-1.5 h-1.5 bg-brand rounded-full shrink-0"></span>
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                <p class="text-xs font-black italic text-[#0d1b2a] mb-6 md:mb-8">{service.tagline}</p>
+
                 <a href="/kontakt" class="group inline-flex items-center gap-3 border-b-2 border-black pb-1 text-[10px] md:text-xs font-black uppercase tracking-widest hover:text-brand hover:border-brand transition-all">
-                  Jetzt Anfragen
+                  Jetzt anfragen
                   <span class="group-hover:translate-x-1 transition-transform">→</span>
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Image Content: Ordered 1st on mobile, varies on desktop */}
-          <div class={`order-1 md:col-span-7 overflow-hidden bg-slate-100 aspect-[4/3] md:aspect-video lg:aspect-[16/9] ${index % 2 !== 0 ? 'md:order-1 md:col-start-1' : 'md:order-2'}`}>
-            <img 
-              src={service.image} 
-              alt={service.title} 
+          <div class={`order-1 md:col-span-7 overflow-hidden bg-slate-100 aspect-[4/3] md:aspect-video ${index % 2 !== 0 ? 'md:order-1 md:col-start-1' : 'md:order-2'}`}>
+            <img
+              src={service.image}
+              alt={service.title}
               class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out hover:scale-110"
               loading="lazy"
             />
           </div>
-          
+
         </div>
       ))}
     </div>
   </section>
 
-  <section class="bg-black text-white py-16 md:py-24 px-6 md:px-24 text-center">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl md:text-5xl font-black uppercase mb-6 md:mb-8 italic leading-tight">
-        Nicht das Richtige dabei?
+  <section class="bg-[#0d1b2a] text-white py-16 md:py-24 px-6 md:px-24">
+    <div class="max-w-4xl">
+      <h2 class="text-3xl md:text-5xl font-black uppercase mb-4 md:mb-6 leading-tight">
+        Ihre Anforderungen sind einzigartig?<br/>
+        <span class="text-brand">Unsere Lösungen auch.</span>
       </h2>
-      <p class="text-slate-400 mb-8 md:mb-12 max-w-xl mx-auto uppercase tracking-[0.2em] text-[10px] md:text-xs font-bold leading-relaxed">
-        Wir erstellen individuelle Konzepte für Ihre speziellen Anforderungen. Sprechen Sie uns an.
+      <p class="text-slate-300 mb-3 max-w-2xl text-base md:text-lg font-medium leading-relaxed">
+        Wir erstellen individuelle Konzepte, die exakt auf Ihr Projekt zugeschnitten sind – flexibel, effizient und professionell umgesetzt.
       </p>
-      <a href="/kontakt" 
-         class="inline-block bg-brand text-white px-8 py-4 md:px-12 md:py-5 text-sm md:text-base font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all"
+      <p class="text-slate-400 mb-8 md:mb-10 max-w-2xl text-sm font-medium">
+        Sprechen Sie uns an und erhalten Sie Ihr persönliches Angebot.
+      </p>
+      <a href="/kontakt"
+         class="inline-block bg-brand text-white px-8 py-4 md:px-12 md:py-5 text-sm font-black uppercase tracking-widest hover:bg-white hover:text-[#0d1b2a] transition-all"
       >
-        Individuelles Angebot
+        Jetzt individuelles Angebot sichern
       </a>
     </div>
   </section>

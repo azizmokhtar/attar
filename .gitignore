@@ -10,11 +10,6 @@ dist/
 .env.*
 !.env.example 
 
-# --- SANITY ---
-# If you ever build the studio locally, ignore the output
-/static/studio
-sanity/dist
-
 # --- SYSTEM FILES ---
 .DS_Store
 Thumbs.db

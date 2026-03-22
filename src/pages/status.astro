@@ -3,16 +3,17 @@ import Layout from '../layouts/Layout.astro';
 
 // You could eventually automate this, but for now, we hardcode it for the "clean" look
 const systems = [
-  { name: "Website & Portfolio", status: "Operational", color: "text-green-500" },
-  { name: "Anfrage-System (Formspree)", status: "Operational", color: "text-green-500" },
+  { name: "Website", status: "Operational", color: "text-green-500" },
+  { name: "Kontaktformular", status: "Operational", color: "text-green-500" },
+  { name: "Bewerbungsformular", status: "Operational", color: "text-green-500" },
   { name: "Telefon-Support", status: "Verfügbar", color: "text-green-500" },
-  { name: "E-Mail Server", status: "Operational", color: "text-green-500" }
 ];
 
 const serviceCapacity = [
-  { name: "Entrümpelung", load: "Normal", availability: "Innerhalb 5-7 Werktagen" },
-  { name: "Hausmeisterservice", load: "Voll", availability: "Bestandskunden bevorzugt" },
-  { name: "Grünpflege", load: "Saisonal Hoch", availability: "Anfragen für Frühjahr offen" }
+  { name: "Reinigungsservice", load: "Normal", availability: "Innerhalb 5–7 Werktagen" },
+  { name: "Hausmeisterservice", load: "Normal", availability: "Innerhalb 5–7 Werktagen" },
+  { name: "Umzugsservice", load: "Normal", availability: "Innerhalb 5–7 Werktagen" },
+  { name: "Gartenservice", load: "Normal", availability: "Innerhalb 5–7 Werktagen" },
 ];
 ---
 

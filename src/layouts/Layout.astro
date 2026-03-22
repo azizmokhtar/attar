@@ -12,36 +12,39 @@ const { title } = Astro.props;
 <html lang="de">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Attar Dienstleistungen – Ihr zuverlässiger Partner für Entrümpelung, Hausmeisterservice und Grünpflege in Kirn und Umgebung." />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<title>{title} | Attar Dienstleistungen</title>
 	</head>
 	<body class="bg-white text-slate-900 selection:bg-brand selection:text-white">
 		<div class="fixed inset-0 flex justify-between px-8 md:px-24 pointer-events-none -z-10" aria-hidden="true">
-    <div class="border-r border-dashed border-slate-300 h-full"></div>
-    <div class="border-r border-dashed border-slate-300 h-full hidden md:block"></div>
-    <div class="border-r border-dashed border-slate-300 h-full hidden md:block"></div>
-    <div class="border-r border-dashed border-slate-300 h-full"></div>
+    <div class="border-r border-dashed border-slate-200 h-full"></div>
+    <div class="border-r border-dashed border-slate-200 h-full hidden md:block"></div>
+    <div class="border-r border-dashed border-slate-200 h-full hidden md:block"></div>
+    <div class="border-r border-dashed border-slate-200 h-full"></div>
 </div>
 
-	<nav class="sticky top-0 z-[1001] flex justify-between items-center p-8 md:px-24 bg-white/80 backdrop-blur-md">
+	<nav class="sticky top-0 z-[1001] flex justify-between items-center px-6 py-5 md:px-24 bg-white/90 backdrop-blur-md border-b border-slate-100/80">
     	<a href="/" class="relative z-[110] block">
-        <img 
-            src="/logo.png" 
-            alt="Attar Dienstleistungen Logo" 
+        <img
+            src="/logo.png"
+            alt="Attar Dienstleistungen Logo"
             class="h-8 md:h-10 w-auto object-contain"
         />
     </a>
-      <button id="menu-button" class="md:hidden relative z-[1110] flex flex-col gap-1.5 p-2" aria-label="Toggle Menu">
+      <button id="menu-button" class="md:hidden relative z-[1110] flex flex-col gap-1.5 p-2" aria-label="Menü öffnen">
         <span class="w-6 h-0.5 bg-black transition-all duration-300" id="line1"></span>
         <span class="w-6 h-0.5 bg-black transition-all duration-300" id="line2"></span>
         <span class="w-6 h-0.5 bg-black transition-all duration-300" id="line3"></span>
     </button>
 
-    <div class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest">
-    <a href="/dienstleistungen" class="text-sm hover:text-brand transition-colors">Dienstleistungen</a>
-    <a href="/ueber-uns" class="text-sm hover:text-brand transition-colors">Über uns</a>
-    <a href="/kontakt" class="bg-black text-white px-5 py-2.5 text-sm hover:bg-brand transition-colors">Kontakt</a>
+    <div class="hidden md:flex items-center gap-8">
+    <a href="/dienstleistungen" class="text-xs font-bold uppercase tracking-widest hover:text-brand transition-colors">Dienstleistungen</a>
+    <a href="/ueber-uns" class="text-xs font-bold uppercase tracking-widest hover:text-brand transition-colors">Über uns</a>
+    <a href="/karriere" class="text-xs font-bold uppercase tracking-widest hover:text-brand transition-colors">Karriere</a>
+    <a href="/kontakt" class="bg-[#0d1b2a] text-white px-5 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-brand transition-colors">Kontakt</a>
 </div>
 
 </nav>
@@ -56,25 +59,22 @@ const { title } = Astro.props;
 
     function toggleMenu() {
     const isOpen = sidebar?.classList.contains('translate-x-0');
-    
+
     if (!isOpen) {
-        // OPENING
-        sidebar?.classList.remove('invisible'); // Make it "real" for the browser
+        sidebar?.classList.remove('invisible');
         sidebar?.classList.replace('translate-x-full', 'translate-x-0');
         overlay?.classList.replace('opacity-0', 'opacity-100');
         overlay?.classList.replace('pointer-events-none', 'pointer-events-auto');
-        
+
         line1.style.transform = 'translateY(8px) rotate(45deg)';
         line2.style.opacity = '0';
         line3.style.transform = 'translateY(-8px) rotate(-45deg)';
         document.body.style.overflow = 'hidden';
     } else {
-        // CLOSING
         sidebar?.classList.replace('translate-x-0', 'translate-x-full');
         overlay?.classList.replace('opacity-100', 'opacity-0');
         overlay?.classList.replace('pointer-events-auto', 'pointer-events-none');
-        
-        // Wait for the transition to finish before hiding it from the DOM again
+
         setTimeout(() => {
             if (sidebar?.classList.contains('translate-x-full')) {
                 sidebar?.classList.add('invisible');
@@ -89,7 +89,7 @@ const { title } = Astro.props;
 }
 
     btn?.addEventListener('click', toggleMenu);
-    overlay?.addEventListener('click', toggleMenu); // Close when clicking outside
+    overlay?.addEventListener('click', toggleMenu);
 </script>
 		<main>
 			<slot />
@@ -98,37 +98,38 @@ const { title } = Astro.props;
 
     <div id="sidebar" class="fixed top-0 right-0 w-[80%] max-w-[400px] h-full bg-white z-[999] translate-x-full invisible transition-all duration-500 ease-in-out p-10 md:p-12 flex flex-col">
     <div class="mt-24 flex flex-col gap-6">
-        <p class="text-brand font-bold uppercase tracking-widest text-[9px] md:text-[10px]">Navigation</p>
-        
+        <p class="text-brand font-bold uppercase tracking-widest text-[9px]">Navigation</p>
+
         <a href="/dienstleistungen" class="text-2xl md:text-3xl font-black uppercase italic hover:text-brand transition-colors">Dienstleistungen</a>
-        <a href="/ueber-uns" class="text-2xl md:text-3xl font-black uppercase italic hover:text-brand transition-colors">über uns</a>
+        <a href="/ueber-uns" class="text-2xl md:text-3xl font-black uppercase italic hover:text-brand transition-colors">Über uns</a>
         <a href="/karriere" class="text-2xl md:text-3xl font-black uppercase italic hover:text-brand transition-colors">Karriere</a>
-        
+
         <div class="h-px bg-slate-100 my-4"></div>
-        
+
         <a href="/kontakt" class="text-2xl md:text-3xl font-black uppercase italic text-brand">Kontakt</a>
     </div>
-    
-    <div class="mt-auto">
-         <p class="text-[9px] font-bold uppercase text-slate-400">© 2026 Attar Dienstleistungen</p>
+
+    <div class="mt-auto space-y-2">
+        <p class="text-xs font-bold text-slate-500">+49 (0) 15 569 365 96</p>
+        <p class="text-[9px] font-bold uppercase text-slate-400">© 2026 Attar Dienstleistungen</p>
     </div>
 </div>
-        
 
-		<footer class="relative z-10 bg-slate-900 text-slate-300 border-t border-white/5 px-8 md:px-24 pt-24 pb-12 overflow-hidden">
-  <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
-    
-    <div class="md:col-span-4">
-      <h2 class="text-4xl font-black tracking-tighter mb-6 text-white">ATTAR.</h2>
-      <p class="text-xs font-bold uppercase tracking-widest leading-relaxed text-slate-500">
+
+		<footer class="relative z-10 bg-[#0d1b2a] text-slate-300 border-t border-white/5 px-6 md:px-24 pt-16 md:pt-24 pb-10 md:pb-12 overflow-hidden">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 md:gap-8">
+
+    <div class="sm:col-span-2 md:col-span-4">
+      <h2 class="text-3xl md:text-4xl font-black tracking-tighter mb-4 text-white italic">ATTAR.</h2>
+      <p class="text-xs font-bold uppercase tracking-widest leading-relaxed text-slate-400 max-w-[280px]">
         Präzision in der Ausführung.<br/> Verlässlichkeit im Service.
       </p>
     </div>
 
     <div class="md:col-span-2">
-      <p class="text-[10px] font-bold uppercase text-brand mb-6 tracking-[0.2em]">Navigation</p>
-      <ul class="flex flex-col gap-4 text-xs font-bold uppercase tracking-widest text-slate-100">
-        <li><a href="/dienstleistungen" class="hover:text-brand transition-colors">Services</a></li>
+      <p class="text-[10px] font-bold uppercase text-brand mb-5 tracking-[0.2em]">Navigation</p>
+      <ul class="flex flex-col gap-3 text-xs font-bold uppercase tracking-widest text-slate-300">
+        <li><a href="/dienstleistungen" class="hover:text-brand transition-colors">Dienstleistungen</a></li>
         <li><a href="/ueber-uns" class="hover:text-brand transition-colors">Über uns</a></li>
         <li><a href="/karriere" class="hover:text-brand transition-colors">Karriere</a></li>
         <li><a href="/kontakt" class="hover:text-brand transition-colors">Angebot anfragen</a></li>
@@ -136,41 +137,46 @@ const { title } = Astro.props;
     </div>
 
     <div class="md:col-span-3">
-      <p class="text-[10px] font-bold uppercase text-brand mb-6 tracking-[0.2em]">Kontakt </p>
-      <div class="flex flex-col gap-6">
-        <a href="tel:+49691234567" class="group">
+      <p class="text-[10px] font-bold uppercase text-brand mb-5 tracking-[0.2em]">Kontakt</p>
+      <div class="flex flex-col gap-5">
+        <a href="tel:+4915569365960" class="group">
           <p class="text-[9px] font-bold text-slate-500 uppercase mb-1">Telefon</p>
-          <p class="text-[12px] font-black text-white group-hover:text-brand transition-colors uppercase italic">+49 (0) 15 569 365 96</p>
+          <p class="text-xs font-black text-white group-hover:text-brand transition-colors uppercase tracking-wider">+49 (0) 15 569 365 96</p>
         </a>
         <a href="mailto:attar.dienstleistungen@gmail.com" class="group">
           <p class="text-[9px] font-bold text-slate-500 uppercase mb-1">E-Mail</p>
-          <p class="text-[10px] font-black text-white group-hover:text-brand transition-colors lowercase italic">attar.dienstleistungen@gmail.com</p>
+          <p class="text-[11px] font-black text-white group-hover:text-brand transition-colors lowercase">attar.dienstleistungen@gmail.com</p>
         </a>
+        <div>
+          <p class="text-[9px] font-bold text-slate-500 uppercase mb-1">Bürozeiten</p>
+          <p class="text-[10px] font-bold text-slate-300 uppercase leading-relaxed">Mo – Fr: 07:00 – 20:00<br/>Sa: 08:30 – 18:00</p>
+        </div>
       </div>
     </div>
 
-    <div class="md:col-span-3 text-slate-100">
-      <p class="text-[10px] font-bold uppercase text-brand mb-6 tracking-[0.2em]">Standort</p>
+    <div class="md:col-span-3 text-slate-300">
+      <p class="text-[10px] font-bold uppercase text-brand mb-5 tracking-[0.2em]">Standort</p>
       <address class="not-italic text-xs font-bold uppercase tracking-widest leading-loose">
         Attar Dienstleistungen<br />
-        55606, Kirn
+        55606 Kirn<br/>
+        Rheinland-Pfalz
       </address>
     </div>
   </div>
 
-  <div class="mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500">
-    <div class="flex gap-8 text-[9px] font-bold uppercase tracking-[0.1em]">
+  <div class="mt-16 md:mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500">
+    <div class="flex gap-6 text-[9px] font-bold uppercase tracking-[0.1em]">
       <a href="/impressum" class="hover:text-white transition-colors">Impressum</a>
       <a href="/datenschutz" class="hover:text-white transition-colors">Datenschutz</a>
       <a href="/agb" class="hover:text-white transition-colors">AGB</a>
     </div>
-    
-    <p class="text-[9px] font-bold uppercase tracking-[0.1em]">
-      © 2026 Attar Dienstleistungen. All Rights Reserved.
+
+    <p class="text-[9px] font-bold uppercase tracking-[0.1em] text-center">
+      © 2026 Attar Dienstleistungen. Alle Rechte vorbehalten.
     </p>
 
-    <div class="flex gap-6 text-[10px] font-bold uppercase italic text-slate-100">
-      <a href="mailto:mohamedazizelmokhtar27@gmail.com" class="hover:text-brand transition-colors lowercase italic text-slate-400">developed by:mohamedazizelmokhtar27@gmail.com</a>
+    <div>
+      <a href="mailto:mohamedazizelmokhtar27@gmail.com" class="text-[9px] hover:text-brand transition-colors lowercase text-slate-600">Developed by mohamedazizelmokhtar27@gmail.com</a>
     </div>
   </div>
 </footer>

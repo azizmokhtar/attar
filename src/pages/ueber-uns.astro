@@ -1,14 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// Beispiel-Daten für das Portfolio (Diese könnten später auch aus Sanity kommen)
 const projects = [
-  { title: "ALdi scanner", category: "Scanners", image: "/projekte/Aldi-scanner/p1.jpg" },
-  { title: "Boden reparatur", category: "Reparatur", image: "/projekte/Boden1/p1.jpg" },
+  { title: "Bodenrenovierung", category: "Renovierung", image: "/projekte/Boden1/p3.jpg" },
+  { title: "Technischer Service", category: "Hausmeisterservice", image: "/projekte/Aldi-scanner/p1.jpg" },
 ];
 ---
 
-<Layout title="Über uns | Das Team hinter Attar">
+<Layout title="Über uns">
   <section class="pt-24 pb-12 md:pt-40 md:pb-20 px-6 md:px-24">
     <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs italic">Unsere DNA</p>
     <h1 class="text-[clamp(2.5rem,10vw,6rem)] font-black uppercase leading-[0.9] mb-8 text-[#0d1b2a]">
@@ -17,100 +16,113 @@ const projects = [
     </h1>
   </section>
 
-  <section class="px-6 md:px-24 py-20 md:py-32 border-y border-slate-100 bg-slate-50/50">
+  <!-- Über uns -->
+  <section class="px-6 md:px-24 py-16 md:py-32 border-y border-slate-100 bg-slate-50/50">
     <div class="grid md:grid-cols-12 gap-6 md:gap-8">
       <div class="md:col-span-4">
-        <h2 class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic">Unsere Mission</h2>
+        <h2 class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic">Über uns</h2>
       </div>
       <div class="md:col-span-8">
-        <p class="text-2xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] mb-6 md:mb-8 text-[#0d1b2a]">
-          Wer sind wir?
+        <p class="text-2xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter leading-[0.9] mb-8 md:mb-10 text-[#0d1b2a]">
+          Wer wir sind.
         </p>
-        <div class="space-y-6 text-base md:text-lg text-slate-600 font-medium leading-relaxed max-w-3xl">
+        <div class="space-y-5 text-base md:text-lg text-slate-600 font-medium leading-relaxed max-w-3xl">
           <p>Wir sind ein dynamisches Dienstleistungsunternehmen mit klarer Struktur, hoher Einsatzbereitschaft und einem kompromisslosen Qualitätsanspruch.</p>
           <p>Attar Dienstleistungen steht für Effizienz, Zuverlässigkeit und professionelle Umsetzung. Wir arbeiten lösungsorientiert, denken mit und handeln vorausschauend. Herausforderungen sehen wir nicht als Hindernis – sondern als Antrieb.</p>
           <p>Unser Anspruch ist es, Verantwortung zu übernehmen und Ergebnisse zu liefern, auf die sich unsere Auftraggeber jederzeit verlassen können.</p>
-          <p class="font-black text-[#0d1b2a] italic">Attar Dienstleistungen – Leistung mit System.</p>
+          <p class="font-black text-[#0d1b2a] italic text-lg md:text-xl">Attar Dienstleistungen – Leistung mit System.</p>
         </div>
       </div>
     </div>
   </section>
-  <section class="px-6 md:px-24 py-20 md:py-32 bg-[#0d1b2a] text-white">
-    <div class="mb-16">
-      <h2 class="text-brand text-[10px] md:text-xs font-bold uppercase tracking-widest mb-4 italic">Unsere Philosophie</h2>
-      <p class="text-3xl md:text-5xl font-black uppercase leading-tight mb-8">
+
+  <!-- Philosophie -->
+  <section class="px-6 md:px-24 py-16 md:py-32 bg-[#0d1b2a] text-white">
+    <div class="mb-12 md:mb-16">
+      <h2 class="text-brand text-[10px] md:text-xs font-bold uppercase tracking-widest mb-6 italic">Unsere Philosophie</h2>
+      <p class="text-2xl md:text-4xl lg:text-5xl font-black uppercase leading-tight mb-6 md:mb-8">
         Wir pflegen Werte,<br/>
-        <span class="text-slate-400">damit Sie sich auf das Wesentliche konzentrieren können.</span>
+        <span class="text-slate-400">damit Sie sich auf das Wesentliche<br class="hidden md:block"/> konzentrieren können.</span>
       </p>
-      <p class="max-w-2xl text-slate-300 text-lg">
-        Attar Dienstleistungen wurde mit einem klaren Anspruch gegründet: Die Professionalität, Struktur und Verlässlichkeit großer Projekte in den Bereich moderner Dienstleistungen zu übertragen.
-      </p>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-white/10 pt-12">
-      {[
-        { title: "Struktur", text: "Effiziente Arbeitsprozesse und klare Organisation." },
-        { title: "Verantwortung", text: "Wir übernehmen die volle Kontrolle über Ihr Projekt." },
-        { title: "Ergebnis", text: "Nachhaltige Qualität mit höchstem Anspruch." }
-      ].map((val) => (
-        <div class="group">
-          <p class="text-brand font-black text-4xl mb-2">0{val.title.length}</p>
-          <h3 class="text-xl font-black uppercase mb-2 italic">{val.title}</h3>
-          <p class="text-slate-400 text-sm uppercase font-bold">{val.text}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <section class="py-20 md:py-32 overflow-hidden bg-white">
-    <div class="px-6 md:px-24 mb-12 flex justify-between items-end">
-      <div>
-        <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs italic">Referenzen</p>
-        <h2 class="text-3xl md:text-5xl font-black uppercase text-[#0d1b2a]">Unsere Arbeit.</h2>
-      </div>
-      
-      <div class="flex gap-2">
-        <button class="portfolio-prev group border-2 border-[#0d1b2a] p-3 hover:bg-[#0d1b2a] transition-all">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="stroke-[#0d1b2a] group-hover:stroke-white transition-colors">
-            <path d="M19 12H5M5 12L11 6M5 12L11 18" stroke-width="3" stroke-linecap="square"/>
-          </svg>
-        </button>
-        <button class="portfolio-next group border-2 border-[#0d1b2a] p-3 hover:bg-[#0d1b2a] transition-all">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="stroke-[#0d1b2a] group-hover:stroke-white transition-colors">
-            <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke-width="3" stroke-linecap="square"/>
-          </svg>
-        </button>
+      <div class="max-w-2xl space-y-4 text-slate-300 text-base md:text-lg leading-relaxed">
+        <p>Attar Dienstleistungen wurde mit einem klaren Anspruch gegründet: Die Professionalität, Struktur und Verlässlichkeit großer Projekte in den Bereich moderner Dienstleistungen zu übertragen.</p>
+        <p>Unser Ziel ist es, Arbeitsprozesse effizient zu gestalten, Verantwortung zu übernehmen und nachhaltige Ergebnisse zu liefern – mit höchstem Qualitätsanspruch und klarer Organisation.</p>
       </div>
     </div>
 
-    <div class="swiper-portfolio !px-6 md:!px-24 !overflow-visible">
-      <div class="swiper-wrapper">
-        {projects.map((project) => (
-          <div class="swiper-slide group cursor-grab active:cursor-grabbing">
-            <div class="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden bg-slate-100 shadow-xl">
-              <img 
-                src={project.image} 
-                alt={project.title} 
-                class="w-full h-full object-cover scale-100 group-hover:scale-110 transition-transform duration-1000 ease-in-out"
-              />
-              {/* Permanent sanfter Verlauf unten für Lesbarkeit, verstärkt sich beim Hover */}
-              <div class="absolute inset-0 bg-gradient-to-t from-[#0d1b2a]/90 via-[#0d1b2a]/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500 flex flex-col justify-end p-8">
-                <p class="text-brand font-bold uppercase text-[10px] tracking-widest mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">{project.category}</p>
-                <p class="text-white font-black uppercase text-xl italic leading-none transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500 delay-75">{project.title}</p>
-              </div>
-            </div>
+    <!-- Was uns auszeichnet -->
+    <div class="border-t border-white/10 pt-10 md:pt-14">
+      <p class="text-brand text-[10px] md:text-xs font-bold uppercase tracking-widest mb-8 italic">Was uns auszeichnet</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        {[
+          { num: "01", title: "Struktur", text: "Klare Planung, effiziente Prozesse und transparente Kommunikation – von der ersten Abstimmung bis zur Fertigstellung." },
+          { num: "02", title: "Verantwortung", text: "Wir übernehmen die volle Verantwortung für Ihr Projekt und stehen für jede Entscheidung ein." },
+          { num: "03", title: "Ergebnis", text: "Nachhaltige Qualität ohne Kompromisse. Wir liefern Ergebnisse, auf die Sie sich verlassen können." }
+        ].map((val) => (
+          <div>
+            <p class="text-brand font-black text-4xl mb-3 italic leading-none">{val.num}</p>
+            <h3 class="text-lg md:text-xl font-black uppercase mb-2 italic">{val.title}</h3>
+            <p class="text-slate-400 text-sm font-medium leading-relaxed">{val.text}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  
-  <section class="px-6 md:px-24 py-20 md:py-32 text-center">
-    <h2 class="text-2xl md:text-4xl font-black uppercase mb-4 md:mb-8 text-[#0d1b2a]">Lernen Sie uns kennen.</h2>
-    <p class="text-slate-500 font-bold uppercase tracking-widest text-[10px] md:text-xs mb-8 md:mb-10">Ein persönliches Gespräch ist durch nichts zu ersetzen.</p>
-    <a href="/kontakt" class="bg-[#0d1b2a] text-white px-8 py-4 md:px-12 md:py-5 text-sm md:text-base font-black uppercase tracking-widest hover:bg-brand transition-all inline-block group">
-      Beratungsgespräch vereinbaren <span class="ml-4 inline-block group-hover:translate-x-2 transition-transform">→</span>
+  <!-- Portfolio / Referenzen mit seitlichen Pfeilen -->
+  <section class="py-16 md:py-32 bg-white overflow-hidden">
+    <div class="px-6 md:px-24 mb-10 md:mb-12 flex justify-between items-end">
+      <div>
+        <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs italic">Referenzen</p>
+        <h2 class="text-3xl md:text-5xl font-black uppercase text-[#0d1b2a]">Unsere Arbeit.</h2>
+      </div>
+    </div>
+
+    <!-- Swiper mit seitlichen Overlay-Pfeilen -->
+    <div class="relative">
+      <!-- Left arrow -->
+      <button class="portfolio-prev absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm border-2 border-[#0d1b2a] p-3 md:p-4 hover:bg-[#0d1b2a] group transition-all shadow-lg" aria-label="Zurück">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="stroke-[#0d1b2a] group-hover:stroke-white transition-colors">
+          <path d="M19 12H5M5 12L11 6M5 12L11 18" stroke-width="3" stroke-linecap="square"/>
+        </svg>
+      </button>
+
+      <!-- Right arrow -->
+      <button class="portfolio-next absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm border-2 border-[#0d1b2a] p-3 md:p-4 hover:bg-[#0d1b2a] group transition-all shadow-lg" aria-label="Weiter">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="stroke-[#0d1b2a] group-hover:stroke-white transition-colors">
+          <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke-width="3" stroke-linecap="square"/>
+        </svg>
+      </button>
+
+      <div class="swiper-portfolio px-6 md:px-24 overflow-hidden">
+        <div class="swiper-wrapper">
+          {projects.map((project) => (
+            <div class="swiper-slide group cursor-grab active:cursor-grabbing">
+              <div class="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden bg-slate-100">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  class="w-full h-full object-cover scale-100 group-hover:scale-110 transition-transform duration-1000 ease-in-out"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0d1b2a]/90 via-[#0d1b2a]/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500 flex flex-col justify-end p-6 md:p-8">
+                  <p class="text-brand font-bold uppercase text-[10px] tracking-widest mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">{project.category}</p>
+                  <p class="text-white font-black uppercase text-lg md:text-xl italic leading-none transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500 delay-75">{project.title}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="px-6 md:px-24 py-16 md:py-32 text-center">
+    <h2 class="text-2xl md:text-4xl font-black uppercase mb-4 md:mb-6 text-[#0d1b2a]">Lernen Sie uns kennen.</h2>
+    <p class="text-slate-500 font-medium text-sm md:text-base mb-8 md:mb-10 max-w-md mx-auto leading-relaxed">Ein persönliches Gespräch ist durch nichts zu ersetzen. Wir freuen uns auf Sie.</p>
+    <a href="/kontakt" class="bg-[#0d1b2a] text-white px-8 py-4 md:px-12 md:py-5 text-sm font-black uppercase tracking-widest hover:bg-brand transition-all inline-block group">
+      Beratungsgespräch vereinbaren <span class="ml-3 inline-block group-hover:translate-x-2 transition-transform">→</span>
     </a>
   </section>
 </Layout>
@@ -122,16 +134,16 @@ const projects = [
 
   new Swiper('.swiper-portfolio', {
     modules: [Navigation],
-    slidesPerView: 1.2,
-    spaceBetween: 20,
+    slidesPerView: 1.15,
+    spaceBetween: 12,
     grabCursor: true,
     navigation: {
       nextEl: '.portfolio-next',
       prevEl: '.portfolio-prev',
     },
     breakpoints: {
-      640: { slidesPerView: 2.2 },
-      1024: { slidesPerView: 3.5, spaceBetween: 30 },
+      640: { slidesPerView: 2.1, spaceBetween: 16 },
+      1024: { slidesPerView: 3.2, spaceBetween: 20 },
     }
   });
 </script>
