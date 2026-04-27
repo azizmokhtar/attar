@@ -6,9 +6,10 @@ import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
 	title: string;
+	preloadHeroPoster?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, preloadHeroPoster = false } = Astro.props;
 const GA_ID = 'G-1QJF32TBF3';
 ---
 
@@ -24,6 +25,9 @@ const GA_ID = 'G-1QJF32TBF3';
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 		<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+		<link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
+		{preloadHeroPoster && <link rel="preload" as="image" href="/main-poster.jpg" fetchpriority="high" />}
 		<title>{title} | Attar Dienstleistungen</title>
 
 		{/* Google Consent Mode v2 — must run BEFORE gtag.js loads. */}
@@ -60,6 +64,10 @@ const GA_ID = 'G-1QJF32TBF3';
         <img
             src="/logo.png"
             alt="Attar Dienstleistungen Logo"
+            width="368"
+            height="120"
+            decoding="async"
+            fetchpriority="high"
             class="h-8 md:h-10 w-auto object-contain"
         />
     </a>
