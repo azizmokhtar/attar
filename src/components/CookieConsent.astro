@@ -1,0 +1,282 @@
+---
+// Cookie consent banner with Google Consent Mode v2 integration.
+// Categories: essential (always on), analytics (Google Analytics), marketing (Google Ads).
+---
+
+<!-- Banner (initial bottom bar) -->
+<div
+  id="cookie-banner"
+  class="fixed inset-x-0 bottom-0 z-[2000] hidden translate-y-full transition-transform duration-500 ease-out"
+  aria-live="polite"
+  aria-label="Cookie-Einwilligung"
+>
+  <div class="bg-[#0d1b2a] text-white border-t-4 border-brand shadow-2xl">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 py-6 md:py-8 grid md:grid-cols-12 gap-6 md:gap-10 items-start md:items-center">
+      <div class="md:col-span-7">
+        <p class="text-brand font-bold uppercase tracking-[0.25em] text-[10px] mb-2 italic">Datenschutz · Cookies</p>
+        <h2 class="font-black uppercase text-lg md:text-xl leading-tight mb-3">Wir respektieren Ihre Privatsphäre.</h2>
+        <p class="text-slate-300 text-xs md:text-sm leading-relaxed font-medium max-w-xl">
+          Wir verwenden Cookies und vergleichbare Technologien, um unsere Website zu betreiben sowie –
+          mit Ihrer Einwilligung – zur Reichweitenmessung (Google Analytics) und für Marketing
+          (Google Ads). Sie können Ihre Auswahl jederzeit ändern. Mehr Informationen in unserer
+          <a href="/datenschutz" class="text-brand font-bold underline hover:text-white transition-colors">Datenschutzerklärung</a>.
+        </p>
+      </div>
+      <div class="md:col-span-5 flex flex-col gap-3">
+        <div class="grid grid-cols-2 gap-3">
+          <button
+            type="button"
+            data-consent-action="reject"
+            class="bg-transparent border-2 border-white/30 text-white py-3 md:py-4 px-4 font-black uppercase tracking-[0.15em] text-[10px] md:text-xs hover:border-white transition-colors"
+          >
+            Ablehnen
+          </button>
+          <button
+            type="button"
+            data-consent-action="accept"
+            class="bg-brand text-[#0d1b2a] py-3 md:py-4 px-4 font-black uppercase tracking-[0.15em] text-[10px] md:text-xs hover:bg-white transition-colors"
+          >
+            Akzeptieren
+          </button>
+        </div>
+        <button
+          type="button"
+          data-consent-action="open-settings"
+          class="text-slate-400 hover:text-brand transition-colors text-[10px] font-bold uppercase tracking-widest underline underline-offset-4"
+        >
+          Einstellungen anpassen
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Settings modal -->
+<div
+  id="cookie-settings-overlay"
+  class="fixed inset-0 z-[2001] hidden bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"
+  aria-hidden="true"
+></div>
+<div
+  id="cookie-settings-modal"
+  class="fixed inset-0 z-[2002] hidden items-center justify-center p-4 md:p-8"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="cookie-settings-title"
+>
+  <div class="bg-white max-w-2xl w-full max-h-[90vh] overflow-y-auto border-l-4 border-brand opacity-0 translate-y-4 transition-all duration-300" id="cookie-settings-card">
+    <div class="bg-[#0d1b2a] text-white p-6 md:p-8 border-b-4 border-brand">
+      <p class="text-brand font-bold uppercase tracking-[0.25em] text-[10px] mb-2 italic">Cookie-Einstellungen</p>
+      <h2 id="cookie-settings-title" class="font-black uppercase text-2xl md:text-3xl leading-tight">Ihre Auswahl.</h2>
+    </div>
+
+    <div class="p-6 md:p-8 space-y-6">
+      <p class="text-slate-600 text-xs md:text-sm font-medium leading-relaxed">
+        Wählen Sie, welche Kategorien von Cookies wir auf dieser Website verwenden dürfen. Erforderliche Cookies sind für den Betrieb der Website notwendig und können nicht deaktiviert werden.
+      </p>
+
+      <!-- Essential -->
+      <div class="border border-slate-200 p-5 md:p-6">
+        <div class="flex items-start justify-between gap-4 mb-2">
+          <div>
+            <h3 class="text-[#0d1b2a] font-black uppercase text-sm md:text-base">Erforderlich</h3>
+            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">Immer aktiv</p>
+          </div>
+          <div class="bg-slate-200 text-slate-500 px-3 py-1.5 font-black uppercase text-[10px] tracking-widest shrink-0">
+            Aktiv
+          </div>
+        </div>
+        <p class="text-slate-600 text-xs md:text-sm font-medium leading-relaxed">
+          Notwendig für den Betrieb der Website (z. B. Sicherheit, Anti-Spam für Formulare). Es werden keine personenbezogenen Daten zu Marketingzwecken verarbeitet.
+        </p>
+      </div>
+
+      <!-- Analytics -->
+      <div class="border border-slate-200 p-5 md:p-6">
+        <div class="flex items-start justify-between gap-4 mb-2">
+          <div>
+            <h3 class="text-[#0d1b2a] font-black uppercase text-sm md:text-base">Statistik</h3>
+            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">Google Analytics</p>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer shrink-0">
+            <input type="checkbox" id="consent-analytics" class="sr-only peer" />
+            <div class="w-12 h-6 bg-slate-200 peer-focus:ring-2 peer-focus:ring-brand peer-focus:ring-offset-2 transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:h-5 after:w-5 after:transition-transform peer-checked:after:translate-x-6 peer-checked:bg-brand"></div>
+          </label>
+        </div>
+        <p class="text-slate-600 text-xs md:text-sm font-medium leading-relaxed">
+          Hilft uns zu verstehen, wie Besucher unsere Website nutzen. Daten werden anonymisiert ausgewertet, damit wir unser Angebot verbessern können.
+        </p>
+      </div>
+
+      <!-- Marketing -->
+      <div class="border border-slate-200 p-5 md:p-6">
+        <div class="flex items-start justify-between gap-4 mb-2">
+          <div>
+            <h3 class="text-[#0d1b2a] font-black uppercase text-sm md:text-base">Marketing</h3>
+            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">Google Ads</p>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer shrink-0">
+            <input type="checkbox" id="consent-marketing" class="sr-only peer" />
+            <div class="w-12 h-6 bg-slate-200 peer-focus:ring-2 peer-focus:ring-brand peer-focus:ring-offset-2 transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:h-5 after:w-5 after:transition-transform peer-checked:after:translate-x-6 peer-checked:bg-brand"></div>
+          </label>
+        </div>
+        <p class="text-slate-600 text-xs md:text-sm font-medium leading-relaxed">
+          Ermöglicht es uns, die Wirksamkeit unserer Werbeanzeigen zu messen und Ihnen relevantere Inhalte auf Partner-Websites anzuzeigen.
+        </p>
+      </div>
+
+      <p class="text-[10px] font-medium text-slate-400 leading-relaxed pt-2">
+        Sie können Ihre Einwilligung jederzeit über den Link „Cookie-Einstellungen“ im Footer widerrufen. Mehr Details in unserer <a href="/datenschutz" class="text-brand font-bold underline">Datenschutzerklärung</a>.
+      </p>
+    </div>
+
+    <div class="bg-slate-50 border-t border-slate-200 p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-3">
+      <button
+        type="button"
+        data-consent-action="reject"
+        class="bg-white border-2 border-slate-200 text-[#0d1b2a] py-3 md:py-4 px-4 font-black uppercase tracking-[0.15em] text-[10px] md:text-xs hover:border-[#0d1b2a] transition-colors"
+      >
+        Alle ablehnen
+      </button>
+      <button
+        type="button"
+        data-consent-action="save-selection"
+        class="bg-[#0d1b2a] text-white py-3 md:py-4 px-4 font-black uppercase tracking-[0.15em] text-[10px] md:text-xs hover:bg-brand transition-colors"
+      >
+        Auswahl speichern
+      </button>
+      <button
+        type="button"
+        data-consent-action="accept"
+        class="md:col-span-2 bg-brand text-[#0d1b2a] py-3 md:py-4 px-4 font-black uppercase tracking-[0.15em] text-[10px] md:text-xs hover:bg-[#0d1b2a] hover:text-white transition-colors"
+      >
+        Alle akzeptieren
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const STORAGE_KEY = 'attar-cookie-consent';
+    const CONSENT_VERSION = 1;
+
+    const banner   = document.getElementById('cookie-banner');
+    const overlay  = document.getElementById('cookie-settings-overlay');
+    const modal    = document.getElementById('cookie-settings-modal');
+    const card     = document.getElementById('cookie-settings-card');
+    const tglAna   = /** @type {HTMLInputElement} */(document.getElementById('consent-analytics'));
+    const tglMkt   = /** @type {HTMLInputElement} */(document.getElementById('consent-marketing'));
+
+    function gtag() { window.dataLayer = window.dataLayer || []; window.dataLayer.push(arguments); }
+
+    function applyConsent(categories) {
+      const ana = categories.analytics ? 'granted' : 'denied';
+      const mkt = categories.marketing ? 'granted' : 'denied';
+      gtag('consent', 'update', {
+        analytics_storage: ana,
+        ad_storage: mkt,
+        ad_user_data: mkt,
+        ad_personalization: mkt,
+      });
+    }
+
+    function readConsent() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed || parsed.version !== CONSENT_VERSION) return null;
+        return parsed;
+      } catch { return null; }
+    }
+
+    function saveConsent(categories) {
+      const payload = {
+        version: CONSENT_VERSION,
+        timestamp: new Date().toISOString(),
+        categories: { essential: true, analytics: !!categories.analytics, marketing: !!categories.marketing },
+      };
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(payload)); } catch {}
+      applyConsent(payload.categories);
+      hideBanner();
+      closeSettings();
+    }
+
+    function showBanner() {
+      if (!banner) return;
+      banner.classList.remove('hidden');
+      requestAnimationFrame(() => banner.classList.remove('translate-y-full'));
+    }
+    function hideBanner() {
+      if (!banner) return;
+      banner.classList.add('translate-y-full');
+      setTimeout(() => banner.classList.add('hidden'), 500);
+    }
+
+    function openSettings() {
+      if (!overlay || !modal || !card) return;
+      const existing = readConsent();
+      if (existing) {
+        tglAna.checked = !!existing.categories.analytics;
+        tglMkt.checked = !!existing.categories.marketing;
+      }
+      overlay.classList.remove('hidden');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      requestAnimationFrame(() => {
+        overlay.classList.remove('opacity-0');
+        overlay.classList.add('opacity-100');
+        card.classList.remove('opacity-0', 'translate-y-4');
+      });
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSettings() {
+      if (!overlay || !modal || !card) return;
+      overlay.classList.remove('opacity-100');
+      overlay.classList.add('opacity-0');
+      card.classList.add('opacity-0', 'translate-y-4');
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    document.addEventListener('click', (e) => {
+      const target = e.target instanceof Element ? e.target.closest('[data-consent-action]') : null;
+      if (!target) return;
+      const action = target.getAttribute('data-consent-action');
+
+      if (action === 'accept') {
+        saveConsent({ analytics: true, marketing: true });
+      } else if (action === 'reject') {
+        saveConsent({ analytics: false, marketing: false });
+      } else if (action === 'save-selection') {
+        saveConsent({ analytics: tglAna?.checked, marketing: tglMkt?.checked });
+      } else if (action === 'open-settings') {
+        openSettings();
+      } else if (action === 'close-settings') {
+        closeSettings();
+      } else if (action === 'reopen') {
+        e.preventDefault();
+        openSettings();
+      }
+    });
+
+    overlay?.addEventListener('click', closeSettings);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) closeSettings();
+    });
+
+    // On boot: re-apply saved consent OR show banner
+    const saved = readConsent();
+    if (saved) {
+      applyConsent(saved.categories);
+    } else {
+      // small delay so the page paints first
+      setTimeout(showBanner, 400);
+    }
+  })();
+</script>

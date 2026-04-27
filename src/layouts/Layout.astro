@@ -2,12 +2,14 @@
 import '../styles/global.css';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import Analytics from '@vercel/analytics/astro';
+import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
 	title: string;
 }
 
 const { title } = Astro.props;
+const GA_ID = 'G-1QJF32TBF3';
 ---
 
 <!doctype html>
@@ -19,6 +21,27 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 		<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
 		<title>{title} | Attar Dienstleistungen</title>
+
+		{/* Google Consent Mode v2 — must run BEFORE gtag.js loads. */}
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){ dataLayer.push(arguments); }
+			gtag('consent', 'default', {
+				ad_storage: 'denied',
+				ad_user_data: 'denied',
+				ad_personalization: 'denied',
+				analytics_storage: 'denied',
+				functionality_storage: 'denied',
+				personalization_storage: 'denied',
+				security_storage: 'granted',
+				wait_for_update: 500,
+			});
+		</script>
+		<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+		<script is:inline define:vars={{ GA_ID }}>
+			gtag('js', new Date());
+			gtag('config', GA_ID, { anonymize_ip: true });
+		</script>
 	</head>
 	<body class="bg-white text-slate-900 selection:bg-brand selection:text-white">
 		<div class="fixed inset-0 flex justify-between px-8 md:px-24 pointer-events-none -z-10" aria-hidden="true">
@@ -167,10 +190,11 @@ const { title } = Astro.props;
   </div>
 
   <div class="mt-16 md:mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500">
-    <div class="flex gap-6 text-[9px] font-bold uppercase tracking-[0.1em]">
+    <div class="flex flex-wrap gap-6 text-[9px] font-bold uppercase tracking-[0.1em]">
       <a href="/impressum" class="hover:text-white transition-colors">Impressum</a>
       <a href="/datenschutz" class="hover:text-white transition-colors">Datenschutz</a>
       <a href="/agb" class="hover:text-white transition-colors">AGB</a>
+      <button type="button" data-consent-action="reopen" class="hover:text-white transition-colors uppercase tracking-[0.1em] cursor-pointer">Cookie-Einstellungen</button>
     </div>
 
     <p class="text-[9px] font-bold uppercase tracking-[0.1em] text-center">
@@ -185,5 +209,6 @@ const { title } = Astro.props;
 
 	<SpeedInsights />
 	<Analytics />
+	<CookieConsent />
 	</body>
 </html>

@@ -35,20 +35,55 @@ import Layout from '../layouts/Layout.astro';
           Rheinland-Pfalz
         </p>
       </div>
+
+      <div>
+        <h3 class="text-[10px] font-bold uppercase tracking-widest text-brand mb-4">Reaktionszeit</h3>
+        <p class="text-sm font-bold uppercase leading-relaxed text-slate-500">
+          Antwort innerhalb<br/>von 24 Stunden
+        </p>
+      </div>
     </div>
 
     <div class="md:col-span-8 bg-slate-50 p-6 md:p-14 border border-slate-100">
+
+      <!-- Success message (hidden by default) -->
+      <div id="success-msg" class="hidden mb-8 bg-[#0d1b2a] text-white p-6 md:p-8 border-l-4 border-brand">
+        <div class="flex items-start gap-4">
+          <div class="bg-brand text-[#0d1b2a] w-10 h-10 flex items-center justify-center font-black text-xl shrink-0">✓</div>
+          <div class="flex-1">
+            <p class="text-brand font-bold uppercase tracking-[0.2em] text-[10px] mb-2">Anfrage erhalten</p>
+            <p class="font-black uppercase text-base md:text-lg mb-3 leading-tight">Vielen Dank für Ihr Vertrauen.</p>
+            <p class="text-slate-300 text-xs md:text-sm font-medium leading-relaxed mb-4">
+              Wir haben Ihre Anfrage erhalten und melden uns innerhalb von 24 Stunden persönlich bei Ihnen. Eine Bestätigung wurde an Ihre E-Mail-Adresse gesendet.
+            </p>
+            <div class="border-t border-white/10 pt-3 mt-3">
+              <p class="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-1">Vorgangsnummer</p>
+              <p id="success-reference" class="font-mono text-sm md:text-base font-black tracking-wider text-white"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error message (hidden by default) -->
+      <div id="error-msg" class="hidden mb-8 bg-white border-l-4 border-red-500 p-6 md:p-8">
+        <p class="text-red-600 font-bold uppercase tracking-[0.2em] text-[10px] mb-2">Fehler</p>
+        <p class="font-black uppercase text-base text-[#0d1b2a] mb-2 leading-tight">Anfrage konnte nicht gesendet werden.</p>
+        <p id="error-detail" class="text-slate-500 text-xs md:text-sm font-medium leading-relaxed">
+          Bitte versuchen Sie es erneut oder erreichen Sie uns direkt unter <a href="mailto:attar.dienstleistungen@gmail.com" class="text-brand font-bold underline">attar.dienstleistungen@gmail.com</a>.
+        </p>
+      </div>
+
       <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-8">Schreiben Sie uns – wir melden uns innerhalb von 24 Stunden.</p>
-      <form action="https://formspree.io/f/xdalynzd" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <form id="contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
 
         <div class="flex flex-col gap-2">
           <label class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-400">Vollständiger Name *</label>
-          <input type="text" name="name" required class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold uppercase text-sm" placeholder="Max Mustermann" />
+          <input type="text" name="name" required maxlength="200" class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold uppercase text-sm" placeholder="Max Mustermann" />
         </div>
 
         <div class="flex flex-col gap-2">
           <label class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-400">E-Mail Adresse *</label>
-          <input type="email" name="email" required class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold text-sm" placeholder="email@beispiel.de" />
+          <input type="email" name="email" required maxlength="200" class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold text-sm" placeholder="email@beispiel.de" />
         </div>
 
         <div class="flex flex-col gap-2 md:col-span-2">
@@ -57,6 +92,7 @@ import Layout from '../layouts/Layout.astro';
             type="tel"
             name="phone"
             required
+            maxlength="50"
             class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold text-sm"
             placeholder="+49 123 456789"
           />
@@ -75,18 +111,71 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="flex flex-col gap-2 md:col-span-2">
           <label class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-400">Nachricht / Details *</label>
-          <textarea name="message" rows="4" required class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-medium text-sm resize-none" placeholder="Beschreiben Sie Ihr Projekt kurz..."></textarea>
+          <textarea name="message" rows="4" required maxlength="3000" class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-medium text-sm resize-none" placeholder="Beschreiben Sie Ihr Projekt kurz..."></textarea>
         </div>
 
         <div class="md:col-span-2 pt-4 md:pt-6">
-          <button type="submit" class="w-full bg-[#0d1b2a] text-white py-4 md:py-5 font-black uppercase tracking-[0.2em] hover:bg-brand transition-all flex justify-between px-6 md:px-8 items-center group text-sm">
-            Anfrage absenden
-            <span class="group-hover:translate-x-2 transition-transform">→</span>
+          <button id="submit-btn" type="submit" class="w-full bg-[#0d1b2a] text-white py-4 md:py-5 font-black uppercase tracking-[0.2em] hover:bg-brand transition-all flex justify-between px-6 md:px-8 items-center group text-sm disabled:opacity-60 disabled:cursor-not-allowed">
+            <span id="btn-text">Anfrage absenden</span>
+            <span id="btn-arrow" class="group-hover:translate-x-2 transition-transform">→</span>
           </button>
+          <p class="text-[9px] md:text-[10px] text-slate-400 font-medium mt-4 leading-relaxed">
+            Mit dem Absenden stimmen Sie unserer <a href="/datenschutz" class="text-brand font-bold underline hover:text-[#0d1b2a]">Datenschutzerklärung</a> zu. Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet.
+          </p>
         </div>
 
-        <input type="text" name="_gotcha" style="display:none" />
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;pointer-events:none" aria-hidden="true" />
       </form>
     </div>
   </section>
 </Layout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnText = document.getElementById('btn-text') as HTMLElement;
+  const btnArrow = document.getElementById('btn-arrow') as HTMLElement;
+  const successMsg = document.getElementById('success-msg') as HTMLElement;
+  const successReference = document.getElementById('success-reference') as HTMLElement;
+  const errorMsg = document.getElementById('error-msg') as HTMLElement;
+  const errorDetail = document.getElementById('error-detail') as HTMLElement;
+
+  const DEFAULT_ERROR = `Bitte versuchen Sie es erneut oder erreichen Sie uns direkt unter <a href="mailto:attar.dienstleistungen@gmail.com" class="text-brand font-bold underline">attar.dienstleistungen@gmail.com</a>.`;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    submitBtn.disabled = true;
+    btnText.textContent = 'Wird gesendet...';
+    btnArrow.textContent = '…';
+    successMsg.classList.add('hidden');
+    errorMsg.classList.add('hidden');
+
+    try {
+      const formData = new FormData(form);
+      const res = await fetch('/api/contact', { method: 'POST', body: formData });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success) {
+        form.reset();
+        successReference.textContent = data.reference || '';
+        successMsg.classList.remove('hidden');
+        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        errorDetail.innerHTML = data.error
+          ? `${data.error} ${DEFAULT_ERROR}`
+          : DEFAULT_ERROR;
+        errorMsg.classList.remove('hidden');
+        errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    } catch {
+      errorDetail.innerHTML = DEFAULT_ERROR;
+      errorMsg.classList.remove('hidden');
+      errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } finally {
+      submitBtn.disabled = false;
+      btnText.textContent = 'Anfrage absenden';
+      btnArrow.textContent = '→';
+    }
+  });
+</script>
