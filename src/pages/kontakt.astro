@@ -68,7 +68,8 @@ import Layout from '../layouts/Layout.astro';
       <div id="error-msg" class="hidden mb-8 bg-white border-l-4 border-red-500 p-6 md:p-8">
         <p class="text-red-600 font-bold uppercase tracking-[0.2em] text-[10px] mb-2">Fehler</p>
         <p class="font-black uppercase text-base text-[#0d1b2a] mb-2 leading-tight">Anfrage konnte nicht gesendet werden.</p>
-        <p id="error-detail" class="text-slate-500 text-xs md:text-sm font-medium leading-relaxed">
+        <p class="text-slate-500 text-xs md:text-sm font-medium leading-relaxed">
+          <span id="error-server-msg" class="block mb-1 text-red-600 font-bold"></span>
           Bitte versuchen Sie es erneut oder erreichen Sie uns direkt unter <a href="mailto:attar.dienstleistungen@gmail.com" class="text-brand font-bold underline">attar.dienstleistungen@gmail.com</a>.
         </p>
       </div>
@@ -78,12 +79,12 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="flex flex-col gap-2">
           <label class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-400">Vollständiger Name *</label>
-          <input type="text" name="name" required maxlength="200" class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold uppercase text-sm" placeholder="Max Mustermann" />
+          <input type="text" name="name" required maxlength="200" autocomplete="name" autocapitalize="words" class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold uppercase text-sm" placeholder="Max Mustermann" />
         </div>
 
         <div class="flex flex-col gap-2">
           <label class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-400">E-Mail Adresse *</label>
-          <input type="email" name="email" required maxlength="200" class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold text-sm" placeholder="email@beispiel.de" />
+          <input type="email" name="email" required maxlength="200" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email" class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold text-sm" placeholder="email@beispiel.de" />
         </div>
 
         <div class="flex flex-col gap-2 md:col-span-2">
@@ -93,6 +94,8 @@ import Layout from '../layouts/Layout.astro';
             name="phone"
             required
             maxlength="50"
+            autocomplete="tel"
+            inputmode="tel"
             class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold text-sm"
             placeholder="+49 123 456789"
           />
@@ -138,9 +141,13 @@ import Layout from '../layouts/Layout.astro';
   const successMsg = document.getElementById('success-msg') as HTMLElement;
   const successReference = document.getElementById('success-reference') as HTMLElement;
   const errorMsg = document.getElementById('error-msg') as HTMLElement;
-  const errorDetail = document.getElementById('error-detail') as HTMLElement;
+  const errorServerMsg = document.getElementById('error-server-msg') as HTMLElement;
 
-  const DEFAULT_ERROR = `Bitte versuchen Sie es erneut oder erreichen Sie uns direkt unter <a href="mailto:attar.dienstleistungen@gmail.com" class="text-brand font-bold underline">attar.dienstleistungen@gmail.com</a>.`;
+  function showError(serverMessage?: string) {
+    errorServerMsg.textContent = serverMessage || '';
+    errorMsg.classList.remove('hidden');
+    errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -162,16 +169,10 @@ import Layout from '../layouts/Layout.astro';
         successMsg.classList.remove('hidden');
         successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
-        errorDetail.innerHTML = data.error
-          ? `${data.error} ${DEFAULT_ERROR}`
-          : DEFAULT_ERROR;
-        errorMsg.classList.remove('hidden');
-        errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        showError(typeof data.error === 'string' ? data.error : undefined);
       }
     } catch {
-      errorDetail.innerHTML = DEFAULT_ERROR;
-      errorMsg.classList.remove('hidden');
-      errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      showError();
     } finally {
       submitBtn.disabled = false;
       btnText.textContent = 'Anfrage absenden';

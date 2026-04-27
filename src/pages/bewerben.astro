@@ -30,12 +30,12 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="flex flex-col gap-2">
           <label class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-400">Vor- & Nachname *</label>
-          <input type="text" name="name" required class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold text-sm" />
+          <input type="text" name="name" required maxlength="200" autocomplete="name" autocapitalize="words" class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold text-sm" />
         </div>
 
         <div class="flex flex-col gap-2">
           <label class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-400">E-Mail *</label>
-          <input type="email" name="email" required class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold text-sm" />
+          <input type="email" name="email" required maxlength="200" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email" class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold text-sm" />
         </div>
 
         <div class="flex flex-col gap-2 md:col-span-2">
@@ -44,6 +44,9 @@ import Layout from '../layouts/Layout.astro';
             type="tel"
             name="phone"
             required
+            maxlength="50"
+            autocomplete="tel"
+            inputmode="tel"
             class="bg-transparent border-b-2 border-slate-200 py-2 md:py-3 focus:border-brand outline-none transition-colors font-bold text-sm"
             placeholder="+49 176 12345678"
           />

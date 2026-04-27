@@ -44,6 +44,22 @@ h1, h2, h3 {
   outline-offset: 2px;
 }
 
+/* Prevent iOS Safari from auto-zooming on input focus.
+   iOS triggers zoom only when font-size < 16px on the focused field. */
+@media (max-width: 767px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
 /* Default state: hidden on mobile */
 .mouse-wrapper {
     display: none;

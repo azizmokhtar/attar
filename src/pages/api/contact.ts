@@ -226,16 +226,19 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 
     await transporter.sendMail(internalMail);
 
-    // Auto-reply: best-effort. If it fails, the inquiry was still received.
+    // Auto-reply: best-effort, but must be awaited or the serverless runtime
+    // will terminate the function before the email actually goes out.
     const autoReply: nodemailer.SendMailOptions = {
       from: `"${COMPANY}" <${import.meta.env.GMAIL_USER}>`,
       to: email,
       subject: `Eingangsbestätigung Ihrer Anfrage [${reference}]`,
       html: buildAutoReply(safe),
     };
-    transporter.sendMail(autoReply).catch((err) => {
+    try {
+      await transporter.sendMail(autoReply);
+    } catch (err) {
       console.error('contact auto-reply failed:', err);
-    });
+    }
 
     return new Response(
       JSON.stringify({ success: true, reference }),
