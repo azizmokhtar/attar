@@ -139,12 +139,12 @@ const serviceItemListLd = {
 
                 <p class="text-xs font-black italic text-[#0d1b2a] mb-6 md:mb-8">{service.tagline}</p>
 
-                <div class="flex flex-wrap gap-x-8 gap-y-3 items-center">
-                  <a href={`/dienstleistungen/${service.slug}`} class="group inline-flex items-center gap-3 border-b-2 border-[#0d1b2a] pb-1 text-[10px] md:text-xs font-black uppercase tracking-widest text-[#0d1b2a] hover:text-brand hover:border-brand transition-all">
+                <div class="flex flex-wrap gap-x-8 gap-y-4 items-center">
+                  <a href={`/dienstleistungen/${service.slug}`} class="group inline-flex items-center gap-3 bg-brand text-white px-6 py-3 md:px-8 md:py-4 text-[10px] md:text-xs font-black uppercase tracking-widest hover:bg-[#0d1b2a] transition-colors">
                     Mehr erfahren
                     <span class="group-hover:translate-x-1 transition-transform">→</span>
                   </a>
-                  <a href={`/kontakt?service=${service.slug.replace('service', '')}`} class="group inline-flex items-center gap-3 border-b-2 border-transparent pb-1 text-[10px] md:text-xs font-black uppercase tracking-widest text-slate-500 hover:text-brand transition-all">
+                  <a href={`/kontakt?service=${service.slug.replace('service', '')}`} class="group inline-flex items-center gap-3 border-b-2 border-[#0d1b2a] pb-1 text-[10px] md:text-xs font-black uppercase tracking-widest text-[#0d1b2a] hover:text-brand hover:border-brand transition-all">
                     Jetzt anfragen
                     <span class="group-hover:translate-x-1 transition-transform">→</span>
                   </a>
