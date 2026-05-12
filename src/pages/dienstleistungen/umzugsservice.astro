@@ -1,0 +1,240 @@
+---
+export const prerender = true;
+
+import Layout from '../../layouts/Layout.astro';
+
+const SITE_URL = 'https://attar-dienstleistungen.de';
+const PAGE_PATH = '/dienstleistungen/umzugsservice';
+const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
+
+const included = [
+  { h: 'Privatumzüge', p: 'Komplettumzüge für Wohnungen und Häuser. Inklusive Demontage und Montage, Verpackung, Transport und Einrichtung am neuen Ort.' },
+  { h: 'Firmen- und Büroumzüge', p: 'Strukturierte Umzüge für Unternehmen mit minimaler Ausfallzeit. IT, Akten, Mobiliar – inventarisiert und etikettiert.' },
+  { h: 'Senioren- und Entlastungsumzüge', p: 'Behutsamer Umzugsservice mit Entrümpelung, Aussortieren, Möbelreduzierung und schlüsselfertiger Einrichtung im neuen Zuhause.' },
+  { h: 'Möbeltransport & Einzelstücke', p: 'Sicherer Transport einzelner Möbel, Klaviere, Tresore und sperriger Gegenstände innerhalb der Region und deutschlandweit.' },
+  { h: 'Verpackungs- & Packservice', p: 'Profi-Verpackung Ihres Hausstands inklusive Kartons, Polsterung und Beschriftung. Auf Wunsch Ein- und Auspacken durch unser Team.' },
+  { h: 'Entrümpelung & Endreinigung', p: 'Nach dem Auszug räumen wir die alte Wohnung besenrein – inklusive Entsorgung nicht mitgenommener Gegenstände und Endreinigung.' },
+];
+
+const process = [
+  { n: '01', h: 'Besichtigung & Beratung', p: 'Wir besichtigen Ihren Hausstand persönlich oder digital, klären Volumen, Stockwerke, Parkmöglichkeiten und besondere Stücke.' },
+  { n: '02', h: 'Festpreisangebot', p: 'Sie erhalten einen schriftlichen Festpreis inkl. aller Leistungen, Versicherung und ggf. Halteverbotszonen – ohne Stundenüberraschungen.' },
+  { n: '03', h: 'Planung & Vorbereitung', p: 'Wir bringen Kartons und Material, koordinieren Termine, Parkverbotszonen und ggf. die Adressänderung. Sie behalten den Überblick.' },
+  { n: '04', h: 'Umzug & Übergabe', p: 'Am Umzugstag verladen, transportieren und stellen wir auf – sorgfältig, pünktlich und mit klarer Übergabe an Sie.' },
+];
+
+const faqs = [
+  {
+    q: 'Welche Umzüge übernimmt Attar Dienstleistungen?',
+    a: 'Wir führen Privat-, Firmen-, Senioren- und Beiladungsumzüge in Kirn, Bad Kreuznach, Idar-Oberstein und deutschlandweit aus. Inklusive Demontage, Verpackung, Transport, Montage, Entrümpelung der alten Wohnung und Endreinigung.',
+  },
+  {
+    q: 'Wie weit im Voraus muss ein Umzug gebucht werden?',
+    a: 'Für reguläre Termine empfehlen wir 3 bis 4 Wochen Vorlauf, in Hochsaisonzeiten (März – Oktober, Monatsanfang/-ende) eher 6 bis 8 Wochen. Kurzfristige Umzüge sind in Einzelfällen möglich – fragen Sie nach Express-Terminen.',
+  },
+  {
+    q: 'Was kostet ein Umzug in Kirn oder Bad Kreuznach?',
+    a: 'Der Preis hängt von Wohnungsgröße, Etagen, Aufzug, Entfernung und gewählten Zusatzleistungen ab. Sie erhalten nach Besichtigung einen verbindlichen Festpreis – ohne Stundenrisiko und ohne versteckte Aufschläge.',
+  },
+  {
+    q: 'Sind meine Möbel während des Transports versichert?',
+    a: 'Ja. Wir arbeiten mit einer gesetzlich vorgeschriebenen Speditionshaftung. Auf Wunsch vermitteln wir eine erweiterte Transportversicherung zum Neuwert für besonders wertvolle Stücke.',
+  },
+  {
+    q: 'Kümmern Sie sich auch um die Halteverbotszone?',
+    a: 'Ja. Wir beantragen mobile Halteverbotszonen an beiden Adressen, stellen die Schilder rechtzeitig auf und kümmern uns um die Rückgabe. Sie müssen sich darum nicht kümmern.',
+  },
+];
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${PAGE_URL}#service`,
+  name: 'Umzugsservice Kirn',
+  serviceType: 'MovingCompany',
+  category: 'Umzugsservice',
+  description:
+    'Umzugsservice in Kirn, Bad Kreuznach und Idar-Oberstein: Privatumzüge, Firmenumzüge, Seniorenumzüge, Möbeltransport, Verpackungsservice, Entrümpelung und Endreinigung – mit Festpreisgarantie.',
+  provider: { '@id': `${SITE_URL}/#organization` },
+  areaServed: [
+    { '@type': 'City', name: 'Kirn' },
+    { '@type': 'City', name: 'Bad Kreuznach' },
+    { '@type': 'City', name: 'Idar-Oberstein' },
+    { '@type': 'City', name: 'Bad Sobernheim' },
+    { '@type': 'AdministrativeArea', name: 'Rheinland-Pfalz' },
+    { '@type': 'Country', name: 'Deutschland' },
+  ],
+  url: PAGE_URL,
+  image: `${SITE_URL}/projekte/WASWIRTUNUmzugsserviice.jpg`,
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Umzugsleistungen',
+    itemListElement: included.map((i) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: i.h, description: i.p },
+    })),
+  },
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${PAGE_URL}#faq`,
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Layout
+  title="Umzugsservice in Kirn – Privatumzug, Firmenumzug & Seniorenumzug"
+  description="Stressfreier Umzugsservice in Kirn, Bad Kreuznach und Idar-Oberstein: Privatumzüge, Firmenumzüge, Seniorenumzüge, Möbeltransport, Verpackungsservice und Endreinigung. Festpreisgarantie, Halteverbotszone inklusive."
+  image="/projekte/WASWIRTUNUmzugsserviice.jpg"
+  breadcrumbs={[
+    { name: 'Start', url: '/' },
+    { name: 'Dienstleistungen', url: '/dienstleistungen' },
+    { name: 'Umzugsservice', url: PAGE_PATH },
+  ]}
+  jsonLd={[serviceLd, faqLd]}
+>
+  <section class="pt-24 pb-12 md:pt-40 md:pb-20 px-6 md:px-24">
+    <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs italic">Dienstleistung 03 · Umzugsservice</p>
+    <h1 class="text-[clamp(2rem,8vw,6.5rem)] font-black uppercase leading-[0.9] mb-6 md:mb-8 text-[#0d1b2a]">
+      Umzugsservice<br />
+      <span class="stroke-dark">in Kirn & Umgebung.</span>
+    </h1>
+    <p class="text-lg md:text-2xl text-slate-600 font-medium leading-relaxed max-w-3xl">
+      Privat-, Firmen- und Seniorenumzüge in Kirn, Bad Kreuznach und Idar-Oberstein – sowie deutschlandweit. Festpreis, klare Planung, sorgfältige Ausführung.
+    </p>
+  </section>
+
+  <section class="px-6 md:px-24 py-12 md:py-20 bg-slate-50 border-y border-slate-100">
+    <div class="grid md:grid-cols-12 gap-8 md:gap-16">
+      <div class="md:col-span-4">
+        <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-2">Was Sie erhalten</p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase leading-[0.95] text-[#0d1b2a]">Umzug ohne Stress.</h2>
+      </div>
+      <div class="md:col-span-8 space-y-5 text-base md:text-lg text-slate-600 font-medium leading-relaxed max-w-3xl">
+        <p>
+          Ein Umzug ist mehr als ein Transport. Er ist Logistik, Planung, Verantwortung – und für viele eine Lebenssituation, die zusätzlich belastet. Genau deshalb gestalten wir unseren <strong class="text-[#0d1b2a]">Umzugsservice in Kirn</strong> so, dass Sie sich um nichts kümmern müssen: Wir übernehmen Beratung, Verpackung, Transport, Aufbau und – wenn gewünscht – auch die Entrümpelung der alten Wohnung.
+        </p>
+        <p>
+          Ob Privatumzug innerhalb von Kirn, Firmenumzug nach Bad Kreuznach oder Seniorenumzug mit umfassender Entlastung: Sie erhalten eine feste Ansprechperson, einen schriftlichen Festpreis und eine klare Termin- und Ablaufplanung. Halteverbotszonen, Versicherung und Verpackungsmaterial sind im Preis enthalten.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24">
+    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-3">Leistungen im Detail</p>
+    <h2 class="text-3xl md:text-5xl font-black uppercase mb-10 md:mb-14 text-[#0d1b2a] max-w-3xl">Diese Umzüge führen wir aus.</h2>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {included.map((i, idx) => (
+        <div class="bg-white border border-slate-200 p-6 md:p-8 hover:border-brand transition-colors">
+          <p class="text-brand font-black italic text-3xl md:text-4xl leading-none mb-4">0{idx + 1}</p>
+          <h3 class="text-base md:text-lg font-black uppercase mb-3 text-[#0d1b2a] leading-tight">{i.h}</h3>
+          <p class="text-sm text-slate-600 font-medium leading-relaxed">{i.p}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24 bg-[#0d1b2a] text-white">
+    <div class="grid md:grid-cols-12 gap-10 md:gap-16">
+      <div class="md:col-span-4">
+        <p class="text-brand text-[10px] md:text-xs font-bold uppercase tracking-widest italic mb-3">Für wen</p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase leading-[0.95]">Privat, Gewerbe, Senioren.</h2>
+      </div>
+      <div class="md:col-span-8 grid sm:grid-cols-2 gap-6 md:gap-8 text-slate-300">
+        <div>
+          <p class="text-brand font-black italic text-2xl mb-2 leading-none">Privatkunden</p>
+          <p class="text-sm md:text-base font-medium leading-relaxed">Vom Single-Apartment bis zum Einfamilienhaus. Wir packen, transportieren, bauen auf – und richten auf Wunsch komplett ein.</p>
+        </div>
+        <div>
+          <p class="text-brand font-black italic text-2xl mb-2 leading-none">Unternehmen</p>
+          <p class="text-sm md:text-base font-medium leading-relaxed">Firmenumzüge mit klarer Logistik, IT-Demontage und -Aufbau, minimaler Ausfallzeit und Wochenend-Optionen.</p>
+        </div>
+        <div>
+          <p class="text-brand font-black italic text-2xl mb-2 leading-none">Senioren</p>
+          <p class="text-sm md:text-base font-medium leading-relaxed">Geduldiger Umzug mit Entlastung beim Aussortieren, Reduzieren und Einrichten – auch in betreute Wohnformen oder Pflegeeinrichtungen.</p>
+        </div>
+        <div>
+          <p class="text-brand font-black italic text-2xl mb-2 leading-none">Hausverwaltungen</p>
+          <p class="text-sm md:text-base font-medium leading-relaxed">Auflösung und Räumung von Mietobjekten inklusive Entrümpelung, Endreinigung und besenreiner Übergabe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24">
+    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-3">Ablauf</p>
+    <h2 class="text-3xl md:text-5xl font-black uppercase mb-10 md:mb-14 text-[#0d1b2a] max-w-3xl">So planen wir Ihren Umzug.</h2>
+
+    <div class="grid md:grid-cols-4 gap-8 md:gap-6 border-t border-slate-200 pt-10">
+      {process.map((step) => (
+        <div class="md:border-r md:last:border-r-0 md:border-slate-200 md:pr-6">
+          <p class="text-brand font-black italic text-5xl md:text-6xl mb-4 leading-none">{step.n}</p>
+          <h3 class="text-lg md:text-xl font-black uppercase mb-3 text-[#0d1b2a] leading-tight">{step.h}</h3>
+          <p class="text-sm text-slate-600 font-medium leading-relaxed">{step.p}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24 bg-slate-50">
+    <div class="grid md:grid-cols-12 gap-8 md:gap-16">
+      <div class="md:col-span-4">
+        <p class="text-brand text-[10px] md:text-xs font-bold uppercase tracking-widest italic mb-3">Einsatzgebiet</p>
+        <h2 class="text-3xl md:text-4xl font-black uppercase leading-[0.95] text-[#0d1b2a]">Wohin wir umziehen.</h2>
+      </div>
+      <div class="md:col-span-8">
+        <p class="text-base md:text-lg text-slate-600 font-medium leading-relaxed mb-6 max-w-2xl">
+          Wir ziehen Sie innerhalb der Region um – und führen Fernumzüge deutschlandweit durch. Bei Bedarf koordinieren wir auch grenzüberschreitende Umzüge.
+        </p>
+        <ul class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs md:text-sm font-bold uppercase tracking-wider text-[#0d1b2a]">
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Kirn</li>
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Bad Kreuznach</li>
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Idar-Oberstein</li>
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Bad Sobernheim</li>
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Mainz</li>
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Deutschlandweit</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24">
+    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-3">Häufige Fragen</p>
+    <h2 class="text-3xl md:text-5xl font-black uppercase mb-10 md:mb-14 text-[#0d1b2a] max-w-3xl">FAQ – Umzugsservice.</h2>
+
+    <div class="divide-y divide-slate-200 border-y border-slate-200 max-w-4xl">
+      {faqs.map((f) => (
+        <details class="group py-5 md:py-6">
+          <summary class="flex justify-between items-center cursor-pointer list-none gap-6">
+            <h3 class="text-base md:text-lg font-black uppercase text-[#0d1b2a] leading-snug">{f.q}</h3>
+            <span class="text-brand font-black text-2xl shrink-0 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="text-sm md:text-base text-slate-600 font-medium leading-relaxed mt-4 max-w-3xl">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24 bg-[#0d1b2a] text-white">
+    <div class="max-w-4xl">
+      <h2 class="text-3xl md:text-5xl font-black uppercase mb-4 md:mb-6 leading-tight">
+        Lassen Sie uns<br />
+        <span class="text-brand">umziehen.</span>
+      </h2>
+      <p class="text-slate-300 mb-8 md:mb-10 max-w-2xl text-base md:text-lg font-medium leading-relaxed">
+        Schildern Sie uns Ihr Umzugsvorhaben – wir kommen vorbei und erstellen einen verbindlichen Festpreis.
+      </p>
+      <a href="/kontakt?service=umzug" class="inline-block bg-brand text-white px-8 py-4 md:px-12 md:py-5 text-sm font-black uppercase tracking-widest hover:bg-white hover:text-[#0d1b2a] transition-all">
+        Umzugsangebot anfragen
+      </a>
+    </div>
+  </section>
+</Layout>

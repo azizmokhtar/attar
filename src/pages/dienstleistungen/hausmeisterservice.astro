@@ -1,0 +1,239 @@
+---
+export const prerender = true;
+
+import Layout from '../../layouts/Layout.astro';
+
+const SITE_URL = 'https://attar-dienstleistungen.de';
+const PAGE_PATH = '/dienstleistungen/hausmeisterservice';
+const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
+
+const included = [
+  { h: 'Wohnungs- und Objektbetreuung', p: 'Regelmäßige Kontrollgänge, Sichtprüfungen, Funktionsprüfungen von Beleuchtung, Türen und Allgemeinflächen. Kommunikation mit Eigentümern und Mietern.' },
+  { h: 'Kleinreparaturen & Instandhaltung', p: 'Beheben kleinerer Schäden: Lampen, Schlösser, Beschläge, Silikonfugen, Anstriche. Handwerklich saubere Ausführung statt Provisorien.' },
+  { h: 'Winterdienst', p: 'Räumen und Streuen von Gehwegen, Hauseingängen und Zufahrten gemäß kommunaler Satzung. Dokumentierter Einsatznachweis für Eigentümer.' },
+  { h: 'Grünflächen- und Außenpflege', p: 'Rasenmähen, Heckenschnitt, Laubentfernung, Pflege von Vorgärten und Hofbereichen. Übergang in unseren Gartenservice nahtlos möglich.' },
+  { h: 'Müll- und Tonnenmanagement', p: 'Bereitstellung, Reinigung und Rückführung der Mülltonnen, Pflege der Müllplätze, Sauberhaltung der Allgemeinbereiche.' },
+  { h: 'Schlüssel- und Notfallmanagement', p: 'Hinterlegung, Übergaben, Erreichbarkeit bei Wasserschäden, Sturmschäden oder defekter Haustechnik – mit definierten Reaktionszeiten.' },
+];
+
+const process = [
+  { n: '01', h: 'Bedarfsanalyse', p: 'Wir besichtigen das Objekt, erfassen Flächen, Anlagen und besondere Anforderungen. Bestandsaufnahme inklusive Mängelliste.' },
+  { n: '02', h: 'Leistungsverzeichnis', p: 'Sie erhalten ein detailliertes Leistungsverzeichnis mit Frequenzen, Verantwortlichkeiten und festem Monatspreis – auf Wunsch nach DIN 32736.' },
+  { n: '03', h: 'Übernahme', p: 'Festgelegte Ansprechperson, klare Erreichbarkeit, dokumentierte Übergaben. Sie wissen jederzeit, wer für Ihr Objekt zuständig ist.' },
+  { n: '04', h: 'Laufende Betreuung', p: 'Regelmäßige Berichte, transparente Reaktionszeiten bei Störungen und planbare Wartungstermine. Anpassung jederzeit möglich.' },
+];
+
+const faqs = [
+  {
+    q: 'Welche Aufgaben übernimmt Ihr Hausmeisterservice?',
+    a: 'Wir übernehmen die laufende Betreuung Ihrer Immobilie: Kontrollgänge, Kleinreparaturen, Winterdienst, Grünflächenpflege, Müllmanagement, Schlüsselverwaltung und Koordination externer Dienstleister. Auf Wunsch erstellen wir ein Leistungsverzeichnis nach DIN 32736.',
+  },
+  {
+    q: 'Betreuen Sie auch WEG-Objekte und Mietshäuser?',
+    a: 'Ja. Wir arbeiten regelmäßig mit Hausverwaltungen, WEG-Verwaltern und privaten Eigentümern zusammen. Wir kennen die Anforderungen an Dokumentation, Verkehrssicherungspflicht und Abrechnung der Betriebskosten.',
+  },
+  {
+    q: 'Wie schnell reagieren Sie bei einem Notfall?',
+    a: 'Für Bestandskunden definieren wir vertraglich Reaktionszeiten – in der Regel innerhalb weniger Stunden bei akuten Schäden (Wasser, Sturm, Sicherheit). Außerhalb der Geschäftszeiten ist eine Rufbereitschaft möglich.',
+  },
+  {
+    q: 'Übernehmen Sie die Verkehrssicherungspflicht im Winter?',
+    a: 'Auf Beauftragung ja. Wir räumen und streuen gemäß örtlicher Satzung, dokumentieren jeden Einsatz und entlasten Sie als Eigentümer rechtlich. Material und Geräte stellen wir.',
+  },
+  {
+    q: 'Was kostet ein Hausmeisterservice in Kirn?',
+    a: 'Der Preis hängt von Objektgröße, Anzahl der Wohneinheiten, Außenflächen und gewünschten Leistungen ab. Sie erhalten nach Begehung ein verbindliches Monatsangebot ohne versteckte Posten.',
+  },
+];
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${PAGE_URL}#service`,
+  name: 'Hausmeisterservice Kirn',
+  serviceType: 'PropertyMaintenance',
+  category: 'Facility Management',
+  description:
+    'Hausmeisterservice für Wohn- und Gewerbeimmobilien in Kirn, Bad Kreuznach und Idar-Oberstein: Objektbetreuung, Kleinreparaturen, Winterdienst, Grünpflege, Müll- und Schlüsselmanagement.',
+  provider: { '@id': `${SITE_URL}/#organization` },
+  areaServed: [
+    { '@type': 'City', name: 'Kirn' },
+    { '@type': 'City', name: 'Bad Kreuznach' },
+    { '@type': 'City', name: 'Idar-Oberstein' },
+    { '@type': 'City', name: 'Bad Sobernheim' },
+    { '@type': 'AdministrativeArea', name: 'Rheinland-Pfalz' },
+  ],
+  url: PAGE_URL,
+  image: `${SITE_URL}/projekte/WASWIRTUNHausmeisterservice.jpg`,
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Hausmeisterleistungen',
+    itemListElement: included.map((i) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: i.h, description: i.p },
+    })),
+  },
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${PAGE_URL}#faq`,
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Layout
+  title="Hausmeisterservice in Kirn – Objektbetreuung & Winterdienst"
+  description="Zuverlässiger Hausmeisterservice in Kirn, Bad Kreuznach und Idar-Oberstein für WEG, Hausverwaltungen und Eigentümer: Objektbetreuung, Kleinreparaturen, Winterdienst, Grünpflege und Notfallmanagement mit definierten Reaktionszeiten."
+  image="/projekte/WASWIRTUNHausmeisterservice.jpg"
+  breadcrumbs={[
+    { name: 'Start', url: '/' },
+    { name: 'Dienstleistungen', url: '/dienstleistungen' },
+    { name: 'Hausmeisterservice', url: PAGE_PATH },
+  ]}
+  jsonLd={[serviceLd, faqLd]}
+>
+  <section class="pt-24 pb-12 md:pt-40 md:pb-20 px-6 md:px-24">
+    <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs italic">Dienstleistung 02 · Hausmeisterservice</p>
+    <h1 class="text-[clamp(2rem,8vw,6.5rem)] font-black uppercase leading-[0.9] mb-6 md:mb-8 text-[#0d1b2a]">
+      Hausmeisterservice<br />
+      <span class="stroke-dark">in Kirn & Umgebung.</span>
+    </h1>
+    <p class="text-lg md:text-2xl text-slate-600 font-medium leading-relaxed max-w-3xl">
+      Professionelle Objektbetreuung für Eigentümer, Hausverwaltungen und WEG in Kirn, Bad Kreuznach und Idar-Oberstein. Klare Verantwortung, dokumentierte Leistungen, schnelle Reaktionszeiten.
+    </p>
+  </section>
+
+  <section class="px-6 md:px-24 py-12 md:py-20 bg-slate-50 border-y border-slate-100">
+    <div class="grid md:grid-cols-12 gap-8 md:gap-16">
+      <div class="md:col-span-4">
+        <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-2">Was Sie erhalten</p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase leading-[0.95] text-[#0d1b2a]">Verantwortung mit System.</h2>
+      </div>
+      <div class="md:col-span-8 space-y-5 text-base md:text-lg text-slate-600 font-medium leading-relaxed max-w-3xl">
+        <p>
+          Eine Immobilie braucht jemanden, der sich kümmert – bevor etwas passiert. Genau diese Rolle übernehmen wir als <strong class="text-[#0d1b2a]">Hausmeisterservice in Kirn</strong>: vorausschauend, dokumentiert und mit klarer Ansprechperson. Sie wissen jederzeit, was wann gemacht wird und wer bei Störungen reagiert.
+        </p>
+        <p>
+          Wir betreuen Wohnanlagen, Mehrfamilienhäuser, WEG-Objekte und Gewerbeimmobilien für private Eigentümer, Hausverwaltungen und Unternehmen. Unsere Leistungen reichen von der regelmäßigen Objektkontrolle über Kleinreparaturen und Grünpflege bis zum Winterdienst und 24-Stunden-Notfallmanagement bei Wasser- oder Sturmschäden.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24">
+    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-3">Leistungen im Detail</p>
+    <h2 class="text-3xl md:text-5xl font-black uppercase mb-10 md:mb-14 text-[#0d1b2a] max-w-3xl">Das übernehmen wir.</h2>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {included.map((i, idx) => (
+        <div class="bg-white border border-slate-200 p-6 md:p-8 hover:border-brand transition-colors">
+          <p class="text-brand font-black italic text-3xl md:text-4xl leading-none mb-4">0{idx + 1}</p>
+          <h3 class="text-base md:text-lg font-black uppercase mb-3 text-[#0d1b2a] leading-tight">{i.h}</h3>
+          <p class="text-sm text-slate-600 font-medium leading-relaxed">{i.p}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24 bg-[#0d1b2a] text-white">
+    <div class="grid md:grid-cols-12 gap-10 md:gap-16">
+      <div class="md:col-span-4">
+        <p class="text-brand text-[10px] md:text-xs font-bold uppercase tracking-widest italic mb-3">Für wen</p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase leading-[0.95]">Eigentümer, Verwalter, Unternehmen.</h2>
+      </div>
+      <div class="md:col-span-8 grid sm:grid-cols-2 gap-6 md:gap-8 text-slate-300">
+        <div>
+          <p class="text-brand font-black italic text-2xl mb-2 leading-none">Hausverwaltungen</p>
+          <p class="text-sm md:text-base font-medium leading-relaxed">Entlastung im operativen Tagesgeschäft, dokumentierte Leistungsnachweise, Abstimmung mit Beirat und Eigentümern.</p>
+        </div>
+        <div>
+          <p class="text-brand font-black italic text-2xl mb-2 leading-none">WEG & Wohnanlagen</p>
+          <p class="text-sm md:text-base font-medium leading-relaxed">Pflege der Allgemeinflächen, Winterdienst, Verkehrssicherungspflicht und Kommunikation mit Bewohnern.</p>
+        </div>
+        <div>
+          <p class="text-brand font-black italic text-2xl mb-2 leading-none">Private Eigentümer</p>
+          <p class="text-sm md:text-base font-medium leading-relaxed">Wenn die eigene Immobilie zu weit weg liegt oder die Zeit fehlt: Wir kümmern uns wie um unsere eigene.</p>
+        </div>
+        <div>
+          <p class="text-brand font-black italic text-2xl mb-2 leading-none">Gewerbeobjekte</p>
+          <p class="text-sm md:text-base font-medium leading-relaxed">Betreuung von Bürohäusern, Praxen, Lagerhallen und Filialen – inklusive Außenanlagen und technischer Kontrolle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24">
+    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-3">Ablauf</p>
+    <h2 class="text-3xl md:text-5xl font-black uppercase mb-10 md:mb-14 text-[#0d1b2a] max-w-3xl">So übernehmen wir Ihr Objekt.</h2>
+
+    <div class="grid md:grid-cols-4 gap-8 md:gap-6 border-t border-slate-200 pt-10">
+      {process.map((step) => (
+        <div class="md:border-r md:last:border-r-0 md:border-slate-200 md:pr-6">
+          <p class="text-brand font-black italic text-5xl md:text-6xl mb-4 leading-none">{step.n}</p>
+          <h3 class="text-lg md:text-xl font-black uppercase mb-3 text-[#0d1b2a] leading-tight">{step.h}</h3>
+          <p class="text-sm text-slate-600 font-medium leading-relaxed">{step.p}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24 bg-slate-50">
+    <div class="grid md:grid-cols-12 gap-8 md:gap-16">
+      <div class="md:col-span-4">
+        <p class="text-brand text-[10px] md:text-xs font-bold uppercase tracking-widest italic mb-3">Einsatzgebiet</p>
+        <h2 class="text-3xl md:text-4xl font-black uppercase leading-[0.95] text-[#0d1b2a]">Wo wir betreuen.</h2>
+      </div>
+      <div class="md:col-span-8">
+        <p class="text-base md:text-lg text-slate-600 font-medium leading-relaxed mb-6 max-w-2xl">
+          Wir betreuen Objekte im Landkreis Bad Kreuznach und angrenzenden Regionen. Bei Bestandskunden mit mehreren Standorten sind wir auch überregional aktiv.
+        </p>
+        <ul class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs md:text-sm font-bold uppercase tracking-wider text-[#0d1b2a]">
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Kirn</li>
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Bad Kreuznach</li>
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Idar-Oberstein</li>
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Bad Sobernheim</li>
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Simmertal</li>
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Meisenheim</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24">
+    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-3">Häufige Fragen</p>
+    <h2 class="text-3xl md:text-5xl font-black uppercase mb-10 md:mb-14 text-[#0d1b2a] max-w-3xl">FAQ – Hausmeisterservice.</h2>
+
+    <div class="divide-y divide-slate-200 border-y border-slate-200 max-w-4xl">
+      {faqs.map((f) => (
+        <details class="group py-5 md:py-6">
+          <summary class="flex justify-between items-center cursor-pointer list-none gap-6">
+            <h3 class="text-base md:text-lg font-black uppercase text-[#0d1b2a] leading-snug">{f.q}</h3>
+            <span class="text-brand font-black text-2xl shrink-0 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="text-sm md:text-base text-slate-600 font-medium leading-relaxed mt-4 max-w-3xl">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24 bg-[#0d1b2a] text-white">
+    <div class="max-w-4xl">
+      <h2 class="text-3xl md:text-5xl font-black uppercase mb-4 md:mb-6 leading-tight">
+        Übergeben Sie Ihr Objekt<br />
+        <span class="text-brand">in verlässliche Hände.</span>
+      </h2>
+      <p class="text-slate-300 mb-8 md:mb-10 max-w-2xl text-base md:text-lg font-medium leading-relaxed">
+        Wir vereinbaren eine kostenlose Begehung und erstellen ein Leistungsverzeichnis mit Monatspreis.
+      </p>
+      <a href="/kontakt?service=hausmeister" class="inline-block bg-brand text-white px-8 py-4 md:px-12 md:py-5 text-sm font-black uppercase tracking-widest hover:bg-white hover:text-[#0d1b2a] transition-all">
+        Begehung vereinbaren
+      </a>
+    </div>
+  </section>
+</Layout>

@@ -7,21 +7,25 @@ const services = [
   {
     id: "1",
     title: "Reinigungsservice",
+    slug: "reinigungsservice",
     image: "/projekte/WASWIRTUNReinigungservice.jpg"
   },
   {
     id: "2",
     title: "Hausmeisterservice",
+    slug: "hausmeisterservice",
     image: "/projekte/WASWIRTUNHausmeisterservice.jpg"
   },
   {
     id: "3",
     title: "Umzugsservice",
+    slug: "umzugsservice",
     image: "/projekte/WASWIRTUNUmzugsserviice.jpg"
   },
   {
     id: "4",
     title: "Gartenservice",
+    slug: "gartenservice",
     image: "/projekte/WASWIRTUNGartenservice.jpg"
   }
 ];
@@ -137,9 +141,9 @@ const homepageJsonLd = [
         <div class="swiper-wrapper">
             {services.map((service, index) => (
               <div class="swiper-slide h-auto">
-                <a href="/dienstleistungen" class="relative bg-[#0d1b2a] aspect-[4/5] flex flex-col justify-between group cursor-pointer h-full overflow-hidden border border-slate-200 block">
+                <a href={`/dienstleistungen/${service.slug}`} class="relative bg-[#0d1b2a] aspect-[4/5] flex flex-col justify-between group cursor-pointer h-full overflow-hidden border border-slate-200 block" aria-label={`${service.title} in Kirn – Details ansehen`}>
                   <div class="absolute inset-0 z-0 overflow-hidden bg-white">
-                    <img src={service.image} alt={service.title} class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-all duration-700 ease-out" loading="lazy" />
+                    <img src={service.image} alt={`${service.title} – Attar Dienstleistungen in Kirn`} class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-all duration-700 ease-out" loading="lazy" />
                     <div class="absolute inset-0 bg-gradient-to-t from-[#0d1b2a]/80 via-[#0d1b2a]/10 to-transparent"></div>
                   </div>
 
