@@ -76,6 +76,8 @@ const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     position: relative;
     z-index: 1;
     pointer-events: none;
+    width: 30px;
+    height: 30px;
   }
 
   .whatsapp-pulse {
@@ -152,6 +154,42 @@ const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
     .whatsapp-tooltip {
       display: none;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .whatsapp-fab {
+      right: 40px;
+      bottom: 40px;
+      bottom: max(40px, calc(env(safe-area-inset-bottom) + 24px));
+      width: 68px;
+      height: 68px;
+    }
+
+    .whatsapp-icon {
+      width: 34px;
+      height: 34px;
+    }
+
+    .whatsapp-tooltip {
+      right: calc(100% + 18px);
+      font-size: 12px;
+      padding: 10px 16px;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .whatsapp-fab {
+      right: 52px;
+      bottom: 52px;
+      bottom: max(52px, calc(env(safe-area-inset-bottom) + 28px));
+      width: 74px;
+      height: 74px;
+    }
+
+    .whatsapp-icon {
+      width: 38px;
+      height: 38px;
     }
   }
 
