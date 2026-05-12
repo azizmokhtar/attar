@@ -1,0 +1,43 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Seite nicht gefunden"
+  description="Die gesuchte Seite existiert nicht oder wurde verschoben. Zurück zur Startseite oder zu unseren Dienstleistungen."
+  noindex={true}
+>
+  <section class="min-h-[70vh] flex flex-col justify-center px-6 md:px-24 py-20 md:py-32">
+    <div class="max-w-3xl">
+      <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs italic">Fehler 404</p>
+      <h1 class="text-[clamp(3rem,12vw,9rem)] font-black uppercase leading-[0.9] mb-6 md:mb-8 text-[#0d1b2a]">
+        Seite <br />
+        <span class="stroke-dark">nicht gefunden.</span>
+      </h1>
+      <p class="text-base md:text-xl text-slate-600 font-medium leading-relaxed mb-8 md:mb-10 max-w-2xl">
+        Die angeforderte Seite existiert nicht mehr oder wurde an einen anderen Ort verschoben. Vielleicht finden Sie, was Sie suchen, über unsere Hauptbereiche.
+      </p>
+
+      <div class="grid sm:grid-cols-2 gap-4 max-w-2xl">
+        <a href="/" class="group flex items-center justify-between bg-[#0d1b2a] text-white px-6 py-4 md:px-8 md:py-5 font-black uppercase tracking-widest hover:bg-brand transition-colors text-xs md:text-sm">
+          Startseite
+          <span class="group-hover:translate-x-1 transition-transform">→</span>
+        </a>
+        <a href="/dienstleistungen" class="group flex items-center justify-between border-2 border-[#0d1b2a] text-[#0d1b2a] px-6 py-4 md:px-8 md:py-5 font-black uppercase tracking-widest hover:bg-[#0d1b2a] hover:text-white transition-colors text-xs md:text-sm">
+          Dienstleistungen
+          <span class="group-hover:translate-x-1 transition-transform">→</span>
+        </a>
+        <a href="/kontakt" class="group flex items-center justify-between border-2 border-[#0d1b2a] text-[#0d1b2a] px-6 py-4 md:px-8 md:py-5 font-black uppercase tracking-widest hover:bg-[#0d1b2a] hover:text-white transition-colors text-xs md:text-sm">
+          Kontakt
+          <span class="group-hover:translate-x-1 transition-transform">→</span>
+        </a>
+        <a href="/karriere" class="group flex items-center justify-between border-2 border-[#0d1b2a] text-[#0d1b2a] px-6 py-4 md:px-8 md:py-5 font-black uppercase tracking-widest hover:bg-[#0d1b2a] hover:text-white transition-colors text-xs md:text-sm">
+          Karriere
+          <span class="group-hover:translate-x-1 transition-transform">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

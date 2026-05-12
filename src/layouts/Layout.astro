@@ -5,13 +5,129 @@ import Analytics from '@vercel/analytics/astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 
+interface BreadcrumbItem {
+	name: string;
+	url: string;
+}
+
 interface Props {
 	title: string;
+	description?: string;
+	image?: string;
+	ogType?: 'website' | 'article' | 'profile';
+	noindex?: boolean;
+	canonical?: string;
+	breadcrumbs?: BreadcrumbItem[];
+	jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 	preloadHeroPoster?: boolean;
 }
 
-const { title, preloadHeroPoster = false } = Astro.props;
+const {
+	title,
+	description = 'Attar Dienstleistungen aus Kirn (Rheinland-Pfalz): Reinigungsservice, Hausmeisterservice, Umzugsservice und Gartenservice. Zuverlässig, strukturiert und mit klarem Qualitätsanspruch – jetzt unverbindliches Angebot anfragen.',
+	image = '/og-default.jpg',
+	ogType = 'website',
+	noindex = false,
+	canonical,
+	breadcrumbs,
+	jsonLd,
+	preloadHeroPoster = false,
+} = Astro.props;
+
 const GA_ID = 'G-1QJF32TBF3';
+const SITE_URL = 'https://attar-dienstleistungen.de';
+const SITE_NAME = 'Attar Dienstleistungen';
+const COMPANY_PHONE_E164 = '+4917655235870';
+const COMPANY_PHONE_DISPLAY = '+49 176 55235870';
+const COMPANY_EMAIL = 'attar.dienstleistungen@gmail.com';
+
+const pageUrl = canonical ?? (new URL(Astro.url.pathname, SITE_URL).href.replace(/\/$/, '') || SITE_URL);
+const ogImageUrl = new URL(image, SITE_URL).href;
+const fullTitle = `${title} | ${SITE_NAME}`;
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
+
+const organizationLd = {
+	'@context': 'https://schema.org',
+	'@type': ['Organization', 'LocalBusiness', 'ProfessionalService'],
+	'@id': `${SITE_URL}/#organization`,
+	name: SITE_NAME,
+	legalName: 'Attar Dienstleistungen – Adam Attar',
+	url: SITE_URL,
+	logo: {
+		'@type': 'ImageObject',
+		url: `${SITE_URL}/logo.png`,
+		width: 368,
+		height: 120,
+	},
+	image: `${SITE_URL}/og-default.jpg`,
+	telephone: COMPANY_PHONE_E164,
+	email: COMPANY_EMAIL,
+	founder: { '@type': 'Person', name: 'Adam Attar' },
+	address: {
+		'@type': 'PostalAddress',
+		streetAddress: 'Nachtigallenweg 10',
+		postalCode: '55606',
+		addressLocality: 'Kirn',
+		addressRegion: 'Rheinland-Pfalz',
+		addressCountry: 'DE',
+	},
+	areaServed: [
+		{ '@type': 'City', name: 'Kirn' },
+		{ '@type': 'City', name: 'Bad Kreuznach' },
+		{ '@type': 'City', name: 'Idar-Oberstein' },
+		{ '@type': 'City', name: 'Bad Sobernheim' },
+		{ '@type': 'AdministrativeArea', name: 'Rheinland-Pfalz' },
+	],
+	openingHoursSpecification: [
+		{
+			'@type': 'OpeningHoursSpecification',
+			dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+			opens: '07:00',
+			closes: '20:00',
+		},
+		{
+			'@type': 'OpeningHoursSpecification',
+			dayOfWeek: 'Saturday',
+			opens: '08:30',
+			closes: '18:00',
+		},
+	],
+	contactPoint: {
+		'@type': 'ContactPoint',
+		telephone: COMPANY_PHONE_E164,
+		email: COMPANY_EMAIL,
+		contactType: 'customer service',
+		availableLanguage: ['de', 'en'],
+		areaServed: 'DE',
+	},
+};
+
+const websiteLd = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	'@id': `${SITE_URL}/#website`,
+	url: SITE_URL,
+	name: SITE_NAME,
+	inLanguage: 'de-DE',
+	publisher: { '@id': `${SITE_URL}/#organization` },
+};
+
+const breadcrumbLd = breadcrumbs && breadcrumbs.length > 0
+	? {
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: breadcrumbs.map((b, i) => ({
+			'@type': 'ListItem',
+			position: i + 1,
+			name: b.name,
+			item: new URL(b.url, SITE_URL).href,
+		})),
+	}
+	: null;
+
+const extraJsonLd = jsonLd
+	? (Array.isArray(jsonLd) ? jsonLd : [jsonLd])
+	: [];
 ---
 
 <!doctype html>
@@ -19,17 +135,74 @@ const GA_ID = 'G-1QJF32TBF3';
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-		<meta name="description" content="Attar Dienstleistungen – Ihr zuverlässiger Partner für Entrümpelung, Hausmeisterservice und Grünpflege in Kirn und Umgebung." />
+		<title>{fullTitle}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={pageUrl} />
+		{noindex
+			? <>
+				<meta name="robots" content="noindex,follow" />
+				<meta name="googlebot" content="noindex,follow" />
+			</>
+			: <>
+				<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+				<meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1" />
+			</>
+		}
+
 		<meta name="theme-color" content="#0d1b2a" />
 		<meta name="apple-mobile-web-app-title" content="Attar" />
 		<meta name="format-detection" content="telephone=no" />
+		<meta name="author" content="Attar Dienstleistungen" />
+		<meta name="publisher" content="Attar Dienstleistungen" />
+		<meta name="geo.region" content="DE-RP" />
+		<meta name="geo.placename" content="Kirn" />
+		<meta name="geo.position" content="49.7869;7.4581" />
+		<meta name="ICBM" content="49.7869, 7.4581" />
+
+		{/* Open Graph */}
+		<meta property="og:type" content={ogType} />
+		<meta property="og:site_name" content={SITE_NAME} />
+		<meta property="og:title" content={fullTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={pageUrl} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={`${SITE_NAME} – ${title}`} />
+		<meta property="og:locale" content="de_DE" />
+
+		{/* Twitter Card */}
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={fullTitle} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageUrl} />
+		<meta name="twitter:image:alt" content={`${SITE_NAME} – ${title}`} />
+
+		<link rel="alternate" hreflang="de-DE" href={pageUrl} />
+		<link rel="alternate" hreflang="x-default" href={pageUrl} />
+
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 		<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
 		<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
 		<link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
 		{preloadHeroPoster && <link rel="preload" as="image" href="/main-poster.jpg" fetchpriority="high" />}
-		<title>{title} | Attar Dienstleistungen</title>
+
+		{/* Search engine verification (replace placeholder values once verified) */}
+		<meta name="google-site-verification" content="REPLACE_WITH_GSC_TOKEN" />
+		<meta name="msvalidate.01" content="REPLACE_WITH_BING_TOKEN" />
+
+		{/* JSON-LD: global Organization + WebSite */}
+		<script type="application/ld+json" is:inline set:html={JSON.stringify(organizationLd)} />
+		<script type="application/ld+json" is:inline set:html={JSON.stringify(websiteLd)} />
+		{breadcrumbLd && (
+			<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbLd)} />
+		)}
+		{extraJsonLd.map((node) => (
+			<script type="application/ld+json" is:inline set:html={JSON.stringify(node)} />
+		))}
 
 		{/* Google Consent Mode v2 — must run BEFORE gtag.js loads. */}
 		<script is:inline>
@@ -148,7 +321,7 @@ const GA_ID = 'G-1QJF32TBF3';
     </div>
 
     <div class="mt-auto space-y-2">
-        <p class="text-xs font-bold text-slate-500">+49 (0) 15 569 365 96</p>
+        <p class="text-xs font-bold text-slate-500">{COMPANY_PHONE_DISPLAY}</p>
         <p class="text-[9px] font-bold uppercase text-slate-400">© 2026 Attar Dienstleistungen</p>
     </div>
 </div>
@@ -177,9 +350,9 @@ const GA_ID = 'G-1QJF32TBF3';
     <div class="md:col-span-3">
       <p class="text-[10px] font-bold uppercase text-brand mb-5 tracking-[0.2em]">Kontakt</p>
       <div class="flex flex-col gap-5">
-        <a href="tel:+4915569365960" class="group">
+        <a href={`tel:${COMPANY_PHONE_E164}`} class="group">
           <p class="text-[9px] font-bold text-slate-500 uppercase mb-1">Telefon</p>
-          <p class="text-xs font-black text-white group-hover:text-brand transition-colors uppercase tracking-wider">+49 (0) 15 569 365 96</p>
+          <p class="text-xs font-black text-white group-hover:text-brand transition-colors uppercase tracking-wider">{COMPANY_PHONE_DISPLAY}</p>
         </a>
         <a href="mailto:attar.dienstleistungen@gmail.com" class="group">
           <p class="text-[9px] font-bold text-slate-500 uppercase mb-1">E-Mail</p>

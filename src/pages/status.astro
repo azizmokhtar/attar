@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import Layout from '../layouts/Layout.astro';
 
 // You could eventually automate this, but for now, we hardcode it for the "clean" look
@@ -17,7 +19,11 @@ const serviceCapacity = [
 ];
 ---
 
-<Layout title="System Status">
+<Layout
+  title="System Status"
+  description="Aktueller Betriebsstatus von Attar Dienstleistungen: Erreichbarkeit von Website, Kontakt- und Bewerbungsformular sowie aktuelle Auftragskapazitäten."
+  noindex={true}
+>
   <section class="pt-40 pb-32 px-8 md:px-24">
     <div class="flex items-center gap-4 mb-8">
         <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>

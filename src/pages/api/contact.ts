@@ -12,7 +12,8 @@ const SERVICE_LABELS: Record<string, string> = {
 const BRAND_NAVY = '#0d1b2a';
 const BRAND_ORANGE = '#ff5f00';
 const COMPANY = 'Attar Dienstleistungen';
-const COMPANY_PHONE = '+49 (0) 15 569 365 96';
+const COMPANY_PHONE = '+49 176 55235870';
+const COMPANY_PHONE_E164 = '+4917655235870';
 const COMPANY_HOURS = 'Mo – Fr: 07:00 – 20:00 · Sa: 08:30 – 18:00';
 
 function escapeHtml(str: string): string {
@@ -127,7 +128,7 @@ function buildAutoReply(p: {
         <p style="margin:32px 0 8px; font-size:10px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:${BRAND_ORANGE};">Sie haben Fragen vorab?</p>
         <p style="margin:0 0 24px; font-size:14px; color:#334155; line-height:1.6;">
           Sie erreichen uns telefonisch unter
-          <a href="tel:+4915569365960" style="color:${BRAND_NAVY}; font-weight:700; text-decoration:none; border-bottom:2px solid ${BRAND_ORANGE};">${COMPANY_PHONE}</a>
+          <a href="tel:${COMPANY_PHONE_E164}" style="color:${BRAND_NAVY}; font-weight:700; text-decoration:none; border-bottom:2px solid ${BRAND_ORANGE};">${COMPANY_PHONE}</a>
           während unserer Bürozeiten:
         </p>
         <p style="margin:0; font-size:13px; color:#64748b;">${COMPANY_HOURS}</p>

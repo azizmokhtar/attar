@@ -1,8 +1,18 @@
 ---
+export const prerender = true;
+
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Angebot anfragen">
+<Layout
+  title="Kontakt & Angebot anfragen – Attar Dienstleistungen Kirn"
+  description="Kontaktieren Sie Attar Dienstleistungen in Kirn: Telefon +49 176 55235870, E-Mail attar.dienstleistungen@gmail.com. Wir melden uns innerhalb von 24 Stunden mit Ihrem persönlichen Angebot."
+  ogType="website"
+  breadcrumbs={[
+    { name: 'Start', url: '/' },
+    { name: 'Kontakt', url: '/kontakt' },
+  ]}
+>
   <section class="pt-24 pb-12 md:pt-40 md:pb-20 px-6 md:px-24">
     <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs italic">Kontakt</p>
     <h1 class="text-[clamp(2.5rem,10vw,6rem)] font-black uppercase leading-[0.9] mb-8">
@@ -16,7 +26,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="md:col-span-4 space-y-8 md:space-y-12">
       <div>
         <h3 class="text-[10px] font-bold uppercase tracking-widest text-brand mb-4">Direktkontakt</h3>
-        <a href="tel:+4915569365960" class="block text-lg md:text-xl font-black uppercase italic hover:text-brand transition-colors mb-2">+49 (0) 15 569 365 96</a>
+        <a href="tel:+4917655235870" class="block text-lg md:text-xl font-black uppercase italic hover:text-brand transition-colors mb-2">+49 176 55235870</a>
         <a href="mailto:attar.dienstleistungen@gmail.com" class="block text-base font-black lowercase italic hover:text-brand transition-colors break-all">attar.dienstleistungen@gmail.com</a>
       </div>
 

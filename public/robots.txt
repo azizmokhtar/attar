@@ -1,0 +1,16 @@
+# robots.txt for Attar Dienstleistungen
+# https://attar-dienstleistungen.de
+
+User-agent: *
+Allow: /
+
+# Block server-side endpoints and parameterized application URLs
+Disallow: /api/
+Disallow: /bewerben
+Disallow: /status
+
+# Block common asset crawling waste
+Disallow: /*?*
+
+# Sitemaps
+Sitemap: https://attar-dienstleistungen.de/sitemap-index.xml

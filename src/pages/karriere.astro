@@ -1,29 +1,82 @@
 ---
+export const prerender = true;
+
 import Layout from '../layouts/Layout.astro';
 
 const jobs = [
   {
+    id: "helfer-entruempelung",
     title: "Helfer Entrümpelung (m/w/d)",
     type: "Vollzeit",
+    employmentType: "FULL_TIME",
     location: "Kirn & Umgebung",
     description: "Unterstützung bei Räumungen, Transporten und Entsorgung. Führerschein Klasse B von Vorteil."
   },
   {
+    id: "hausmeister",
     title: "Hausmeister (m/w/d)",
     type: "Vollzeit / Teilzeit",
+    employmentType: ["FULL_TIME", "PART_TIME"],
     location: "Kirn & Umgebung",
     description: "Betreuung und Wartung von Wohn- und Gewerbeimmobilien. Handwerkliches Geschick erforderlich."
   },
   {
+    id: "gaertner",
     title: "Gärtner / Grünpflegehelfer (m/w/d)",
     type: "Saisonal / Teilzeit",
+    employmentType: ["PART_TIME", "TEMPORARY"],
     location: "Kirn & Umgebung",
     description: "Pflege von Außenanlagen, Rasenmähen, Heckenschnitt und Gartenarbeit. Erfahrung willkommen, aber nicht Voraussetzung."
   }
 ];
+
+const SITE_URL = 'https://attar-dienstleistungen.de';
+const datePosted = new Date().toISOString().slice(0, 10);
+const validThrough = new Date(Date.now() + 1000 * 60 * 60 * 24 * 90).toISOString().slice(0, 10);
+
+const jobPostingsLd = jobs.map((job) => ({
+  '@context': 'https://schema.org',
+  '@type': 'JobPosting',
+  '@id': `${SITE_URL}/karriere#${job.id}`,
+  title: job.title,
+  description: `<p>${job.description}</p>`,
+  identifier: {
+    '@type': 'PropertyValue',
+    name: 'Attar Dienstleistungen',
+    value: job.id,
+  },
+  datePosted,
+  validThrough,
+  employmentType: job.employmentType,
+  hiringOrganization: { '@id': `${SITE_URL}/#organization` },
+  jobLocation: {
+    '@type': 'Place',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Kirn',
+      addressRegion: 'Rheinland-Pfalz',
+      postalCode: '55606',
+      addressCountry: 'DE',
+    },
+  },
+  applicantLocationRequirements: {
+    '@type': 'Country',
+    name: 'Germany',
+  },
+  directApply: true,
+  url: `${SITE_URL}/bewerben?job=${encodeURIComponent(job.title)}`,
+}));
 ---
 
-<Layout title="Karriere">
+<Layout
+  title="Karriere & Stellenangebote in Kirn"
+  description="Aktuelle Stellenangebote bei Attar Dienstleistungen in Kirn: Hausmeister, Helfer Entrümpelung, Gärtner. Faire Vergütung, modernes Equipment, echtes Team. Jetzt bewerben oder Initiativbewerbung senden."
+  breadcrumbs={[
+    { name: 'Start', url: '/' },
+    { name: 'Karriere', url: '/karriere' },
+  ]}
+  jsonLd={jobPostingsLd}
+>
   <section class="pt-24 pb-12 md:pt-40 md:pb-20 px-6 md:px-24">
     <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs italic">Karriere</p>
     <h1 class="text-[clamp(2.5rem,10vw,6rem)] font-black uppercase leading-[0.9] mb-8">

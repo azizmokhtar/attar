@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import Layout from '../layouts/Layout.astro';
 
 const services = [
@@ -23,9 +25,36 @@ const services = [
     image: "/projekte/WASWIRTUNGartenservice.jpg"
   }
 ];
+
+const reviews = [
+  { name: "M. Schmidt", text: "Die Entrümpelung verlief absolut reibungslos – diskret, schnell und ohne Stress. Klare Empfehlung!" },
+  { name: "K. Weber", text: "Unser Garten sah noch nie so gepflegt aus. Ein zuverlässiges Team, das wirklich mitdenkt." },
+  { name: "Hausverwaltung Meyer", text: "Professioneller Hausmeisterservice auf höchstem Niveau. Absolut vertrauenswürdig." },
+];
+
+const SITE_URL = 'https://attar-dienstleistungen.de';
+
+const homepageJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${SITE_URL}/#webpage`,
+    url: SITE_URL,
+    name: 'Attar Dienstleistungen – Reinigung, Hausmeister, Umzug & Garten in Kirn',
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    about: { '@id': `${SITE_URL}/#organization` },
+    inLanguage: 'de-DE',
+    primaryImageOfPage: { '@type': 'ImageObject', url: `${SITE_URL}/main-poster.jpg` },
+  },
+];
 ---
 
-<Layout title="Zuverlässige Dienstleistungen in Kirn" preloadHeroPoster={true}>
+<Layout
+    title="Reinigung, Hausmeister, Umzug & Garten in Kirn"
+    description="Attar Dienstleistungen aus Kirn – Reinigungsservice, Hausmeisterservice, Umzugsservice und Gartenservice für Privat- und Gewerbekunden in Rheinland-Pfalz. Strukturiert, diskret, zuverlässig. Jetzt unverbindliches Angebot anfragen."
+    preloadHeroPoster={true}
+    jsonLd={homepageJsonLd}
+>
     <section class="w-full relative p-0 mb-3 md:mb-20 overflow-hidden">
     <video
         autoplay
@@ -74,11 +103,7 @@ const services = [
 <section class="px-6 md:px-24 py-20 md:py-32 bg-[#0d1b2a] text-white">
   <h2 class="text-brand text-[10px] md:text-xs font-bold uppercase tracking-widest mb-10 md:mb-12 italic">Kundenstimmen</h2>
   <div class="grid md:grid-cols-3 gap-10 md:gap-8">
-    {[
-      { name: "M. Schmidt", text: "Die Entrümpelung verlief absolut reibungslos – diskret, schnell und ohne Stress. Klare Empfehlung!" },
-      { name: "K. Weber", text: "Unser Garten sah noch nie so gepflegt aus. Ein zuverlässiges Team, das wirklich mitdenkt." },
-      { name: "Hausverwaltung Meyer", text: "Professioneller Hausmeisterservice auf höchstem Niveau. Absolut vertrauenswürdig." }
-    ].map((review) => (
+    {reviews.map((review) => (
       <div class="border-l-2 border-brand/40 pl-6 md:pl-8 py-2">
         <p class="text-base md:text-lg mb-4 md:mb-6 italic text-slate-300 leading-relaxed">"{review.text}"</p>
         <p class="font-black uppercase tracking-widest text-brand text-xs md:text-sm">— {review.name}</p>
