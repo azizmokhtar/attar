@@ -3,6 +3,10 @@ export const prerender = true;
 
 import Layout from '../../layouts/Layout.astro';
 import IndividualOfferCTA from '../../components/IndividualOfferCTA.astro';
+import ProjectGallery from '../../components/ProjectGallery.astro';
+import { getProjectsByService } from '../../data/projects';
+
+const projects = getProjectsByService('umzug');
 
 const SITE_URL = 'https://attar-dienstleistungen.de';
 const PAGE_PATH = '/dienstleistungen/umzugsservice';
@@ -223,6 +227,14 @@ const faqLd = {
       ))}
     </div>
   </section>
+
+  <ProjectGallery
+    projects={projects}
+    eyebrow="Referenzen"
+    heading="Umzugs- & Räumungsprojekte."
+    intro="Ausgewählte Aufträge aus Kirn und Umgebung – inklusive Wohnungsauflösungen und Entrümpelungen. Klicken Sie auf ein Projekt für die vollständige Fotostrecke."
+    showServiceChip={false}
+  />
 
   <IndividualOfferCTA />
 </Layout>

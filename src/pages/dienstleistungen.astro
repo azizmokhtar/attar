@@ -3,6 +3,10 @@ export const prerender = true;
 
 import Layout from '../layouts/Layout.astro';
 import IndividualOfferCTA from '../components/IndividualOfferCTA.astro';
+import ProjectGallery from '../components/ProjectGallery.astro';
+import { getAllProjects } from '../data/projects';
+
+const allProjects = getAllProjects();
 
 const services = [
   {
@@ -171,6 +175,13 @@ const serviceItemListLd = {
       ))}
     </div>
   </section>
+
+  <ProjectGallery
+    projects={allProjects}
+    eyebrow="Referenzen"
+    heading="Ausgewählte Projekte."
+    intro="Ein Auszug aus unseren letzten Aufträgen in Kirn und Umgebung. Klicken Sie auf ein Projekt, um die komplette Fotostrecke zu sehen."
+  />
 
   <IndividualOfferCTA />
 </Layout>
