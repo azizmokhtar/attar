@@ -1,0 +1,175 @@
+---
+const phone = '4915569365960';
+const message = 'Hallo Attar Dienstleistungen, ich interessiere mich für Ihre Dienstleistungen.';
+const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="WhatsApp Chat mit Attar Dienstleistungen starten"
+  class="whatsapp-fab"
+>
+  <span class="whatsapp-pulse" aria-hidden="true"></span>
+  <span class="whatsapp-pulse whatsapp-pulse--delayed" aria-hidden="true"></span>
+  <svg
+    class="whatsapp-icon"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 32 32"
+    width="30"
+    height="30"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      fill="currentColor"
+      d="M16 .396C7.164.396 0 7.56 0 16.396c0 2.845.755 5.512 2.073 7.825L0 32l8.04-2.1A15.93 15.93 0 0 0 16 32.396c8.836 0 16-7.164 16-16s-7.164-16-16-16zm0 29.187a13.16 13.16 0 0 1-6.7-1.832l-.48-.285-4.77 1.247 1.272-4.65-.31-.48a13.13 13.13 0 0 1-2.025-7.02C2.99 8.97 8.97 2.99 16 2.99s13.01 5.98 13.01 13.01-5.98 13.01-13.01 13.01zm7.39-9.84c-.4-.2-2.36-1.17-2.73-1.3-.37-.13-.64-.2-.9.2-.27.4-1.03 1.3-1.27 1.57-.23.27-.47.3-.87.1s-1.7-.63-3.24-2c-1.2-1.07-2.02-2.4-2.25-2.8-.23-.4-.02-.62.18-.82.18-.18.4-.47.6-.7.2-.23.27-.4.4-.67.13-.27.07-.5-.03-.7-.1-.2-.9-2.17-1.23-2.97-.32-.78-.65-.67-.9-.68l-.77-.01c-.27 0-.7.1-1.07.5-.37.4-1.4 1.37-1.4 3.33s1.43 3.87 1.63 4.13c.2.27 2.82 4.3 6.83 6.03.95.4 1.7.65 2.28.83.96.3 1.83.27 2.52.16.77-.12 2.36-.97 2.7-1.9.33-.93.33-1.73.23-1.9-.1-.16-.37-.27-.77-.46z"
+    />
+  </svg>
+  <span class="whatsapp-tooltip">Chat starten</span>
+</a>
+
+<style>
+  .whatsapp-fab {
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+    bottom: max(32px, calc(env(safe-area-inset-bottom) + 16px));
+    z-index: 990;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    color: #ffffff;
+    background: #25d366;
+    border-radius: 9999px;
+    box-shadow:
+      0 10px 25px -5px rgba(37, 211, 102, 0.45),
+      0 8px 20px -8px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    transition:
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      background 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .whatsapp-fab:hover {
+    background: #1ebe57;
+    transform: translateY(-2px) scale(1.06);
+    box-shadow:
+      0 14px 30px -5px rgba(37, 211, 102, 0.55),
+      0 10px 24px -8px rgba(0, 0, 0, 0.3);
+  }
+
+  .whatsapp-fab:active {
+    transform: translateY(0) scale(0.97);
+  }
+
+  .whatsapp-fab:focus-visible {
+    outline: 3px solid #0d1b2a;
+    outline-offset: 4px;
+  }
+
+  .whatsapp-icon {
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .whatsapp-pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: #25d366;
+    opacity: 0.55;
+    animation: whatsapp-pulse 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    z-index: 0;
+  }
+
+  .whatsapp-pulse--delayed {
+    animation-delay: 1.2s;
+  }
+
+  @keyframes whatsapp-pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    80%,
+    100% {
+      transform: scale(1.7);
+      opacity: 0;
+    }
+  }
+
+  .whatsapp-tooltip {
+    position: absolute;
+    right: calc(100% + 14px);
+    top: 50%;
+    transform: translateY(-50%) translateX(8px);
+    background: #0d1b2a;
+    color: #ffffff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .whatsapp-tooltip::after {
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-left-color: #0d1b2a;
+  }
+
+  .whatsapp-fab:hover .whatsapp-tooltip,
+  .whatsapp-fab:focus-visible .whatsapp-tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  @media (max-width: 768px) {
+    .whatsapp-fab {
+      right: 20px;
+      bottom: 24px;
+      bottom: max(24px, calc(env(safe-area-inset-bottom) + 12px));
+      width: 56px;
+      height: 56px;
+    }
+
+    .whatsapp-tooltip {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .whatsapp-pulse {
+      animation: none;
+      opacity: 0;
+    }
+
+    .whatsapp-fab,
+    .whatsapp-tooltip {
+      transition: none;
+    }
+  }
+
+  @media print {
+    .whatsapp-fab {
+      display: none;
+    }
+  }
+</style>

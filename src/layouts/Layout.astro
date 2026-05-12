@@ -3,6 +3,7 @@ import '../styles/global.css';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import Analytics from '@vercel/analytics/astro';
 import CookieConsent from '../components/CookieConsent.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 
 interface Props {
 	title: string;
@@ -221,6 +222,7 @@ const GA_ID = 'G-1QJF32TBF3';
 
 	<SpeedInsights />
 	<Analytics />
+	<WhatsAppButton />
 	<CookieConsent />
 	</body>
 </html>
