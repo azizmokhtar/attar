@@ -2,6 +2,7 @@
 export const prerender = true;
 
 import Layout from '../layouts/Layout.astro';
+import IndividualOfferCTA from '../components/IndividualOfferCTA.astro';
 
 const services = [
   {
@@ -174,24 +175,7 @@ const homepageJsonLd = [
     </div>
 </section>
 
-<section class="px-6 md:px-24 py-20 md:py-32 bg-[#0d1b2a] text-white">
-    <div class="max-w-4xl">
-        <h2 class="text-3xl md:text-5xl lg:text-6xl font-black uppercase mb-6 md:mb-8 leading-tight">
-            <span class="block mb-2 md:mb-3 lg:mb-4">Ihre Anforderungen</span>
-            <span class="block mb-2 md:mb-3 lg:mb-4">sind einzigartig?</span>
-            <span class="block text-brand">Unsere Lösungen auch.</span>
-        </h2>
-        <p class="text-base md:text-lg text-slate-300 mb-3 max-w-2xl leading-relaxed">
-            Wir erstellen individuelle Konzepte, die exakt auf Ihr Projekt zugeschnitten sind – flexibel, effizient und professionell umgesetzt.
-        </p>
-        <p class="text-sm text-slate-400 mb-10 max-w-2xl">
-            Sprechen Sie uns an und erhalten Sie Ihr persönliches Angebot.
-        </p>
-        <a href="/kontakt" class="inline-block bg-brand text-white px-8 md:px-10 py-4 md:py-5 font-black uppercase tracking-widest hover:bg-white hover:text-[#0d1b2a] transition-colors text-sm">
-            Jetzt individuelles Angebot sichern
-        </a>
-    </div>
-</section>
+<IndividualOfferCTA />
 </Layout>
 <script>
 import Swiper from 'swiper';

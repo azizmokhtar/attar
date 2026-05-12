@@ -2,6 +2,7 @@
 export const prerender = true;
 
 import Layout from '../../layouts/Layout.astro';
+import IndividualOfferCTA from '../../components/IndividualOfferCTA.astro';
 
 const SITE_URL = 'https://attar-dienstleistungen.de';
 const PAGE_PATH = '/dienstleistungen/umzugsservice';
@@ -223,18 +224,5 @@ const faqLd = {
     </div>
   </section>
 
-  <section class="px-6 md:px-24 py-16 md:py-24 bg-[#0d1b2a] text-white">
-    <div class="max-w-4xl">
-      <h2 class="text-3xl md:text-5xl font-black uppercase mb-4 md:mb-6 leading-tight">
-        Lassen Sie uns<br />
-        <span class="text-brand">umziehen.</span>
-      </h2>
-      <p class="text-slate-300 mb-8 md:mb-10 max-w-2xl text-base md:text-lg font-medium leading-relaxed">
-        Schildern Sie uns Ihr Umzugsvorhaben – wir kommen vorbei und erstellen einen verbindlichen Festpreis.
-      </p>
-      <a href="/kontakt?service=umzug" class="inline-block bg-brand text-white px-8 py-4 md:px-12 md:py-5 text-sm font-black uppercase tracking-widest hover:bg-white hover:text-[#0d1b2a] transition-all">
-        Umzugsangebot anfragen
-      </a>
-    </div>
-  </section>
+  <IndividualOfferCTA />
 </Layout>

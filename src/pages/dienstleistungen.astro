@@ -2,6 +2,7 @@
 export const prerender = true;
 
 import Layout from '../layouts/Layout.astro';
+import IndividualOfferCTA from '../components/IndividualOfferCTA.astro';
 
 const services = [
   {
@@ -171,23 +172,5 @@ const serviceItemListLd = {
     </div>
   </section>
 
-  <section class="bg-[#0d1b2a] text-white py-16 md:py-24 px-6 md:px-24">
-    <div class="max-w-4xl">
-      <h2 class="text-3xl md:text-5xl font-black uppercase mb-4 md:mb-6 leading-tight">
-        Ihre Anforderungen sind einzigartig?<br/>
-        <span class="text-brand">Unsere Lösungen auch.</span>
-      </h2>
-      <p class="text-slate-300 mb-3 max-w-2xl text-base md:text-lg font-medium leading-relaxed">
-        Wir erstellen individuelle Konzepte, die exakt auf Ihr Projekt zugeschnitten sind – flexibel, effizient und professionell umgesetzt.
-      </p>
-      <p class="text-slate-400 mb-8 md:mb-10 max-w-2xl text-sm font-medium">
-        Sprechen Sie uns an und erhalten Sie Ihr persönliches Angebot.
-      </p>
-      <a href="/kontakt"
-         class="inline-block bg-brand text-white px-8 py-4 md:px-12 md:py-5 text-sm font-black uppercase tracking-widest hover:bg-white hover:text-[#0d1b2a] transition-all"
-      >
-        Jetzt individuelles Angebot sichern
-      </a>
-    </div>
-  </section>
+  <IndividualOfferCTA />
 </Layout>

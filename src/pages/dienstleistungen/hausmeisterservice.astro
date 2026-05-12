@@ -2,6 +2,7 @@
 export const prerender = true;
 
 import Layout from '../../layouts/Layout.astro';
+import IndividualOfferCTA from '../../components/IndividualOfferCTA.astro';
 
 const SITE_URL = 'https://attar-dienstleistungen.de';
 const PAGE_PATH = '/dienstleistungen/hausmeisterservice';
@@ -222,18 +223,5 @@ const faqLd = {
     </div>
   </section>
 
-  <section class="px-6 md:px-24 py-16 md:py-24 bg-[#0d1b2a] text-white">
-    <div class="max-w-4xl">
-      <h2 class="text-3xl md:text-5xl font-black uppercase mb-4 md:mb-6 leading-tight">
-        Übergeben Sie Ihr Objekt<br />
-        <span class="text-brand">in verlässliche Hände.</span>
-      </h2>
-      <p class="text-slate-300 mb-8 md:mb-10 max-w-2xl text-base md:text-lg font-medium leading-relaxed">
-        Wir vereinbaren eine kostenlose Begehung und erstellen ein Leistungsverzeichnis mit Monatspreis.
-      </p>
-      <a href="/kontakt?service=hausmeister" class="inline-block bg-brand text-white px-8 py-4 md:px-12 md:py-5 text-sm font-black uppercase tracking-widest hover:bg-white hover:text-[#0d1b2a] transition-all">
-        Begehung vereinbaren
-      </a>
-    </div>
-  </section>
+  <IndividualOfferCTA />
 </Layout>
