@@ -36,18 +36,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: 'aldi-scanner-wartung',
-    title: 'Aldi – Scanner-Wartung',
-    service: 'hausmeister',
-    description:
-      'Technische Wartung und Reinigung der Kassenscanner einer Aldi-Filiale. Geräte demontiert, gereinigt, justiert und wieder einsatzbereit übergeben – außerhalb der Geschäftszeiten und ohne Verkaufsausfall.',
-    location: 'Kirn',
-    date: 'März 2025',
-    folder: 'Aldi-scanner',
-    images: ['p1.jpg', 'p2.jpg', 'p3.jpg'],
-    featured: true,
-  },
-  {
     slug: 'entruempelung-wohnung',
     title: 'Wohnungsauflösung & Entrümpelung',
     service: 'umzug',
