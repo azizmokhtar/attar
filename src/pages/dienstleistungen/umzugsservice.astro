@@ -5,6 +5,8 @@ import Layout from '../../layouts/Layout.astro';
 import IndividualOfferCTA from '../../components/IndividualOfferCTA.astro';
 import ProjectGallery from '../../components/ProjectGallery.astro';
 import { getProjectsByService } from '../../data/projects';
+import { Image } from 'astro:assets';
+import heroImg from '../../assets/services/umzug.jpg';
 
 const projects = getProjectsByService('umzug');
 
@@ -49,6 +51,14 @@ const faqs = [
     q: 'Kümmern Sie sich auch um die Halteverbotszone?',
     a: 'Ja. Wir beantragen mobile Halteverbotszonen an beiden Adressen, stellen die Schilder rechtzeitig auf und kümmern uns um die Rückgabe. Sie müssen sich darum nicht kümmern.',
   },
+  {
+    q: 'Wie lange dauert ein Umzug?',
+    a: 'Eine durchschnittliche 2- bis 3-Zimmer-Wohnung ist in der Regel an einem Tag umgezogen. Größere Haushalte oder Fernumzüge können zwei Tage in Anspruch nehmen. Den genauen Ablauf planen wir nach der Besichtigung.',
+  },
+  {
+    q: 'Was passiert mit Möbeln, die ich nicht mitnehmen möchte?',
+    a: 'Nicht benötigte Möbel und Gegenstände entsorgen wir auf Wunsch fachgerecht im Rahmen einer Entrümpelung. Die alte Wohnung übergeben wir besenrein – alles aus einer Hand.',
+  },
 ];
 
 const serviceLd = {
@@ -70,7 +80,7 @@ const serviceLd = {
     { '@type': 'Country', name: 'Deutschland' },
   ],
   url: PAGE_URL,
-  image: `${SITE_URL}/projekte/WASWIRTUNUmzugsserviice.jpg`,
+  image: new URL(heroImg.src, SITE_URL).href,
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Umzugsleistungen',
@@ -96,7 +106,7 @@ const faqLd = {
 <Layout
   title="Umzugsservice in Kirn – Privatumzug, Firmenumzug & Seniorenumzug"
   description="Stressfreier Umzugsservice in Kirn, Bad Kreuznach und Idar-Oberstein: Privatumzüge, Firmenumzüge, Seniorenumzüge, Möbeltransport, Verpackungsservice und Endreinigung. Festpreisgarantie, Halteverbotszone inklusive."
-  image="/projekte/WASWIRTUNUmzugsserviice.jpg"
+  image={heroImg.src}
   breadcrumbs={[
     { name: 'Start', url: '/' },
     { name: 'Dienstleistungen', url: '/dienstleistungen' },

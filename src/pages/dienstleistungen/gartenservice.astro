@@ -5,6 +5,8 @@ import Layout from '../../layouts/Layout.astro';
 import IndividualOfferCTA from '../../components/IndividualOfferCTA.astro';
 import ProjectGallery from '../../components/ProjectGallery.astro';
 import { getProjectsByService } from '../../data/projects';
+import { Image } from 'astro:assets';
+import heroImg from '../../assets/services/garten.jpg';
 
 const projects = getProjectsByService('garten');
 
@@ -49,6 +51,14 @@ const faqs = [
     q: 'Was kostet die Gartenpflege in Kirn?',
     a: 'Einzelne Einsätze rechnen wir nach Aufwand und Fläche zum Festpreis ab. Für regelmäßige Pflege bieten wir Jahresverträge mit festen Monatsraten – kalkulierbar und ohne Stundenrisiko.',
   },
+  {
+    q: 'Wie oft sollte der Rasen gemäht werden?',
+    a: 'In der Hauptwachstumszeit von April bis Oktober ist ein Schnitt alle ein bis zwei Wochen ideal. Wir übernehmen die Pflege nach festem Turnus oder bei Bedarf – passend zu Ihrer Außenanlage.',
+  },
+  {
+    q: 'Übernehmen Sie auch Baumfällungen?',
+    a: 'Kleinere Bäume fällen und entsorgen wir im Rahmen der Gartenpflege. Bei größeren Fällungen klären wir vorab Umfang und eventuell erforderliche Genehmigungen, da diese je nach Gemeinde und Baumschutzsatzung nötig sein können.',
+  },
 ];
 
 const serviceLd = {
@@ -69,7 +79,7 @@ const serviceLd = {
     { '@type': 'AdministrativeArea', name: 'Rheinland-Pfalz' },
   ],
   url: PAGE_URL,
-  image: `${SITE_URL}/projekte/WASWIRTUNGartenservice.jpg`,
+  image: new URL(heroImg.src, SITE_URL).href,
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Gartenleistungen',
@@ -95,7 +105,7 @@ const faqLd = {
 <Layout
   title="Gartenservice in Kirn – Rasen, Hecke, Baumpflege & Grünschnitt"
   description="Professioneller Gartenservice in Kirn, Bad Kreuznach und Idar-Oberstein: Rasenpflege, Heckenschnitt, Baumpflege, Beetpflege, Laubentsorgung und ganzjährige Außenanlagenpflege. Festpreis, ohne Glyphosat, mit dokumentierten Einsätzen."
-  image="/projekte/WASWIRTUNGartenservice.jpg"
+  image={heroImg.src}
   breadcrumbs={[
     { name: 'Start', url: '/' },
     { name: 'Dienstleistungen', url: '/dienstleistungen' },

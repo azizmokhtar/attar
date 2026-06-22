@@ -5,6 +5,8 @@ import Layout from '../../layouts/Layout.astro';
 import IndividualOfferCTA from '../../components/IndividualOfferCTA.astro';
 import ProjectGallery from '../../components/ProjectGallery.astro';
 import { getProjectsByService } from '../../data/projects';
+import { Image } from 'astro:assets';
+import heroImg from '../../assets/services/reinigung.jpg';
 
 const projects = getProjectsByService('reinigung');
 
@@ -49,6 +51,14 @@ const faqs = [
     q: 'Was kostet eine professionelle Reinigung in Kirn?',
     a: 'Der Preis richtet sich nach Fläche, Verschmutzungsgrad, Intervall und Anfahrtsweg. Sie erhalten einen verbindlichen Festpreis nach Begehung oder Beschreibung des Objekts – ohne Stundenrisiko.',
   },
+  {
+    q: 'Wie lange dauert eine Reinigung?',
+    a: 'Als grober Richtwert dauert eine Unterhaltsreinigung etwa 2,5 bis 4 Stunden pro 100 m² – je nach Verschmutzungsgrad, Ausstattung und Reinigungsart. Den genauen Zeitrahmen halten wir nach einer kurzen Begehung verbindlich fest.',
+  },
+  {
+    q: 'Wie oft sollte ein Objekt gereinigt werden?',
+    a: 'Das richtet sich nach Nutzung und Publikumsverkehr: Büros mit Kundenkontakt werden meist täglich bis dreimal wöchentlich gereinigt, kleinere Büros ein- bis zweimal pro Woche. Wir erstellen Ihnen einen passenden Reinigungsplan für Ihr Objekt.',
+  },
 ];
 
 const serviceLd = {
@@ -69,7 +79,7 @@ const serviceLd = {
     { '@type': 'AdministrativeArea', name: 'Rheinland-Pfalz' },
   ],
   url: PAGE_URL,
-  image: `${SITE_URL}/projekte/WASWIRTUNReinigungservice.jpg`,
+  image: new URL(heroImg.src, SITE_URL).href,
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Reinigungsleistungen',
@@ -95,7 +105,7 @@ const faqLd = {
 <Layout
   title="Reinigungsservice in Kirn – Büro, Treppenhaus & Grundreinigung"
   description="Professioneller Reinigungsservice in Kirn, Bad Kreuznach und Idar-Oberstein: Unterhaltsreinigung, Grundreinigung, Bauschlussreinigung und Treppenhausreinigung für Privat- und Gewerbekunden. Festpreis, klare Reinigungspläne, dokumentierte Qualitätskontrolle."
-  image="/projekte/WASWIRTUNReinigungservice.jpg"
+  image={heroImg.src}
   breadcrumbs={[
     { name: 'Start', url: '/' },
     { name: 'Dienstleistungen', url: '/dienstleistungen' },

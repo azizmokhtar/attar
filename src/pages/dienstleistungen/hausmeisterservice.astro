@@ -5,6 +5,8 @@ import Layout from '../../layouts/Layout.astro';
 import IndividualOfferCTA from '../../components/IndividualOfferCTA.astro';
 import ProjectGallery from '../../components/ProjectGallery.astro';
 import { getProjectsByService } from '../../data/projects';
+import { Image } from 'astro:assets';
+import heroImg from '../../assets/services/hausmeister.jpg';
 
 const projects = getProjectsByService('hausmeister');
 
@@ -49,6 +51,14 @@ const faqs = [
     q: 'Was kostet ein Hausmeisterservice in Kirn?',
     a: 'Der Preis hängt von Objektgröße, Anzahl der Wohneinheiten, Außenflächen und gewünschten Leistungen ab. Sie erhalten nach Begehung ein verbindliches Monatsangebot ohne versteckte Posten.',
   },
+  {
+    q: 'Übernehmen Sie auch kleinere Reparaturen?',
+    a: 'Ja. Kleinreparaturen wie tropfende Wasserhähne, klemmende Türen oder defekte Leuchtmittel erledigen wir direkt vor Ort. Bei größeren Arbeiten holen wir Angebote ein, koordinieren Fachfirmen und überwachen die Ausführung für Sie.',
+  },
+  {
+    q: 'Können wir die Leistungen flexibel kombinieren?',
+    a: 'Ja. Sie buchen genau die Leistungen, die Ihr Objekt braucht – von der reinen Außenpflege bis zur Komplettbetreuung inklusive Reinigung, Grünpflege und Winterdienst. Der Umfang lässt sich jederzeit anpassen.',
+  },
 ];
 
 const serviceLd = {
@@ -69,7 +79,7 @@ const serviceLd = {
     { '@type': 'AdministrativeArea', name: 'Rheinland-Pfalz' },
   ],
   url: PAGE_URL,
-  image: `${SITE_URL}/projekte/WASWIRTUNHausmeisterservice.jpg`,
+  image: new URL(heroImg.src, SITE_URL).href,
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Hausmeisterleistungen',
@@ -95,7 +105,7 @@ const faqLd = {
 <Layout
   title="Hausmeisterservice in Kirn – Objektbetreuung & Winterdienst"
   description="Zuverlässiger Hausmeisterservice in Kirn, Bad Kreuznach und Idar-Oberstein für WEG, Hausverwaltungen und Eigentümer: Objektbetreuung, Kleinreparaturen, Winterdienst, Grünpflege und Notfallmanagement mit definierten Reaktionszeiten."
-  image="/projekte/WASWIRTUNHausmeisterservice.jpg"
+  image={heroImg.src}
   breadcrumbs={[
     { name: 'Start', url: '/' },
     { name: 'Dienstleistungen', url: '/dienstleistungen' },
