@@ -37,7 +37,7 @@ h1, h2, h3 {
    on wrapped lines. This unlayered class wins over both the rule above
    and Tailwind's leading-* utilities, giving the text room to breathe. */
 .blog-title {
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 /* Smooth tap highlight removal on mobile */
