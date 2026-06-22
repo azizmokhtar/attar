@@ -1,4 +1,5 @@
 ---
+import '@fontsource-variable/inter';
 import '../styles/global.css';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import Analytics from '@vercel/analytics/astro';
@@ -43,7 +44,9 @@ const COMPANY_EMAIL = 'attar.dienstleistungen@gmail.com';
 
 const pageUrl = canonical ?? (new URL(Astro.url.pathname, SITE_URL).href.replace(/\/$/, '') || SITE_URL);
 const ogImageUrl = new URL(image, SITE_URL).href;
-const fullTitle = `${title} | ${SITE_NAME}`;
+// Append the brand only when the page title doesn't already contain it,
+// so titles like "Über uns – Attar Dienstleistungen…" don't double up.
+const fullTitle = title.includes('Attar') ? title : `${title} | ${SITE_NAME}`;
 const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 
 const organizationLd = {
@@ -241,7 +244,7 @@ const extraJsonLd = jsonLd
             class="h-8 md:h-10 xl:h-12 2xl:h-14 w-auto object-contain"
         />
     </a>
-      <button id="menu-button" class="md:hidden relative z-[1110] flex flex-col gap-1.5 p-2" aria-label="Menü öffnen">
+      <button id="menu-button" class="md:hidden relative z-[1110] flex flex-col gap-1.5 p-3 -mr-1" aria-label="Menü öffnen">
         <span class="w-6 h-0.5 bg-black transition-all duration-300" id="line1"></span>
         <span class="w-6 h-0.5 bg-black transition-all duration-300" id="line2"></span>
         <span class="w-6 h-0.5 bg-black transition-all duration-300" id="line3"></span>
@@ -298,6 +301,18 @@ const extraJsonLd = jsonLd
 
     btn?.addEventListener('click', toggleMenu);
     overlay?.addEventListener('click', toggleMenu);
+
+    // Close the menu when a navigation link inside it is tapped.
+    sidebar?.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+            if (sidebar?.classList.contains('translate-x-0')) toggleMenu();
+        });
+    });
+
+    // Allow closing with the Escape key.
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sidebar?.classList.contains('translate-x-0')) toggleMenu();
+    });
 </script>
 		<main>
 			<slot />

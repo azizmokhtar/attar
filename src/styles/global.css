@@ -10,7 +10,7 @@ html, body {
 }
 
 :root {
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
 }
 
 body {

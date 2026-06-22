@@ -256,30 +256,36 @@ import Swiper from 'swiper';
         }
     });
     const mouseIcon = document.querySelector('.mouse-wrapper') as HTMLElement;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    window.addEventListener('scroll', () => {
-        const scrollValue = window.scrollY;
-
-        if (mouseIcon) {
+    if (mouseIcon && !reduceMotion) {
+        let ticking = false;
+        const updateMouse = () => {
+            const scrollValue = window.scrollY;
             if (scrollValue > 0 && scrollValue < 150) {
                 const moveAmount = scrollValue * 0.5;
                 mouseIcon.style.transform = `translate(-50%, ${moveAmount}px)`;
-
                 const fadeStart = 100;
-				const newOpacity = 1 - (Math.max(0, scrollValue - fadeStart) / 200);
+                const newOpacity = 1 - (Math.max(0, scrollValue - fadeStart) / 200);
                 mouseIcon.style.opacity = newOpacity.toString();
                 mouseIcon.style.visibility = 'visible';
-            }
-            else if (scrollValue >= 150) {
+            } else if (scrollValue >= 150) {
                 mouseIcon.style.opacity = '0';
                 mouseIcon.style.visibility = 'hidden';
-            }
-            else {
+            } else {
                 mouseIcon.style.transform = `translate(-50%, 0)`;
                 mouseIcon.style.opacity = '1';
                 mouseIcon.style.visibility = 'visible';
             }
-        }
-    });
+            ticking = false;
+        };
+        // Throttle to one update per animation frame for smooth INP.
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                ticking = true;
+                window.requestAnimationFrame(updateMouse);
+            }
+        }, { passive: true });
+    }
 
 </script>
