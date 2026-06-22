@@ -1,0 +1,129 @@
+---
+export const prerender = true;
+
+import Layout from '../../layouts/Layout.astro';
+import IndividualOfferCTA from '../../components/IndividualOfferCTA.astro';
+import { getPublishedPosts, formatDate, isoDate, readingMinutes, postPath } from '../../data/blog';
+
+const posts = await getPublishedPosts();
+const [lead, ...rest] = posts;
+
+const SITE_URL = 'https://attar-dienstleistungen.de';
+
+const blogLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': `${SITE_URL}/blog#blog`,
+  name: 'Ratgeber – Attar Dienstleistungen',
+  description:
+    'Praxiswissen rund um Reinigung, Hausmeisterservice, Umzug und Gartenpflege in Kirn und Umgebung.',
+  url: `${SITE_URL}/blog`,
+  inLanguage: 'de-DE',
+  publisher: { '@id': `${SITE_URL}/#organization` },
+  blogPost: posts.map((p) => ({
+    '@type': 'BlogPosting',
+    headline: p.data.title,
+    description: p.data.description,
+    url: `${SITE_URL}${postPath(p)}`,
+    datePublished: isoDate(p.data.pubDate),
+    dateModified: isoDate(p.data.updatedDate ?? p.data.pubDate),
+    author: { '@type': 'Organization', name: p.data.author },
+  })),
+};
+---
+
+<Layout
+  title="Ratgeber – Tipps zu Reinigung, Hausmeister, Umzug & Garten"
+  description="Praxiswissen aus erster Hand: Ratgeber, Tipps und Hintergründe rund um Reinigung, Hausmeisterservice, Umzug und Gartenpflege in Kirn und Umgebung."
+  breadcrumbs={[
+    { name: 'Start', url: '/' },
+    { name: 'Ratgeber', url: '/blog' },
+  ]}
+  jsonLd={blogLd}
+>
+  <section class="pt-24 pb-12 md:pt-40 md:pb-20 px-6 md:px-24">
+    <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs italic">Ratgeber</p>
+    <h1 class="text-[clamp(2.2rem,9vw,6rem)] font-black uppercase leading-[0.9] mb-8 text-[#0d1b2a]">
+      Wissen, <br />
+      <span class="stroke-dark">das weiterhilft.</span>
+    </h1>
+    <p class="max-w-2xl text-base md:text-lg text-slate-600 font-medium leading-relaxed">
+      Praxiswissen rund um Reinigung, Hausmeisterservice, Umzug und Gartenpflege –
+      verständlich erklärt, direkt aus unserem Arbeitsalltag in Kirn und Umgebung.
+    </p>
+  </section>
+
+  {posts.length === 0 ? (
+    <section class="px-6 md:px-24 pb-32">
+      <p class="text-slate-500 font-medium">Demnächst finden Sie hier unsere ersten Beiträge.</p>
+    </section>
+  ) : (
+    <section class="px-6 md:px-24 pb-20 md:pb-32 border-t border-slate-100 pt-12 md:pt-20">
+      {/* Lead / featured post */}
+      <a href={postPath(lead)} class="group grid md:grid-cols-12 gap-6 md:gap-12 items-center mb-16 md:mb-24">
+        <div class="md:col-span-7 order-2 md:order-1">
+          <p class="text-brand font-bold uppercase tracking-widest text-[9px] md:text-[10px] mb-3">
+            {lead.data.category} · {formatDate(lead.data.pubDate)} · {readingMinutes(lead.body)} Min. Lesezeit
+          </p>
+          <h2 class="text-2xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter leading-[1.05] mb-4 text-[#0d1b2a] group-hover:text-brand transition-colors">
+            {lead.data.title}
+          </h2>
+          <p class="text-slate-600 font-medium leading-relaxed mb-6 max-w-prose">{lead.data.description}</p>
+          <span class="inline-flex items-center gap-3 text-[10px] md:text-xs font-black uppercase tracking-widest text-[#0d1b2a] group-hover:text-brand transition-colors">
+            Beitrag lesen <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </span>
+        </div>
+        <div class="md:col-span-5 order-1 md:order-2 overflow-hidden bg-slate-100 aspect-[16/10] block">
+          {lead.data.heroImage ? (
+            <img
+              src={lead.data.heroImage}
+              alt={lead.data.heroImageAlt ?? lead.data.title}
+              class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+              loading="eager"
+            />
+          ) : (
+            <div class="w-full h-full flex items-center justify-center">
+              <span class="text-6xl md:text-8xl font-black italic text-slate-200 select-none">ATTAR.</span>
+            </div>
+          )}
+        </div>
+      </a>
+
+      {/* Remaining posts */}
+      {rest.length > 0 && (
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-100 border border-slate-100">
+          {rest.map((post) => (
+            <a href={postPath(post)} class="group bg-white p-6 md:p-8 flex flex-col hover:bg-slate-50/50 transition-colors">
+              <div class="aspect-[16/10] overflow-hidden bg-slate-100 mb-6">
+                {post.data.heroImage ? (
+                  <img
+                    src={post.data.heroImage}
+                    alt={post.data.heroImageAlt ?? post.data.title}
+                    class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center">
+                    <span class="text-4xl font-black italic text-slate-200 select-none">ATTAR.</span>
+                  </div>
+                )}
+              </div>
+              <p class="text-brand font-bold uppercase tracking-widest text-[9px] mb-3">
+                {post.data.category} · {readingMinutes(post.body)} Min.
+              </p>
+              <h3 class="text-lg md:text-xl font-black uppercase tracking-tight leading-[1.1] mb-3 text-[#0d1b2a] group-hover:text-brand transition-colors">
+                {post.data.title}
+              </h3>
+              <p class="text-sm text-slate-500 font-medium leading-relaxed mb-6 line-clamp-3">{post.data.description}</p>
+              <span class="mt-auto inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#0d1b2a] group-hover:text-brand transition-colors">
+                Lesen <span class="group-hover:translate-x-1 transition-transform">→</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      )}
+    </section>
+  )}
+
+  <IndividualOfferCTA />
+</Layout>

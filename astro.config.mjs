@@ -33,7 +33,8 @@ export default defineConfig({
         let priority = 0.7;
         if (path === '/' || path === '') priority = 1.0;
         else if (path === '/dienstleistungen' || path === '/kontakt') priority = 0.9;
-        else if (path === '/ueber-uns' || path === '/karriere') priority = 0.8;
+        else if (path === '/ueber-uns' || path === '/karriere' || path === '/blog') priority = 0.8;
+        else if (path.startsWith('/blog/')) priority = 0.6;
         else if (['/impressum', '/datenschutz', '/agb'].includes(path)) priority = 0.3;
         return { ...item, priority };
       },

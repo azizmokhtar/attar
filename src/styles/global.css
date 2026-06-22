@@ -143,3 +143,103 @@ h1, h2, h3 {
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Article body — readable long-form prose for the blog.
+   Overrides the global uppercase/tight heading rules above so body copy
+   stays legible while keeping the brand accent and rhythm.
+--------------------------------------------------------------------------- */
+.prose-attar {
+  color: #334155;
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+.prose-attar > :first-child { margin-top: 0; }
+
+.prose-attar p,
+.prose-attar ul,
+.prose-attar ol,
+.prose-attar blockquote {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.prose-attar h2,
+.prose-attar h3 {
+  color: #0d1b2a;
+  text-transform: none;
+  line-height: 1.2;
+  font-weight: 800;
+}
+.prose-attar h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  letter-spacing: -0.02em;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+.prose-attar h3 {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  letter-spacing: -0.01em;
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-attar a {
+  color: #ff5f00;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s ease;
+}
+.prose-attar a:hover { color: #0d1b2a; }
+
+.prose-attar strong { color: #0d1b2a; font-weight: 700; }
+
+.prose-attar ul { list-style: none; padding-left: 0; }
+.prose-attar ul li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.prose-attar ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 0.4rem;
+  height: 0.4rem;
+  background: #ff5f00;
+  border-radius: 9999px;
+}
+.prose-attar ol {
+  list-style: decimal;
+  padding-left: 1.4rem;
+}
+.prose-attar ol li::marker {
+  color: #ff5f00;
+  font-weight: 800;
+}
+.prose-attar li + li { margin-top: 0.5rem; }
+.prose-attar li > ul,
+.prose-attar li > ol { margin-top: 0.5rem; margin-bottom: 0; }
+
+.prose-attar blockquote {
+  border-left: 3px solid #ff5f00;
+  padding-left: 1.25rem;
+  font-style: italic;
+  font-weight: 600;
+  color: #0d1b2a;
+}
+
+.prose-attar img {
+  width: 100%;
+  height: auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.prose-attar hr {
+  border: 0;
+  border-top: 1px solid #e2e8f0;
+  margin: 2.5rem 0;
+}
+
