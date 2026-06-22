@@ -5,6 +5,8 @@ pubDate: 2026-06-10
 author: "Attar Dienstleistungen"
 category: "Reinigung"
 tags: ["Unterhaltsreinigung", "Büroreinigung", "Gewerbe", "Reinigungsintervall"]
+heroImage: "./images/unterhaltsreinigung-gewerbe.jpg"
+heroImageAlt: "Büroreinigung – Reinigungskraft pflegt Gewerberäume"
 faq:
   - question: "Wie oft sollte ein Büro gereinigt werden?"
     answer: "Für Büros mit täglichem Publikumsverkehr empfiehlt sich eine tägliche oder mehrmals wöchentliche Unterhaltsreinigung. Kleinere Büros ohne Kundenverkehr kommen oft mit ein bis zwei Reinigungen pro Woche aus."

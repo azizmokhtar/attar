@@ -14,34 +14,41 @@ import { z } from 'astro/zod';
 
 const blog = defineCollection({
   loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
-  schema: z.object({
-    /** Headline — used as <h1>, <title> and og:title. */
-    title: z.string(),
-    /** Meta description / og:description (~150–160 chars). */
-    description: z.string(),
-    /** Publish date, e.g. 2026-06-01. */
-    pubDate: z.coerce.date(),
-    /** Last meaningful edit — improves freshness signals. */
-    updatedDate: z.coerce.date().optional(),
-    /** Byline. */
-    author: z.string().default('Attar Dienstleistungen'),
-    /** Eyebrow label / grouping, e.g. "Reinigung". */
-    category: z.string().default('Ratgeber'),
-    /** Free-text tags for related-content and keyword coverage. */
-    tags: z.array(z.string()).default([]),
-    /** Path under /public, e.g. "/blog/entruempelung.jpg". */
-    heroImage: z.string().optional(),
-    /** Alt text for the hero image (accessibility + image SEO). */
-    heroImageAlt: z.string().optional(),
-    /** Hide from listings & sitemap while writing. */
-    draft: z.boolean().default(false),
-    /** Surface first in the listing. */
-    featured: z.boolean().default(false),
-    /** Q&A pairs — rendered on-page and as FAQPage JSON-LD (great for GEO). */
-    faq: z
-      .array(z.object({ question: z.string(), answer: z.string() }))
-      .default([]),
-  }),
+  // `schema` is a function so we can use the `image()` helper, which validates
+  // the path AND hands the build pipeline an image to optimize (WebP + resize).
+  schema: ({ image }) =>
+    z.object({
+      /** Headline — used as <h1>, <title> and og:title. */
+      title: z.string(),
+      /** Meta description / og:description (~150–160 chars). */
+      description: z.string(),
+      /** Publish date, e.g. 2026-06-01. */
+      pubDate: z.coerce.date(),
+      /** Last meaningful edit — improves freshness signals. */
+      updatedDate: z.coerce.date().optional(),
+      /** Byline. */
+      author: z.string().default('Attar Dienstleistungen'),
+      /** Eyebrow label / grouping, e.g. "Reinigung". */
+      category: z.string().default('Ratgeber'),
+      /** Free-text tags for related-content and keyword coverage. */
+      tags: z.array(z.string()).default([]),
+      /**
+       * Hero image. Path is relative to THIS markdown file, e.g.
+       * "./images/my-post.jpg" → src/content/blog/images/my-post.jpg.
+       * Astro optimizes it automatically (resizes + serves WebP).
+       */
+      heroImage: image().optional(),
+      /** Alt text for the hero image (accessibility + image SEO). */
+      heroImageAlt: z.string().optional(),
+      /** Hide from listings & sitemap while writing. */
+      draft: z.boolean().default(false),
+      /** Surface first in the listing. */
+      featured: z.boolean().default(false),
+      /** Q&A pairs — rendered on-page and as FAQPage JSON-LD (great for GEO). */
+      faq: z
+        .array(z.object({ question: z.string(), answer: z.string() }))
+        .default([]),
+    }),
 });
 
 export const collections = { blog };

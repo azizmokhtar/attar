@@ -5,6 +5,8 @@ pubDate: 2026-06-22
 author: "Attar Dienstleistungen"
 category: "Reinigung"
 tags: ["Reinigungsfirma", "Gebäudereinigung", "Kosten", "Checkliste"]
+heroImage: "./images/reinigungsfirma-finden-vergleichen.jpg"
+heroImageAlt: "Professionelle Reinigungskraft bei der Gebäudereinigung"
 featured: true
 faq:
   - question: "Was kostet eine Stunde putzen bei einer Putzfirma?"

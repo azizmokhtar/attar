@@ -1,6 +1,7 @@
 ---
 export const prerender = true;
 
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import IndividualOfferCTA from '../../components/IndividualOfferCTA.astro';
 import { getPublishedPosts, formatDate, isoDate, readingMinutes, postPath } from '../../data/blog';
@@ -75,9 +76,11 @@ const blogLd = {
         </div>
         <div class="md:col-span-5 order-1 md:order-2 overflow-hidden bg-slate-100 aspect-[16/10] block">
           {lead.data.heroImage ? (
-            <img
+            <Image
               src={lead.data.heroImage}
               alt={lead.data.heroImageAlt ?? lead.data.title}
+              widths={[400, 800, 1200]}
+              sizes="(min-width: 768px) 42vw, 100vw"
               class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
               loading="eager"
             />
@@ -96,9 +99,11 @@ const blogLd = {
             <a href={postPath(post)} class="group bg-white p-6 md:p-8 flex flex-col hover:bg-slate-50/50 transition-colors">
               <div class="aspect-[16/10] overflow-hidden bg-slate-100 mb-6">
                 {post.data.heroImage ? (
-                  <img
+                  <Image
                     src={post.data.heroImage}
                     alt={post.data.heroImageAlt ?? post.data.title}
+                    widths={[300, 600, 900]}
+                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
                     class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
                     loading="lazy"
                   />
