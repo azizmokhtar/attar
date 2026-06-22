@@ -1,8 +1,12 @@
 ---
 export const prerender = true;
 
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import IndividualOfferCTA from '../components/IndividualOfferCTA.astro';
+import { getPublishedPosts, readingMinutes, postPath } from '../data/blog';
+
+const latestPosts = (await getPublishedPosts()).slice(0, 3);
 
 const services = [
   {
@@ -174,6 +178,59 @@ const homepageJsonLd = [
         </button>
     </div>
 </section>
+
+{latestPosts.length > 0 && (
+<section class="px-6 md:px-24 py-20 md:py-32">
+    <div class="flex justify-between items-end mb-10 md:mb-12">
+        <div>
+            <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-xs italic">Ratgeber</p>
+            <h2 class="text-4xl md:text-5xl font-black uppercase text-[#0d1b2a]">Aus dem Ratgeber.</h2>
+        </div>
+        <a href="/blog" class="group hidden md:inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-[#0d1b2a] hover:text-brand transition-colors">
+            Alle Beiträge
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
+        </a>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-100 border border-slate-100">
+        {latestPosts.map((post) => (
+            <a href={postPath(post)} class="group bg-white p-6 md:p-8 flex flex-col hover:bg-slate-50/50 transition-colors">
+                <div class="aspect-[16/10] overflow-hidden bg-slate-100 mb-6">
+                    {post.data.heroImage ? (
+                        <Image
+                            src={post.data.heroImage}
+                            alt={post.data.heroImageAlt ?? post.data.title}
+                            widths={[300, 600, 900]}
+                            sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
+                            class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+                            loading="lazy"
+                        />
+                    ) : (
+                        <div class="w-full h-full flex items-center justify-center">
+                            <span class="text-4xl font-black italic text-slate-200 select-none">ATTAR.</span>
+                        </div>
+                    )}
+                </div>
+                <p class="text-brand font-bold uppercase tracking-widest text-[9px] mb-3">
+                    {post.data.category} · {readingMinutes(post.body)} Min.
+                </p>
+                <h3 class="text-lg md:text-xl font-black uppercase tracking-tight leading-[1.1] mb-3 text-[#0d1b2a] group-hover:text-brand transition-colors">
+                    {post.data.title}
+                </h3>
+                <p class="text-sm text-slate-500 font-medium leading-relaxed mb-6 line-clamp-3">{post.data.description}</p>
+                <span class="mt-auto inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#0d1b2a] group-hover:text-brand transition-colors">
+                    Lesen <span class="group-hover:translate-x-1 transition-transform">→</span>
+                </span>
+            </a>
+        ))}
+    </div>
+
+    <a href="/blog" class="group mt-8 md:hidden inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-[#0d1b2a] hover:text-brand transition-colors">
+        Alle Beiträge
+        <span class="group-hover:translate-x-1 transition-transform">→</span>
+    </a>
+</section>
+)}
 
 <IndividualOfferCTA />
 </Layout>
