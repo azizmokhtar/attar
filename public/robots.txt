@@ -1,5 +1,5 @@
 # robots.txt for Attar Dienstleistungen
-# https://attar-dienstleistungen.de
+# https://attardienstleistungen.com
 
 User-agent: *
 Allow: /
@@ -13,4 +13,4 @@ Disallow: /status
 Disallow: /*?*
 
 # Sitemaps
-Sitemap: https://attar-dienstleistungen.de/sitemap-index.xml
+Sitemap: https://attardienstleistungen.com/sitemap-index.xml

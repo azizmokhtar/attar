@@ -23,7 +23,7 @@ for (const file of readdirSync(blogDir)) {
 }
 
 export default defineConfig({
-  site: 'https://attar-dienstleistungen.de',
+  site: 'https://attardienstleistungen.com',
   output: 'server',
   prefetch: {
     prefetchAll: true,
