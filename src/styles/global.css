@@ -33,6 +33,13 @@ h1, h2, h3 {
   text-transform: uppercase;
 }
 
+/* Blog titles: the global 0.9 line-height clips German umlauts (Ä Ö Ü)
+   on wrapped lines. This unlayered class wins over both the rule above
+   and Tailwind's leading-* utilities, giving the text room to breathe. */
+.blog-title {
+  line-height: 1.3;
+}
+
 /* Smooth tap highlight removal on mobile */
 * {
   -webkit-tap-highlight-color: transparent;

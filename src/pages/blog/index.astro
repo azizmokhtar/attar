@@ -66,7 +66,7 @@ const blogLd = {
           <p class="text-brand font-bold uppercase tracking-widest text-[9px] md:text-[10px] mb-3">
             {lead.data.category} · {formatDate(lead.data.pubDate)} · {readingMinutes(lead.body)} Min. Lesezeit
           </p>
-          <h2 class="text-2xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter leading-tight mb-4 text-[#0d1b2a] group-hover:text-brand transition-colors">
+          <h2 class="blog-title text-2xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter mb-4 text-[#0d1b2a] group-hover:text-brand transition-colors">
             {lead.data.title}
           </h2>
           <p class="text-slate-600 font-medium leading-relaxed mb-6 max-w-prose">{lead.data.description}</p>
@@ -116,7 +116,7 @@ const blogLd = {
               <p class="text-brand font-bold uppercase tracking-widest text-[9px] mb-3">
                 {post.data.category} · {readingMinutes(post.body)} Min.
               </p>
-              <h3 class="text-lg md:text-xl font-black uppercase tracking-tight leading-tight mb-3 text-[#0d1b2a] group-hover:text-brand transition-colors">
+              <h3 class="blog-title text-lg md:text-xl font-black uppercase tracking-tight mb-3 text-[#0d1b2a] group-hover:text-brand transition-colors">
                 {post.data.title}
               </h3>
               <p class="text-sm text-slate-500 font-medium leading-relaxed mb-6 line-clamp-3">{post.data.description}</p>
