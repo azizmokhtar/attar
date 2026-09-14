@@ -3,7 +3,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import vercel from '@astrojs/vercel';
+import node from '@astrojs/node';
 import sitemap from '@astrojs/sitemap';
 
 // Build a { slug -> ISO date } map from blog frontmatter so each post's
@@ -69,5 +69,7 @@ export default defineConfig({
       },
     }),
   ],
-  adapter: vercel()
+  // Standalone: the build is its own HTTP server (dist/server/entry.mjs),
+  // run by systemd on the VPS behind nginx. See README "Server".
+  adapter: node({ mode: 'standalone' })
 });

@@ -1,43 +1,28 @@
-# Astro Starter Kit: Minimal
+# Attar Dienstleistungen
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Astro 5, server output, Tailwind. Contact and application forms post to
+`/api/contact` and `/api/apply`, which send mail through Gmail
+(`GMAIL_USER`, `GMAIL_APP_PASSWORD`).
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Running it
 
-## 🚀 Project Structure
+    npm install
+    npm run dev        # http://localhost:4321
+    npm run build      # dist/ — dist/server/entry.mjs is a standalone HTTP server
+    HOST=127.0.0.1 PORT=3001 node dist/server/entry.mjs
 
-Inside of your Astro project, you'll see the following folders and files:
+## Server
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.jsonvg
-```
+Deployed on the same VPS as Avero, as its own user, service and nginx block.
+The site was on Vercel; the Vercel adapter, `vercel.json` and the Vercel
+analytics/speed-insights packages are gone. What `vercel.json` did is now
+done by nginx: security headers, and the maintenance redirect.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- `attar-deploy` — pull `master`, `npm ci`, build, restart, health-check.
+- `attar-maintenance on|off` — everything except `/maintenance` redirects
+  there (503 + Retry-After) while it is on.
+- `site-domain attar <host> [<host> …]` — bind a hostname with a Let's
+  Encrypt certificate, HTTP → HTTPS, HSTS. Names must resolve to the box.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Env lives in `/srv/attar/app/.env` (git-ignored, survives deploys):
+`GMAIL_USER`, `GMAIL_APP_PASSWORD`.

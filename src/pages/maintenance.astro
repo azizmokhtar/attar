@@ -1,8 +1,8 @@
 ---
 // Maintenance screen — served for every route while the catch-all redirect in
-// vercel.json is active. Returns HTTP 503 (Retry-After) so search engines treat
+// the nginx maintenance redirect is active. Returns HTTP 503 (Retry-After) so search engines treat
 // the site as TEMPORARILY unavailable and do NOT deindex it.
-// To bring the site back online: remove the "redirects" block in vercel.json
+// To bring the site back online: set MAINTENANCE=off in /etc/nginx/attar-maintenance.conf on the server
 // (and optionally delete this file), then redeploy.
 export const prerender = false;
 
