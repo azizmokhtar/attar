@@ -1,6 +1,8 @@
 ---
 import '@fontsource-variable/inter';
 import '../styles/global.css';
+import SpeedInsights from '@vercel/speed-insights/astro';
+import Analytics from '@vercel/analytics/astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 
@@ -405,6 +407,8 @@ const extraJsonLd = jsonLd
   </div>
 </footer>
 
+	<SpeedInsights />
+	<Analytics />
 	<WhatsAppButton />
 	<CookieConsent />
 	</body>
