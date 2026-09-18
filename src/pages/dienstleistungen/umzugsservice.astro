@@ -6,6 +6,8 @@ import IndividualOfferCTA from '../../components/IndividualOfferCTA.astro';
 import ProjectGallery from '../../components/ProjectGallery.astro';
 import { getProjectsByService } from '../../data/projects';
 import { Image } from 'astro:assets';
+import pageDates from '../../data/page-dates.json';
+import { formatDate, isoDate } from '../../data/blog';
 import heroImg from '../../assets/services/umzug.jpg';
 
 const projects = getProjectsByService('umzug');
@@ -13,6 +15,7 @@ const projects = getProjectsByService('umzug');
 const SITE_URL = 'https://attardienstleistungen.com';
 const PAGE_PATH = '/dienstleistungen/umzugsservice';
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
+const updated = new Date(pageDates[PAGE_PATH as keyof typeof pageDates]);
 
 const included = [
   { h: 'Privatumzüge', p: 'Komplettumzüge für Wohnungen und Häuser. Inklusive Demontage und Montage, Verpackung, Transport und Einrichtung am neuen Ort.' },
@@ -91,6 +94,19 @@ const serviceLd = {
   },
 };
 
+const webPageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${PAGE_URL}#webpage`,
+  url: PAGE_URL,
+  inLanguage: 'de-DE',
+  isPartOf: { '@id': `${SITE_URL}/#website` },
+  about: { '@id': `${PAGE_URL}#service` },
+  dateModified: isoDate(updated),
+  author: { '@id': `${SITE_URL}/#adam-attar` },
+  reviewedBy: { '@id': `${SITE_URL}/#adam-attar` },
+};
+
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -104,15 +120,15 @@ const faqLd = {
 ---
 
 <Layout
-  title="Umzugsservice in Kirn – Privatumzug, Firmenumzug & Seniorenumzug"
-  description="Stressfreier Umzugsservice in Kirn, Bad Kreuznach und Idar-Oberstein: Privatumzüge, Firmenumzüge, Seniorenumzüge, Möbeltransport, Verpackungsservice und Endreinigung. Festpreisgarantie, Halteverbotszone inklusive."
+  title="Umzugsservice Kirn – Privat-, Firmen- & Seniorenumzug"
+  description="Umzugsunternehmen in Kirn, Bad Kreuznach und Idar-Oberstein: Privat-, Firmen- und Seniorenumzüge mit Verpackung, Endreinigung und Halteverbotszone zum Festpreis."
   image={heroImg.src}
   breadcrumbs={[
     { name: 'Start', url: '/' },
     { name: 'Dienstleistungen', url: '/dienstleistungen' },
     { name: 'Umzugsservice', url: PAGE_PATH },
   ]}
-  jsonLd={[serviceLd, faqLd]}
+  jsonLd={[serviceLd, faqLd, webPageLd]}
 >
   <section class="pt-24 pb-12 md:pt-40 md:pb-20 px-6 md:px-24">
     <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs italic">Dienstleistung 03 · Umzugsservice</p>
@@ -122,6 +138,9 @@ const faqLd = {
     </h1>
     <p class="text-lg md:text-2xl text-slate-600 font-medium leading-relaxed max-w-3xl">
       Privat-, Firmen- und Seniorenumzüge in Kirn, Bad Kreuznach und Idar-Oberstein – sowie deutschlandweit. Festpreis, klare Planung, sorgfältige Ausführung.
+    </p>
+    <p class="mt-6 text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400">
+      Von Adam Attar, Inhaber · Zuletzt aktualisiert: <time datetime={isoDate(updated)}>{formatDate(updated)}</time>
     </p>
   </section>
 

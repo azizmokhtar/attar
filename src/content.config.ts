@@ -27,7 +27,7 @@ const blog = defineCollection({
       /** Last meaningful edit — improves freshness signals. */
       updatedDate: z.coerce.date().optional(),
       /** Byline. */
-      author: z.string().default('Attar Dienstleistungen'),
+      author: z.string().default('Adam Attar'),
       /** Eyebrow label / grouping, e.g. "Reinigung". */
       category: z.string().default('Ratgeber'),
       /** Free-text tags for related-content and keyword coverage. */

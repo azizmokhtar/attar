@@ -1,0 +1,194 @@
+---
+// Region page for one city: Reinigung + Hausmeisterservice with genuinely
+// local content. Rule from the seo216 playbook: if a city cannot get a page
+// with its own intro, own object types, own FAQ and an honest note about
+// where we actually sit, it does not get a page at all.
+import Layout from '../layouts/Layout.astro';
+import IndividualOfferCTA from './IndividualOfferCTA.astro';
+import pageDates from '../data/page-dates.json';
+import { formatDate, isoDate } from '../data/blog';
+
+export interface CityData {
+  slug: string;
+  city: string;
+  title: string;
+  description: string;
+  eyebrow: string;
+  h1Top: string;
+  h1Stroke: string;
+  lead: string;
+  /** Honest "where we come from" paragraph: distance, route, response time. */
+  anfahrt: string;
+  /** Two paragraphs on the local situation for cleaning. */
+  reinigung: string[];
+  reinigungObjekte: { h: string; p: string }[];
+  /** Two paragraphs on the local situation for caretaking. */
+  hausmeister: string[];
+  hausmeisterLeistungen: { h: string; p: string }[];
+  stadtteile: string[];
+  nachbarn: { name: string; href?: string }[];
+  faqs: { q: string; a: string }[];
+}
+
+const { data } = Astro.props as { data: CityData };
+
+const SITE_URL = 'https://attardienstleistungen.com';
+const PAGE_PATH = `/dienstleistungen/${data.slug}`;
+const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
+const updated = new Date(pageDates[PAGE_PATH as keyof typeof pageDates]);
+
+const serviceLd = (name: string, serviceType: string, id: string, description: string) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${PAGE_URL}#${id}`,
+  name,
+  serviceType,
+  description,
+  provider: { '@id': `${SITE_URL}/#organization` },
+  areaServed: { '@type': 'City', name: data.city },
+  url: PAGE_URL,
+});
+
+const jsonLd = [
+  serviceLd(`Reinigungsservice ${data.city}`, 'CleaningService', 'reinigung', data.reinigung[0]),
+  serviceLd(`Hausmeisterservice ${data.city}`, 'PropertyMaintenance', 'hausmeister', data.hausmeister[0]),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${PAGE_URL}#faq`,
+    mainEntity: data.faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${PAGE_URL}#webpage`,
+    url: PAGE_URL,
+    inLanguage: 'de-DE',
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    dateModified: isoDate(updated),
+    author: { '@id': `${SITE_URL}/#adam-attar` },
+  },
+];
+---
+
+<Layout
+  title={data.title}
+  description={data.description}
+  breadcrumbs={[
+    { name: 'Start', url: '/' },
+    { name: 'Dienstleistungen', url: '/dienstleistungen' },
+    { name: data.city, url: PAGE_PATH },
+  ]}
+  jsonLd={jsonLd}
+>
+  <section class="pt-24 pb-12 md:pt-40 md:pb-20 px-6 md:px-24">
+    <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs italic">{data.eyebrow}</p>
+    <h1 class="text-[clamp(1.8rem,7vw,6rem)] font-black uppercase leading-[0.9] mb-6 md:mb-8 text-[#0d1b2a]">
+      {data.h1Top}<br />
+      <span class="stroke-dark">{data.h1Stroke}</span>
+    </h1>
+    <p class="text-lg md:text-2xl text-slate-600 font-medium leading-relaxed max-w-3xl">{data.lead}</p>
+    <p class="mt-6 text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400">
+      Von Adam Attar, Inhaber · Zuletzt aktualisiert: <time datetime={isoDate(updated)}>{formatDate(updated)}</time>
+    </p>
+  </section>
+
+  <section class="px-6 md:px-24 py-12 md:py-20 bg-slate-50 border-y border-slate-100">
+    <div class="grid md:grid-cols-12 gap-8 md:gap-16">
+      <div class="md:col-span-4">
+        <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-2">Anfahrt & Erreichbarkeit</p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase leading-[0.95] text-[#0d1b2a]">Von Kirn nach {data.city}.</h2>
+      </div>
+      <div class="md:col-span-8 space-y-5 text-base md:text-lg text-slate-600 font-medium leading-relaxed max-w-3xl">
+        <p set:html={data.anfahrt} />
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24">
+    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-3">Reinigung</p>
+    <h2 class="text-3xl md:text-5xl font-black uppercase mb-8 text-[#0d1b2a] max-w-3xl">Reinigungsservice in {data.city}.</h2>
+    <div class="space-y-5 text-base md:text-lg text-slate-600 font-medium leading-relaxed max-w-3xl mb-10 md:mb-14">
+      {data.reinigung.map((p) => <p set:html={p} />)}
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {data.reinigungObjekte.map((i, idx) => (
+        <div class="bg-white border border-slate-200 p-6 md:p-8 hover:border-brand transition-colors">
+          <p class="text-brand font-black italic text-3xl md:text-4xl leading-none mb-4">0{idx + 1}</p>
+          <h3 class="text-base md:text-lg font-black uppercase mb-3 text-[#0d1b2a] leading-tight">{i.h}</h3>
+          <p class="text-sm text-slate-600 font-medium leading-relaxed">{i.p}</p>
+        </div>
+      ))}
+    </div>
+    <p class="mt-8 text-sm text-slate-500 font-medium">
+      Alle Reinigungsarten, Ablauf und Qualitätskontrolle: <a href="/dienstleistungen/reinigungsservice" class="text-brand font-bold hover:text-[#0d1b2a] transition-colors">Reinigungsservice im Überblick</a>.
+    </p>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24 bg-[#0d1b2a] text-white">
+    <p class="text-brand text-[10px] md:text-xs font-bold uppercase tracking-widest italic mb-3">Hausmeisterservice</p>
+    <h2 class="text-3xl md:text-5xl font-black uppercase mb-8 max-w-3xl">Hausmeisterservice in {data.city}.</h2>
+    <div class="space-y-5 text-base md:text-lg text-slate-300 font-medium leading-relaxed max-w-3xl mb-10 md:mb-14">
+      {data.hausmeister.map((p) => <p set:html={p} />)}
+    </div>
+    <div class="grid sm:grid-cols-2 gap-6 md:gap-8 max-w-5xl">
+      {data.hausmeisterLeistungen.map((i) => (
+        <div>
+          <p class="text-brand font-black italic text-2xl mb-2 leading-none">{i.h}</p>
+          <p class="text-sm md:text-base font-medium leading-relaxed text-slate-300">{i.p}</p>
+        </div>
+      ))}
+    </div>
+    <p class="mt-10 text-sm text-slate-400 font-medium">
+      Leistungsverzeichnis, Reaktionszeiten und Winterdienst im Detail: <a href="/dienstleistungen/hausmeisterservice" class="text-brand font-bold hover:text-white transition-colors">Hausmeisterservice im Überblick</a>.
+    </p>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24 bg-slate-50">
+    <div class="grid md:grid-cols-12 gap-8 md:gap-16">
+      <div class="md:col-span-4">
+        <p class="text-brand text-[10px] md:text-xs font-bold uppercase tracking-widest italic mb-3">Einsatzgebiet</p>
+        <h2 class="text-3xl md:text-4xl font-black uppercase leading-[0.95] text-[#0d1b2a]">Stadtteile & Umgebung.</h2>
+      </div>
+      <div class="md:col-span-8">
+        <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">Stadtteile von {data.city}</p>
+        <ul class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs md:text-sm font-bold uppercase tracking-wider text-[#0d1b2a] mb-8">
+          {data.stadtteile.map((s) => (
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>{s}</li>
+          ))}
+        </ul>
+        <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">Ebenfalls im Einsatzgebiet</p>
+        <ul class="flex flex-wrap gap-x-6 gap-y-2 text-xs md:text-sm font-bold uppercase tracking-wider text-[#0d1b2a]">
+          {data.nachbarn.map((n) => (
+            <li>{n.href ? <a href={n.href} class="hover:text-brand transition-colors underline decoration-brand/40 underline-offset-4">{n.name}</a> : n.name}</li>
+          ))}
+        </ul>
+        <p class="mt-8 text-sm text-slate-600 font-medium leading-relaxed max-w-2xl">
+          Auch <a href="/dienstleistungen/umzugsservice" class="text-brand font-bold hover:text-[#0d1b2a] transition-colors">Umzüge</a>, <a href="/dienstleistungen/gartenservice" class="text-brand font-bold hover:text-[#0d1b2a] transition-colors">Gartenpflege</a> und <a href="/dienstleistungen/entruempelung" class="text-brand font-bold hover:text-[#0d1b2a] transition-colors">Entrümpelungen</a> übernehmen wir in {data.city}, gern kombiniert in einem Auftrag.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24">
+    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-3">Häufige Fragen</p>
+    <h2 class="text-3xl md:text-5xl font-black uppercase mb-10 md:mb-14 text-[#0d1b2a] max-w-3xl">FAQ – {data.city}.</h2>
+    <div class="divide-y divide-slate-200 border-y border-slate-200 max-w-4xl">
+      {data.faqs.map((f) => (
+        <details class="group py-5 md:py-6">
+          <summary class="flex justify-between items-center cursor-pointer list-none gap-6">
+            <h3 class="text-base md:text-lg font-black uppercase text-[#0d1b2a] leading-snug">{f.q}</h3>
+            <span class="text-brand font-black text-2xl shrink-0 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="text-sm md:text-base text-slate-600 font-medium leading-relaxed mt-4 max-w-3xl">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <IndividualOfferCTA />
+</Layout>

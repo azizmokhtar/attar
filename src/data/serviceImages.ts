@@ -6,10 +6,12 @@ import reinigung from '../assets/services/reinigung.jpg';
 import hausmeister from '../assets/services/hausmeister.jpg';
 import umzug from '../assets/services/umzug.jpg';
 import garten from '../assets/services/garten.jpg';
+import entruempelung from '../assets/services/entruempelung.jpg';
 
 export const serviceImages: Record<string, ImageMetadata> = {
   reinigungsservice: reinigung,
   hausmeisterservice: hausmeister,
   umzugsservice: umzug,
   gartenservice: garten,
+  entruempelung,
 };

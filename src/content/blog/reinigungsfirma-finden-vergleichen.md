@@ -2,7 +2,7 @@
 title: "Reinigungsfirma finden: Anbieter richtig vergleichen & auswählen"
 description: "So finden Sie die passende Reinigungsfirma: Leistungen, Kosten und Qualitätsmerkmale im Vergleich – inklusive Checkliste und Festpreis-Tipp von Attar Dienstleistungen."
 pubDate: 2026-06-22
-author: "Attar Dienstleistungen"
+author: "Adam Attar"
 category: "Reinigung"
 tags: ["Reinigungsfirma", "Gebäudereinigung", "Kosten", "Checkliste"]
 heroImage: "./images/reinigungsfirma-finden-vergleichen.jpg"

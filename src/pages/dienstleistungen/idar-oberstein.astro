@@ -1,0 +1,76 @@
+---
+export const prerender = true;
+
+import CityServicePage from '../../components/CityServicePage.astro';
+import type { CityData } from '../../components/CityServicePage.astro';
+
+const data: CityData = {
+  slug: 'idar-oberstein',
+  city: 'Idar-Oberstein',
+  title: 'Reinigung & Hausmeisterservice Idar-Oberstein | Attar Dienstleistungen',
+  description:
+    'Reinigungsfirma und Hausmeisterservice für Idar-Oberstein: Büros, Werkstätten der Schmuckbranche, Ladenlokale, WEG-Objekte in Hanglage und Winterdienst. Festpreis nach Begehung.',
+  eyebrow: 'Einsatzgebiet · Idar-Oberstein',
+  h1Top: 'Reinigung & Hausmeister',
+  h1Stroke: 'in Idar-Oberstein.',
+  lead:
+    'Unterhaltsreinigung, Treppenhausreinigung und Hausmeisterservice für Betriebe, Ladenlokale, Hausverwaltungen und Eigentümer in Idar-Oberstein, von Idar über Oberstein bis in die Stadtteile im Tal und am Hang. Festpreis nach Begehung.',
+  anfahrt:
+    'Von unserem Sitz in Kirn sind es etwa 20 Kilometer naheaufwärts über die B41 bis Oberstein, rund 25 Minuten Fahrzeit. Damit ist Idar-Oberstein für uns näher als Bad Kreuznach, und Einsätze am selben Tag sind bei freien Kapazitäten möglich. Wir bündeln Touren für Kunden in Idar, Oberstein, Tiefenstein und Algenrodt, sodass die Anfahrt im Festpreis aufgeht.',
+  reinigung: [
+    'Idar-Oberstein ist geprägt von der Edelstein- und Schmuckbranche, von Einzelhandel entlang der Hauptstraße in Oberstein und der Fußgängerzone in Idar sowie von Wohnbebauung in steiler Hanglage. Für uns bedeutet das: Werkstätten und Ateliers, in denen Staub und Schleifrückstände anfallen, Ladenlokale mit Glasfronten, Büros in Verwaltungs- und Industriegebieten wie Nahbollenbach und Wohnhäuser, deren Treppenhäuser oft über mehrere Ebenen laufen.',
+    'In Betrieben der Schmuckbranche stimmen wir Reinigungsmittel und Ablauf mit Ihnen ab, damit weder Werkstücke noch empfindliche Oberflächen leiden. Ladenlokale reinigen wir vor Öffnung mit Schwerpunkt auf Schaufenster und Eingang. Für Hausverwaltungen übernehmen wir Treppenhäuser nach Leistungsverzeichnis. Wie oft welche Fläche gereinigt werden sollte, erklärt unser Ratgeber zur <a href="/blog/unterhaltsreinigung-gewerbe-wie-oft" class="text-brand font-bold hover:text-[#0d1b2a] transition-colors">Unterhaltsreinigung im Gewerbe</a>.',
+  ],
+  reinigungObjekte: [
+    { h: 'Werkstätten & Ateliers', p: 'Reinigung in Schleifereien, Goldschmieden und Ateliers mit abgestimmten Mitteln und Rücksicht auf Werkstücke, Maschinen und Staubkonzepte.' },
+    { h: 'Ladenlokale & Schaufenster', p: 'Reinigung vor Ladenöffnung in Oberstein und Idar, inklusive Glasfronten, Eingangsbereich und Verkaufsflächen.' },
+    { h: 'Büros & Verwaltungen', p: 'Regelmäßige Unterhaltsreinigung in Büroetagen und Gewerbegebieten wie Nahbollenbach, nach Plan und mit fester Reinigungskraft.' },
+    { h: 'Treppenhäuser in Hanglage', p: 'Wohnhäuser mit vielen Ebenen und Außentreppen: Treppenhausreinigung inklusive Eingang, Kellerabgang und Hofzugang.' },
+    { h: 'Grund- und Endreinigung', p: 'Nach Mieterwechsel, Geschäftsaufgabe oder Renovierung: einmalige Grundreinigung inklusive Fenster und Rahmen.' },
+    { h: 'Bauendreinigung', p: 'Übergabefertige Reinigung nach Neubau oder Sanierung für Bauträger und Handwerksbetriebe im Raum Idar-Oberstein.' },
+  ],
+  hausmeister: [
+    'Hausmeisterservice in Idar-Oberstein heißt oft: Treppen, Hänge und Außenflächen. Viele Wohnanlagen liegen am Hang, mit Außentreppen, Stützmauern und Zuwegen, die im Winter und bei Laub schnell zur Gefahrenstelle werden. Wir übernehmen Kontrollgänge, Kleinreparaturen, Müllplatzpflege und Außenanlagen und melden Mängel an die Verwaltung, bevor daraus Schäden werden.',
+    'Beim Winterdienst gilt die Satzung der Stadt Idar-Oberstein, die die Räum- und Streupflicht auf die Anlieger überträgt. Gerade bei steilen Gehwegen und Treppen dokumentieren wir jeden Einsatz mit Uhrzeit. Was Eigentümer und WEG beachten müssen, steht in unserem Ratgeber <a href="/blog/winterdienst-pflicht-rheinland-pfalz" class="text-brand font-bold hover:text-white transition-colors">Winterdienst-Pflicht in Rheinland-Pfalz</a>.',
+  ],
+  hausmeisterLeistungen: [
+    { h: 'Objektbetreuung', p: 'Kontrollgänge in Wohnanlagen und Gewerbeobjekten, Mängelmeldung, Kleinreparaturen an Türen, Beleuchtung und Beschlägen.' },
+    { h: 'Winterdienst am Hang', p: 'Räumen und Streuen von Außentreppen, Zuwegen und Gehwegen nach städtischer Satzung, mit Einsatzprotokoll.' },
+    { h: 'Außenanlagen', p: 'Hecken, Rasen, Laub und Böschungspflege an Wohnanlagen, damit Zuwege frei und sicher bleiben.' },
+    { h: 'Notfall & Schlüssel', p: 'Erreichbarkeit bei Wasserschäden oder Sturm, Schlüsselverwaltung und Übergaben bei Mieterwechsel.' },
+  ],
+  stadtteile: ['Idar', 'Oberstein', 'Tiefenstein', 'Algenrodt', 'Göttschied', 'Nahbollenbach', 'Weierbach', 'Kirchenbollenbach', 'Enzweiler', 'Regulshausen'],
+  nachbarn: [
+    { name: 'Kirn', href: '/dienstleistungen' },
+    { name: 'Bad Kreuznach', href: '/dienstleistungen/bad-kreuznach' },
+    { name: 'Herrstein' },
+    { name: 'Fischbach' },
+    { name: 'Hoppstädten-Weiersbach' },
+    { name: 'Birkenfeld' },
+  ],
+  faqs: [
+    {
+      q: 'Reinigen Sie auch Werkstätten der Schmuck- und Edelsteinbranche?',
+      a: 'Ja. Wir stimmen Reinigungsmittel, Ablauf und Zeiten mit Ihnen ab, damit Werkstücke, Maschinen und empfindliche Oberflächen nicht beeinträchtigt werden. Auf Wunsch reinigen wir außerhalb der Produktionszeiten.',
+    },
+    {
+      q: 'Wer muss in Idar-Oberstein Gehwege und Außentreppen im Winter räumen?',
+      a: 'Die Stadt überträgt die Räum- und Streupflicht per Satzung auf die Anlieger. Bei Wohnanlagen ist das die WEG beziehungsweise der Eigentümer. Wir übernehmen den Winterdienst inklusive Einsatzprotokoll. Die genauen Zeiten stehen in der aktuellen Satzung.',
+    },
+    {
+      q: 'Wie weit ist Kirn von Idar-Oberstein entfernt und was bedeutet das für die Reaktionszeit?',
+      a: 'Etwa 20 Kilometer über die B41, rund 25 Minuten. Für Vertragskunden legen wir Reaktionszeiten schriftlich fest, die diese Fahrzeit einrechnen. Bei Notfällen sichern wir zuerst telefonisch.',
+    },
+    {
+      q: 'Übernehmen Sie Treppenhäuser mit vielen Ebenen und Außentreppen?',
+      a: 'Ja, das ist in Idar-Oberstein der Normalfall. Wir erfassen bei der Begehung alle Ebenen, Außentreppen und Zuwege und nennen einen Festpreis für das gesamte Objekt. Preise auf Anfrage.',
+    },
+    {
+      q: 'Können Sie Reinigung und Hausmeisterservice für ein Objekt kombinieren?',
+      a: 'Ja. Viele Hausverwaltungen beauftragen Treppenhausreinigung, Winterdienst und Außenanlagen zusammen. Sie haben dann eine Ansprechperson, ein Leistungsverzeichnis und eine Rechnung.',
+    },
+  ],
+};
+---
+
+<CityServicePage data={data} />

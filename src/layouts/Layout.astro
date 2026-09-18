@@ -49,6 +49,22 @@ const ogImageUrl = new URL(image, SITE_URL).href;
 const fullTitle = title.includes('Attar') ? title : `${title} | ${SITE_NAME}`;
 const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 
+// Public profiles of the company. Add URLs as they are created; the array is
+// emitted as `sameAs` on the Organization and omitted while empty.
+const SAME_AS: string[] = [];
+
+// Owner as a first-class entity — used as author on blog posts (E-E-A-T).
+const founderLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	'@id': `${SITE_URL}/#adam-attar`,
+	name: 'Adam Attar',
+	jobTitle: 'Inhaber',
+	worksFor: { '@id': `${SITE_URL}/#organization` },
+	url: `${SITE_URL}/ueber-uns`,
+	knowsAbout: ['Gebäudereinigung', 'Hausmeisterservice', 'Umzüge', 'Gartenpflege', 'Entrümpelung'],
+};
+
 const organizationLd = {
 	'@context': 'https://schema.org',
 	'@type': ['Organization', 'LocalBusiness', 'ProfessionalService'],
@@ -65,7 +81,14 @@ const organizationLd = {
 	image: `${SITE_URL}/og-default.jpg`,
 	telephone: COMPANY_PHONE_E164,
 	email: COMPANY_EMAIL,
-	founder: { '@type': 'Person', name: 'Adam Attar' },
+	founder: { '@id': `${SITE_URL}/#adam-attar` },
+	priceRange: '€€',
+	currenciesAccepted: 'EUR',
+	paymentAccepted: 'Überweisung, Bar, Rechnung',
+	geo: { '@type': 'GeoCoordinates', latitude: 49.7869, longitude: 7.4581 },
+	hasMap: 'https://www.google.com/maps/search/?api=1&query=Attar+Dienstleistungen+Nachtigallenweg+10+55606+Kirn',
+	...(SAME_AS.length ? { sameAs: SAME_AS } : {}),
+	knowsLanguage: ['de', 'en'],
 	address: {
 		'@type': 'PostalAddress',
 		streetAddress: 'Nachtigallenweg 10',
@@ -195,6 +218,7 @@ const extraJsonLd = jsonLd
 
 		{/* JSON-LD: global Organization + WebSite */}
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(organizationLd)} />
+		<script type="application/ld+json" is:inline set:html={JSON.stringify(founderLd)} />
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(websiteLd)} />
 		{breadcrumbLd && (
 			<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbLd)} />
@@ -344,7 +368,7 @@ const extraJsonLd = jsonLd
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 md:gap-8">
 
     <div class="sm:col-span-2 md:col-span-4">
-      <h2 class="text-3xl md:text-4xl font-black tracking-tighter mb-4 text-white italic">ATTAR.</h2>
+      <p class="text-3xl md:text-4xl font-black tracking-tighter mb-4 text-white italic" aria-hidden="true">ATTAR.</p>
       <p class="text-xs font-bold uppercase tracking-widest leading-relaxed text-slate-400 max-w-[280px]">
         Präzision in der Ausführung.<br/> Verlässlichkeit im Service.
       </p>
@@ -356,6 +380,7 @@ const extraJsonLd = jsonLd
         <li><a href="/dienstleistungen" class="hover:text-brand transition-colors">Dienstleistungen</a></li>
         <li><a href="/ueber-uns" class="hover:text-brand transition-colors">Über uns</a></li>
         <li><a href="/blog" class="hover:text-brand transition-colors">Ratgeber</a></li>
+        <li><a href="/preise" class="hover:text-brand transition-colors">Preise</a></li>
         <li><a href="/karriere" class="hover:text-brand transition-colors">Karriere</a></li>
         <li><a href="/kontakt" class="hover:text-brand transition-colors">Angebot anfragen</a></li>
       </ul>
@@ -383,9 +408,13 @@ const extraJsonLd = jsonLd
       <p class="text-[10px] font-bold uppercase text-brand mb-5 tracking-[0.2em]">Standort</p>
       <address class="not-italic text-xs font-bold uppercase tracking-widest leading-loose">
         Attar Dienstleistungen<br />
+        Nachtigallenweg 10<br />
         55606 Kirn<br/>
         Rheinland-Pfalz
       </address>
+      <p class="mt-4 text-[9px] font-bold uppercase tracking-[0.15em] text-slate-500 leading-loose">
+        Einsatzgebiet: Kirn · <a href="/dienstleistungen/bad-kreuznach" class="hover:text-white transition-colors">Bad Kreuznach</a> · <a href="/dienstleistungen/idar-oberstein" class="hover:text-white transition-colors">Idar-Oberstein</a> · Bad Sobernheim
+      </p>
     </div>
   </div>
 

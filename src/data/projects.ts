@@ -9,6 +9,7 @@ export const SERVICE_LABELS = {
   hausmeister: 'Hausmeisterservice',
   umzug: 'Umzugsservice',
   garten: 'Gartenservice',
+  entruempelung: 'Entrümpelung',
 } as const;
 
 export type ServiceSlug = keyof typeof SERVICE_LABELS;
@@ -38,7 +39,7 @@ export const projects: Project[] = [
   {
     slug: 'entruempelung-wohnung',
     title: 'Wohnungsauflösung & Entrümpelung',
-    service: 'umzug',
+    service: 'entruempelung',
     description:
       'Komplette Wohnungsauflösung inklusive Räumung, fachgerechter Entsorgung und besenreiner Übergabe an die Hausverwaltung. Diskret, strukturiert und in vereinbartem Zeitfenster abgeschlossen.',
     location: 'Kirn',

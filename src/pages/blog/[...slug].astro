@@ -39,7 +39,7 @@ const articleLd = {
   inLanguage: 'de-DE',
   datePublished: isoDate(post.data.pubDate),
   dateModified: isoDate(post.data.updatedDate ?? post.data.pubDate),
-  author: { '@type': 'Organization', name: post.data.author, '@id': `${SITE_URL}/#organization` },
+  author: { '@type': 'Person', name: post.data.author, '@id': `${SITE_URL}/#adam-attar`, url: `${SITE_URL}/ueber-uns` },
   publisher: { '@id': `${SITE_URL}/#organization` },
   mainEntityOfPage: { '@type': 'WebPage', '@id': url },
   url,
@@ -92,6 +92,12 @@ const jsonLd = faqLd ? [articleLd, faqLd] : articleLd;
         <span>{post.data.author}</span>
         <span class="text-slate-300">·</span>
         <time datetime={isoDate(post.data.pubDate)}>{formatDate(post.data.pubDate)}</time>
+        {post.data.updatedDate && (
+          <>
+            <span class="text-slate-300">·</span>
+            <span>Aktualisiert: <time datetime={isoDate(post.data.updatedDate)}>{formatDate(post.data.updatedDate)}</time></span>
+          </>
+        )}
         <span class="text-slate-300">·</span>
         <span>{minutes} Min. Lesezeit</span>
       </div>
@@ -118,6 +124,16 @@ const jsonLd = faqLd ? [articleLd, faqLd] : articleLd;
       <div class="prose-attar max-w-3xl mx-auto">
         <Content />
       </div>
+      <aside class="max-w-3xl mx-auto mt-12 md:mt-16 border-t border-slate-200 pt-8 flex flex-col sm:flex-row gap-4 sm:gap-8">
+        <p class="text-brand font-bold uppercase tracking-[0.3em] text-[10px] md:text-xs italic shrink-0">Über den Autor</p>
+        <div>
+          <p class="font-black uppercase text-[#0d1b2a] mb-1">{post.data.author}, Inhaber von Attar Dienstleistungen</p>
+          <p class="text-sm text-slate-600 font-medium leading-relaxed">
+            Adam Attar führt Attar Dienstleistungen in Kirn und steht selbst auf den Baustellen, in den Treppenhäusern und Gärten der Region. Die Ratgeber entstehen aus der täglichen Arbeit für Privatkunden, Hausverwaltungen und Gewerbebetriebe zwischen Bad Kreuznach und Idar-Oberstein.
+            <a href="/ueber-uns" class="text-brand font-bold hover:text-[#0d1b2a] transition-colors">Mehr über uns</a>
+          </p>
+        </div>
+      </aside>
     </div>
 
     {/* FAQ */}

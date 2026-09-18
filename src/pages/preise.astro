@@ -1,0 +1,157 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+import IndividualOfferCTA from '../components/IndividualOfferCTA.astro';
+import pageDates from '../data/page-dates.json';
+import { formatDate, isoDate } from '../data/blog';
+
+const SITE_URL = 'https://attardienstleistungen.com';
+const PAGE_PATH = '/preise';
+const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
+const updated = new Date(pageDates[PAGE_PATH as keyof typeof pageDates]);
+
+const services = [
+  {
+    name: 'Reinigungsservice',
+    href: '/dienstleistungen/reinigungsservice',
+    basis: 'Festpreis pro Einsatz oder Monatspauschale',
+    faktoren: ['Fläche in m² und Raumaufteilung', 'Reinigungsart: Unterhalt, Grund, Bauschluss, Treppenhaus', 'Intervall und Uhrzeit', 'Verschmutzungsgrad und Bodenbeläge'],
+  },
+  {
+    name: 'Hausmeisterservice',
+    href: '/dienstleistungen/hausmeisterservice',
+    basis: 'Fester Monatspreis nach Leistungsverzeichnis',
+    faktoren: ['Anzahl Wohneinheiten und Außenflächen', 'Frequenz der Kontrollgänge', 'Winterdienst ja/nein', 'Reaktionszeiten und Bereitschaft'],
+  },
+  {
+    name: 'Umzugsservice',
+    href: '/dienstleistungen/umzugsservice',
+    basis: 'Festpreis nach Besichtigung',
+    faktoren: ['Umzugsvolumen in m³', 'Etagen, Aufzug, Tragewege', 'Entfernung und Halteverbotszone', 'Verpackung, Montage, Endreinigung'],
+  },
+  {
+    name: 'Gartenservice',
+    href: '/dienstleistungen/gartenservice',
+    basis: 'Festpreis pro Einsatz oder Jahresvertrag',
+    faktoren: ['Grundstücksgröße und Bewuchs', 'Heckenlänge und -höhe', 'Entsorgung des Grünschnitts', 'Saisonale Leistungen wie Laub und Winterschnitt'],
+  },
+  {
+    name: 'Entrümpelung',
+    href: '/dienstleistungen/entruempelung',
+    basis: 'Festpreis nach Besichtigung, inklusive Entsorgung',
+    faktoren: ['Volumen in m³ und Etage', 'Anteil Sondermüll und Elektrogeräte', 'Wertanrechnung verwertbarer Gegenstände', 'Endreinigung und Zeitdruck'],
+  },
+];
+
+const faqs = [
+  { q: 'Warum stehen keine Preise auf dieser Seite?', a: 'Weil jedes Objekt anders ist. Ein Preis ohne Kenntnis von Fläche, Zustand, Intervall und Anfahrt wäre entweder zu hoch oder nicht haltbar. Wir nennen Ihnen nach einer kurzen Beschreibung oder Begehung einen verbindlichen Festpreis, den wir dann auch einhalten.' },
+  { q: 'Ist die Besichtigung kostenlos?', a: 'Ja. Besichtigung, Beratung und Angebot sind für Sie kostenlos und unverbindlich, in Kirn, Bad Kreuznach, Idar-Oberstein und im gesamten Landkreis Bad Kreuznach.' },
+  { q: 'Wie schnell bekomme ich ein Angebot?', a: 'Bei einfachen Anfragen mit klaren Angaben meist innerhalb von 24 Stunden. Nach einer Begehung erhalten Sie das schriftliche Festpreisangebot in der Regel innerhalb von zwei Werktagen.' },
+  { q: 'Gibt es versteckte Kosten oder Anfahrtspauschalen?', a: 'Nein. Der Festpreis enthält Anfahrt, Material, Geräte und bei Entrümpelungen die Entsorgung. Zusatzleistungen werden vorher besprochen und schriftlich ergänzt.' },
+  { q: 'Bekommen Hausverwaltungen und Gewerbekunden Rahmenverträge?', a: 'Ja. Für wiederkehrende Leistungen wie Treppenhausreinigung, Hausmeisterservice oder Gartenpflege erstellen wir Monats- oder Jahresverträge mit Leistungsverzeichnis, die sich für die Betriebskostenabrechnung eignen.' },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${PAGE_URL}#faq`,
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+const webPageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${PAGE_URL}#webpage`,
+  url: PAGE_URL,
+  inLanguage: 'de-DE',
+  isPartOf: { '@id': `${SITE_URL}/#website` },
+  dateModified: isoDate(updated),
+  author: { '@id': `${SITE_URL}/#adam-attar` },
+};
+---
+
+<Layout
+  title="Preise – Festpreis auf Anfrage | Attar Dienstleistungen Kirn"
+  description="Was kostet Reinigung, Hausmeisterservice, Umzug, Garten oder Entrümpelung in Kirn? Preise auf Anfrage: Festpreis nach kostenloser Begehung, ohne versteckte Posten."
+  breadcrumbs={[
+    { name: 'Start', url: '/' },
+    { name: 'Preise', url: PAGE_PATH },
+  ]}
+  jsonLd={[faqLd, webPageLd]}
+>
+  <section class="pt-24 pb-12 md:pt-40 md:pb-20 px-6 md:px-24">
+    <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs italic">Preise</p>
+    <h1 class="text-[clamp(2rem,8vw,6.5rem)] font-black uppercase leading-[0.9] mb-6 md:mb-8 text-[#0d1b2a]">
+      Festpreis<br />
+      <span class="stroke-dark">auf Anfrage.</span>
+    </h1>
+    <p class="text-lg md:text-2xl text-slate-600 font-medium leading-relaxed max-w-3xl">
+      Unsere Preise für Reinigung, Hausmeisterservice, Umzug, Gartenpflege und Entrümpelung in Kirn und Umgebung nennen wir auf Anfrage: als verbindlichen Festpreis nach kostenloser Begehung, ohne Stundenrisiko und ohne versteckte Posten.
+    </p>
+    <p class="mt-6 text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400">
+      Von Adam Attar, Inhaber · Zuletzt aktualisiert: <time datetime={isoDate(updated)}>{formatDate(updated)}</time>
+    </p>
+  </section>
+
+  <section class="px-6 md:px-24 py-12 md:py-20 bg-slate-50 border-y border-slate-100">
+    <div class="grid md:grid-cols-12 gap-8 md:gap-16">
+      <div class="md:col-span-4">
+        <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-2">So kommt Ihr Preis zustande</p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase leading-[0.95] text-[#0d1b2a]">Drei Schritte zum Festpreis.</h2>
+      </div>
+      <ol class="md:col-span-8 space-y-6 text-base md:text-lg text-slate-600 font-medium leading-relaxed max-w-3xl list-none">
+        <li class="flex gap-5"><span class="text-brand font-black italic text-3xl leading-none shrink-0">01</span><span><strong class="text-[#0d1b2a]">Anfrage.</strong> Sie beschreiben Objekt, Leistung und Wunschtermin über das <a href="/kontakt" class="text-brand font-bold hover:text-[#0d1b2a] transition-colors">Kontaktformular</a>, per WhatsApp oder Telefon.</span></li>
+        <li class="flex gap-5"><span class="text-brand font-black italic text-3xl leading-none shrink-0">02</span><span><strong class="text-[#0d1b2a]">Begehung.</strong> Bei größeren oder wiederkehrenden Aufträgen sehen wir uns das Objekt kostenlos an und klären Details vor Ort.</span></li>
+        <li class="flex gap-5"><span class="text-brand font-black italic text-3xl leading-none shrink-0">03</span><span><strong class="text-[#0d1b2a]">Festpreis.</strong> Sie erhalten ein schriftliches Angebot mit Leistungsumfang, Intervall und Gesamtpreis. Der Preis gilt, solange sich der Auftrag nicht ändert.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24">
+    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-3">Preisfaktoren</p>
+    <h2 class="text-3xl md:text-5xl font-black uppercase mb-10 md:mb-14 text-[#0d1b2a] max-w-3xl">Was den Preis je Leistung bestimmt.</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-sm md:text-base border-collapse min-w-[640px]">
+        <thead>
+          <tr class="border-b-2 border-[#0d1b2a] text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500">
+            <th class="py-3 pr-6">Leistung</th>
+            <th class="py-3 pr-6">Abrechnung</th>
+            <th class="py-3">Preisfaktoren</th>
+          </tr>
+        </thead>
+        <tbody>
+          {services.map((s) => (
+            <tr class="border-b border-slate-200 align-top">
+              <td class="py-4 pr-6 font-black uppercase text-[#0d1b2a]"><a href={s.href} class="hover:text-brand transition-colors">{s.name}</a></td>
+              <td class="py-4 pr-6 text-slate-600 font-medium">{s.basis}</td>
+              <td class="py-4 text-slate-600 font-medium">
+                <ul class="space-y-1">
+                  {s.faktoren.map((f) => <li class="flex gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full mt-2 shrink-0"></span>{f}</li>)}
+                </ul>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-6 text-sm text-slate-500 font-medium max-w-3xl">Alle Preise auf Anfrage. Angebote enthalten Anfahrt, Material und Geräte; bei Entrümpelungen zusätzlich die fachgerechte Entsorgung.</p>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24 bg-slate-50 border-y border-slate-100">
+    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-3">Häufige Fragen</p>
+    <h2 class="text-3xl md:text-5xl font-black uppercase mb-10 md:mb-14 text-[#0d1b2a] max-w-3xl">FAQ – Preise.</h2>
+    <div class="divide-y divide-slate-200 border-y border-slate-200 max-w-4xl">
+      {faqs.map((f) => (
+        <details class="group py-5 md:py-6">
+          <summary class="flex justify-between items-center cursor-pointer list-none gap-6">
+            <h3 class="text-base md:text-lg font-black uppercase text-[#0d1b2a] leading-snug">{f.q}</h3>
+            <span class="text-brand font-black text-2xl shrink-0 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="text-sm md:text-base text-slate-600 font-medium leading-relaxed mt-4 max-w-3xl">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <IndividualOfferCTA />
+</Layout>

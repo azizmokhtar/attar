@@ -2,7 +2,7 @@
 title: "Unterhaltsreinigung im Gewerbe: Wie oft ist sinnvoll?"
 description: "Täglich, wöchentlich oder monatlich? So finden Sie das richtige Reinigungsintervall für Büro, Praxis oder Gewerbeobjekt – mit klaren Empfehlungen von Attar Dienstleistungen."
 pubDate: 2026-06-10
-author: "Attar Dienstleistungen"
+author: "Adam Attar"
 category: "Reinigung"
 tags: ["Unterhaltsreinigung", "Büroreinigung", "Gewerbe", "Reinigungsintervall"]
 heroImage: "./images/unterhaltsreinigung-gewerbe.jpg"

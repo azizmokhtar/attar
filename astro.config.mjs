@@ -9,6 +9,11 @@ import sitemap from '@astrojs/sitemap';
 // Build a { slug -> ISO date } map from blog frontmatter so each post's
 // sitemap <lastmod> reflects when it was actually written/updated, not the
 // build time. Uses updatedDate if present, otherwise pubDate.
+// Hand-maintained last-edit dates for static pages (src/data/page-dates.json).
+// Shared with the "Zuletzt aktualisiert" line on the pages themselves, so the
+// sitemap never claims a freshness the page doesn't show.
+const pageDates = JSON.parse(readFileSync(fileURLToPath(new URL('./src/data/page-dates.json', import.meta.url)), 'utf-8'));
+
 const blogDir = fileURLToPath(new URL('./src/content/blog', import.meta.url));
 const blogLastmod = {};
 for (const file of readdirSync(blogDir)) {
@@ -25,6 +30,7 @@ for (const file of readdirSync(blogDir)) {
 export default defineConfig({
   site: 'https://attardienstleistungen.com',
   output: 'server',
+  trailingSlash: 'never',
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'viewport',
@@ -40,7 +46,6 @@ export default defineConfig({
         !page.includes('/status'),
       changefreq: 'weekly',
       priority: 0.7,
-      lastmod: new Date(),
       i18n: {
         defaultLocale: 'de',
         locales: { de: 'de-DE' },
@@ -58,14 +63,18 @@ export default defineConfig({
         else if (path.startsWith('/blog/')) priority = 0.6;
         else if (['/impressum', '/datenschutz', '/agb'].includes(path)) priority = 0.3;
 
-        // Use the real publish/update date for blog posts.
-        let lastmod = item.lastmod;
+        // Real dates only: blog posts from frontmatter, static pages from
+        // page-dates.json. Pages without a known date get no <lastmod> at all
+        // rather than a fake build timestamp Google would learn to ignore.
+        let lastmod;
         const blogMatch = path.match(/^\/blog\/([^/]+)$/);
         if (blogMatch && blogLastmod[blogMatch[1]]) {
           lastmod = blogLastmod[blogMatch[1]];
+        } else if (pageDates[path || '/']) {
+          lastmod = new Date(pageDates[path || '/']).toISOString();
         }
 
-        return { ...item, url, priority, lastmod };
+        return { ...item, url, priority, ...(lastmod ? { lastmod } : {}) };
       },
     }),
   ],

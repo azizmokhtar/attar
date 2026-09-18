@@ -1,0 +1,76 @@
+---
+export const prerender = true;
+
+import CityServicePage from '../../components/CityServicePage.astro';
+import type { CityData } from '../../components/CityServicePage.astro';
+
+const data: CityData = {
+  slug: 'bad-kreuznach',
+  city: 'Bad Kreuznach',
+  title: 'Reinigung & Hausmeisterservice Bad Kreuznach | Attar Dienstleistungen',
+  description:
+    'Reinigungsfirma und Hausmeisterservice für Bad Kreuznach: Praxen im Kurviertel, Büros, WEG-Objekte und Winterdienst nach städtischer Satzung. Festpreis nach Begehung.',
+  eyebrow: 'Einsatzgebiet · Bad Kreuznach',
+  h1Top: 'Reinigung & Hausmeister',
+  h1Stroke: 'in Bad Kreuznach.',
+  lead:
+    'Unterhaltsreinigung, Treppenhausreinigung und Hausmeisterservice für Praxen, Büros, Hausverwaltungen und Eigentümer in der Kreisstadt Bad Kreuznach und ihren Stadtteilen. Festpreis nach Begehung, ein Ansprechpartner.',
+  anfahrt:
+    'Unser Betrieb sitzt in Kirn, gut 30 Kilometer naheabwärts. Über die B41 sind wir in etwa 35 Minuten in der Innenstadt von Bad Kreuznach, Planig oder Bad Münster am Stein. Für wiederkehrende Aufträge bündeln wir die Touren, sodass Sie keine Anfahrtszuschläge sehen. Für Hausmeisterkunden mit Vertrag gelten feste Reaktionszeiten, die die Fahrzeit bereits einrechnen. Wir sagen Ihnen also lieber ehrlich, dass wir kein Betrieb aus Bad Kreuznach sind, als es zu behaupten.',
+  reinigung: [
+    'Bad Kreuznach ist Kurstadt und Kreisstadt zugleich. Das prägt die Objekte, die wir dort reinigen: Arztpraxen, Physiotherapie und Reha-nahe Einrichtungen rund um das Kurviertel und das Salinental, Kanzleien und Verwaltungsbüros in der Innenstadt sowie Wohnanlagen in Planig, Winzenheim und Bosenheim, die von Hausverwaltungen betreut werden.',
+    'In Praxen arbeiten wir nach Hygieneplan und außerhalb der Sprechzeiten, mit farbcodierten Tüchern und dokumentierten Kontaktflächen. In Büros und Kanzleien richten wir das Intervall nach Publikumsverkehr. Treppenhäuser reinigen wir nach festem Leistungsverzeichnis, das die Hausverwaltung für die Betriebskostenabrechnung verwenden kann. Wie Sie einen Anbieter vergleichen, beschreibt unser Ratgeber <a href="/blog/reinigungsfirma-finden-vergleichen" class="text-brand font-bold hover:text-[#0d1b2a] transition-colors">Reinigungsfirma finden</a>.',
+  ],
+  reinigungObjekte: [
+    { h: 'Praxen & Therapiezentren', p: 'Unterhaltsreinigung nach Hygieneplan außerhalb der Sprechzeiten, inklusive Wartebereich, Behandlungsräume und Sanitär. Dokumentation für Ihre Qualitätssicherung.' },
+    { h: 'Büros & Kanzleien', p: 'Innenstadt, Gewerbegebiete und Verwaltungsnähe: regelmäßige Reinigung nach Reinigungsplan, abends oder frühmorgens, mit fester Reinigungskraft.' },
+    { h: 'Treppenhäuser für WEG', p: 'Wöchentliche oder 14-tägige Treppenhausreinigung in Wohnanlagen von Planig bis Bad Münster am Stein, mit Leistungsverzeichnis für die Hausverwaltung.' },
+    { h: 'Ferien- und Kurgast-Unterkünfte', p: 'Wechselreinigung von Ferienwohnungen und Apartments für Kurgäste, abgestimmt auf An- und Abreisetage.' },
+    { h: 'Grund- und Endreinigung', p: 'Bei Praxisübergabe, Mieterwechsel oder nach Renovierung: einmalige Grundreinigung inklusive Fenster und Rahmen.' },
+    { h: 'Bauendreinigung', p: 'Für Bauträger und Handwerksbetriebe in Bad Kreuznach: übergabefertige Reinigung nach Neubau oder Sanierung.' },
+  ],
+  hausmeister: [
+    'Für Hausverwaltungen und Eigentümergemeinschaften in Bad Kreuznach übernehmen wir die laufende Objektbetreuung: Kontrollgänge, Kleinreparaturen, Müllplatzpflege, Grünflächen und die Koordination von Fachfirmen. Sie erhalten ein Leistungsverzeichnis mit Frequenzen und einem festen Monatspreis, auf Wunsch nach DIN 32736.',
+    'Der Winterdienst richtet sich nach der Satzung der Stadt Bad Kreuznach, die die Räum- und Streupflicht auf die Anlieger überträgt. Wir räumen und streuen innerhalb der vorgeschriebenen Zeiten und dokumentieren jeden Einsatz, damit Eigentümer im Streitfall einen Nachweis haben. Was genau gilt, erklärt unser Ratgeber <a href="/blog/winterdienst-pflicht-rheinland-pfalz" class="text-brand font-bold hover:text-white transition-colors">Winterdienst-Pflicht in Rheinland-Pfalz</a>.',
+  ],
+  hausmeisterLeistungen: [
+    { h: 'Objektbetreuung', p: 'Regelmäßige Kontrollgänge in Wohnanlagen und Gewerbeobjekten, Mängelmeldung an die Verwaltung, kleine Instandsetzungen direkt vor Ort.' },
+    { h: 'Winterdienst', p: 'Räumen und Streuen nach städtischer Satzung, mit Einsatzprotokoll und Bereitschaft bei Wetterwarnung.' },
+    { h: 'Außenanlagen', p: 'Rasen, Hecken, Laub und Hofflächen in Wohnanlagen, sodass der Gesamteindruck des Objekts stimmt.' },
+    { h: 'Notfall & Schlüssel', p: 'Erreichbarkeit bei Wasserschäden oder Sturm, Schlüsselverwaltung und Übergaben bei Mieterwechsel.' },
+  ],
+  stadtteile: ['Innenstadt', 'Kurviertel', 'Bad Münster am Stein-Ebernburg', 'Planig', 'Bosenheim', 'Winzenheim', 'Ippesheim', 'Salinental'],
+  nachbarn: [
+    { name: 'Bad Sobernheim' },
+    { name: 'Kirn', href: '/dienstleistungen' },
+    { name: 'Idar-Oberstein', href: '/dienstleistungen/idar-oberstein' },
+    { name: 'Meisenheim' },
+    { name: 'Rüdesheim an der Nahe' },
+    { name: 'Langenlonsheim' },
+  ],
+  faqs: [
+    {
+      q: 'Reinigen Sie auch Praxen in Bad Kreuznach außerhalb der Sprechzeiten?',
+      a: 'Ja. Praxen und Therapiezentren reinigen wir abends oder frühmorgens nach Ihrem Hygieneplan. Die Reinigungskraft bleibt dieselbe, Kontaktflächen und Sanitärbereiche werden dokumentiert.',
+    },
+    {
+      q: 'Wer ist in Bad Kreuznach für den Winterdienst am Gehweg zuständig?',
+      a: 'Die Stadt überträgt die Räum- und Streupflicht per Satzung auf die Anlieger, also auf Eigentümer beziehungsweise die WEG. Wir übernehmen diese Pflicht im Rahmen des Hausmeisterservices inklusive Einsatzprotokoll. Prüfen Sie die aktuelle Satzung für die genauen Zeiten.',
+    },
+    {
+      q: 'Berechnen Sie Anfahrt von Kirn nach Bad Kreuznach?',
+      a: 'Bei wiederkehrenden Aufträgen ist die Anfahrt im Festpreis enthalten. Bei einmaligen Einsätzen nennen wir den Gesamtpreis vorab, ebenfalls ohne gesonderte Anfahrtspauschale. Preise auf Anfrage.',
+    },
+    {
+      q: 'Können Hausverwaltungen ein Leistungsverzeichnis für die Betriebskostenabrechnung bekommen?',
+      a: 'Ja. Für Treppenhausreinigung und Hausmeisterservice erstellen wir ein Leistungsverzeichnis mit Frequenzen und Verantwortlichkeiten, das sich für die Umlage nach Betriebskostenverordnung verwenden lässt.',
+    },
+    {
+      q: 'Wie schnell sind Sie bei einem Notfall in Bad Kreuznach vor Ort?',
+      a: 'Für Vertragskunden legen wir Reaktionszeiten schriftlich fest. Die Fahrzeit von Kirn ist darin eingerechnet. Bei Wasserschäden oder Sturm sichern wir zuerst telefonisch und koordinieren parallel Fachfirmen.',
+    },
+  ],
+};
+---
+
+<CityServicePage data={data} />

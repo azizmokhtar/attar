@@ -1,0 +1,271 @@
+---
+export const prerender = true;
+
+import Layout from '../../layouts/Layout.astro';
+import IndividualOfferCTA from '../../components/IndividualOfferCTA.astro';
+import ProjectGallery from '../../components/ProjectGallery.astro';
+import { getProjectsByService } from '../../data/projects';
+import { Image } from 'astro:assets';
+import pageDates from '../../data/page-dates.json';
+import { formatDate, isoDate } from '../../data/blog';
+import heroImg from '../../assets/services/entruempelung.jpg';
+
+const projects = getProjectsByService('entruempelung');
+
+const SITE_URL = 'https://attardienstleistungen.com';
+const PAGE_PATH = '/dienstleistungen/entruempelung';
+const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
+const updated = new Date(pageDates[PAGE_PATH as keyof typeof pageDates]);
+
+const included = [
+  { h: 'Wohnungsauflösung', p: 'Komplette Räumung von Wohnungen und Häusern nach Auszug, Umzug ins Pflegeheim oder Nachlass. Sortierung, Abtransport und besenreine Übergabe an Vermieter oder Hausverwaltung.' },
+  { h: 'Haushaltsauflösung & Nachlass', p: 'Diskrete Auflösung ganzer Haushalte. Wertgegenstände, Dokumente und Erinnerungsstücke werden gesichert und an die Angehörigen übergeben, bevor entsorgt wird.' },
+  { h: 'Keller, Dachboden & Garage', p: 'Teilentrümpelungen von Kellerabteilen, Speichern, Garagen und Gartenhäusern. Auch bei schwer zugänglichen Räumen ohne Aufzug.' },
+  { h: 'Gewerbe- und Büroauflösung', p: 'Räumung von Büros, Lagern, Praxen und Ladenflächen inklusive Möbeldemontage, Elektroschrott und Aktenvernichtung nach Absprache.' },
+  { h: 'Messie-Wohnungen & Sonderfälle', p: 'Räumung stark vermüllter Wohnungen mit Schutzausrüstung, Geruchsbeseitigung und anschließender Grundreinigung. Respektvoll und ohne Aufsehen.' },
+  { h: 'Entsorgung & Nachweis', p: 'Trennung nach Abfallarten, Abgabe bei zugelassenen Entsorgern, Sperrmüll, Elektro, Farben und Kühlgeräte. Entsorgungsnachweise auf Wunsch.' },
+];
+
+const process = [
+  { n: '01', h: 'Besichtigung', p: 'Wir sehen uns die Räume an, schätzen Volumen und Sondermüllanteil ein und klären, was erhalten bleiben soll. Kostenlos und unverbindlich.' },
+  { n: '02', h: 'Festpreisangebot', p: 'Sie erhalten einen verbindlichen Festpreis inklusive Entsorgung. Wertanrechnung für verwertbare Gegenstände wird transparent ausgewiesen.' },
+  { n: '03', h: 'Räumung', p: 'Unser Team sortiert, verpackt und transportiert ab. Auf Wunsch stellen wir eine Halteverbotszone und schützen Treppenhaus und Böden.' },
+  { n: '04', h: 'Übergabe', p: 'Besenreine Übergabe, optional mit Endreinigung oder kleinen Renovierungsarbeiten. Sie prüfen das Ergebnis vor Ort mit uns.' },
+];
+
+const faqs = [
+  {
+    q: 'Was kostet eine Entrümpelung in Kirn?',
+    a: 'Den Preis nennen wir nach einer kostenlosen Besichtigung als verbindlichen Festpreis. Er richtet sich nach Volumen, Etage, Zufahrt, Sondermüllanteil und gewünschten Zusatzleistungen. Preise auf Anfrage, ohne versteckte Posten.',
+  },
+  {
+    q: 'Wie schnell können Sie entrümpeln?',
+    a: 'Nach der Besichtigung können wir in der Regel innerhalb weniger Werktage beginnen. Bei Fristen der Hausverwaltung oder einem Wohnungsübergabetermin planen wir rückwärts vom Übergabetag.',
+  },
+  {
+    q: 'Was bedeutet besenreine Übergabe?',
+    a: 'Alle Gegenstände sind entfernt, lose Verschmutzungen sind aufgekehrt, Böden und Flächen sind frei. Eine besenreine Wohnung ist bereit für die Übergabe, aber nicht grundgereinigt. Die Endreinigung bieten wir als Zusatz an.',
+  },
+  {
+    q: 'Was passiert mit brauchbaren Möbeln und Wertgegenständen?',
+    a: 'Wertgegenstände, Dokumente und persönliche Erinnerungsstücke legen wir zur Seite und übergeben sie Ihnen. Gut erhaltene Möbel und Hausrat werden verwertet oder gespendet und auf Ihren Festpreis angerechnet.',
+  },
+  {
+    q: 'Entsorgen Sie auch Sondermüll wie Farben, Elektrogeräte oder Kühlschränke?',
+    a: 'Ja. Wir trennen nach Abfallarten und geben Elektrogeräte, Kühlgeräte, Farben, Lacke und Chemikalien bei zugelassenen Entsorgern ab. Auf Wunsch erhalten Sie Entsorgungsnachweise für Ihre Unterlagen.',
+  },
+  {
+    q: 'In welchen Orten entrümpeln Sie?',
+    a: 'In Kirn, Bad Kreuznach, Idar-Oberstein, Bad Sobernheim und im gesamten Landkreis Bad Kreuznach. Größere Auflösungen übernehmen wir auf Anfrage auch darüber hinaus.',
+  },
+  {
+    q: 'Können Sie Entrümpelung, Endreinigung und Umzug kombinieren?',
+    a: 'Ja, das ist unser Alltag: Wir räumen, reinigen und transportieren aus einer Hand. Sie haben eine Ansprechperson, einen Termin und einen Festpreis.',
+  },
+];
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${PAGE_URL}#service`,
+  name: 'Entrümpelung Kirn',
+  serviceType: 'JunkRemoval',
+  category: 'Entrümpelung und Haushaltsauflösung',
+  description:
+    'Wohnungsauflösung, Haushaltsauflösung, Keller- und Gewerbeentrümpelung mit fachgerechter Entsorgung und besenreiner Übergabe in Kirn, Bad Kreuznach und Idar-Oberstein.',
+  provider: { '@id': `${SITE_URL}/#organization` },
+  areaServed: [
+    { '@type': 'City', name: 'Kirn' },
+    { '@type': 'City', name: 'Bad Kreuznach' },
+    { '@type': 'City', name: 'Idar-Oberstein' },
+    { '@type': 'City', name: 'Bad Sobernheim' },
+    { '@type': 'AdministrativeArea', name: 'Rheinland-Pfalz' },
+  ],
+  url: PAGE_URL,
+  image: new URL(heroImg.src, SITE_URL).href,
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Entrümpelungsleistungen',
+    itemListElement: included.map((i) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: i.h, description: i.p },
+    })),
+  },
+};
+
+const webPageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${PAGE_URL}#webpage`,
+  url: PAGE_URL,
+  inLanguage: 'de-DE',
+  isPartOf: { '@id': `${SITE_URL}/#website` },
+  about: { '@id': `${PAGE_URL}#service` },
+  dateModified: isoDate(updated),
+  author: { '@id': `${SITE_URL}/#adam-attar` },
+  reviewedBy: { '@id': `${SITE_URL}/#adam-attar` },
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${PAGE_URL}#faq`,
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Layout
+  title="Entrümpelung Kirn – Wohnungsauflösung & Haushaltsauflösung"
+  description="Entrümpelung und Wohnungsauflösung in Kirn, Bad Kreuznach und Idar-Oberstein: Sortierung, fachgerechte Entsorgung, besenreine Übergabe. Festpreis nach Besichtigung."
+  image={heroImg.src}
+  breadcrumbs={[
+    { name: 'Start', url: '/' },
+    { name: 'Dienstleistungen', url: '/dienstleistungen' },
+    { name: 'Entrümpelung', url: PAGE_PATH },
+  ]}
+  jsonLd={[serviceLd, faqLd, webPageLd]}
+>
+  <section class="pt-24 pb-12 md:pt-40 md:pb-20 px-6 md:px-24">
+    <p class="text-brand font-bold uppercase tracking-[0.3em] mb-4 text-[10px] md:text-xs italic">Dienstleistung 05 · Entrümpelung</p>
+    <h1 class="text-[clamp(2rem,8vw,6.5rem)] font-black uppercase leading-[0.9] mb-6 md:mb-8 text-[#0d1b2a]">
+      Entrümpelung<br />
+      <span class="stroke-dark">in Kirn & Umgebung.</span>
+    </h1>
+    <p class="text-lg md:text-2xl text-slate-600 font-medium leading-relaxed max-w-3xl">
+      Wohnungsauflösung, Haushaltsauflösung und Gewerbeentrümpelung in Kirn, Bad Kreuznach und Idar-Oberstein. Diskret, mit fachgerechter Entsorgung und besenreiner Übergabe zum Festpreis.
+    </p>
+    <p class="mt-6 text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400">
+      Von Adam Attar, Inhaber · Zuletzt aktualisiert: <time datetime={isoDate(updated)}>{formatDate(updated)}</time>
+    </p>
+  </section>
+
+  <section class="px-6 md:px-24 py-12 md:py-20 bg-slate-50 border-y border-slate-100">
+    <div class="grid md:grid-cols-12 gap-8 md:gap-16">
+      <div class="md:col-span-4">
+        <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-2">Was Sie erhalten</p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase leading-[0.95] text-[#0d1b2a]">Freiraum ohne Aufsehen.</h2>
+      </div>
+      <div class="md:col-span-8 space-y-5 text-base md:text-lg text-slate-600 font-medium leading-relaxed max-w-3xl">
+        <p>
+          Eine Entrümpelung ist selten nur eine logistische Aufgabe. Oft steht ein Nachlass dahinter, ein Umzug ins Pflegeheim oder eine Wohnung, die schneller übergeben werden muss, als die Familie räumen kann. <strong class="text-[#0d1b2a]">Attar Dienstleistungen</strong> übernimmt die komplette Räumung aus Kirn heraus: mit fester Ansprechperson, klarem Ablauf und einem Festpreis, der nach der Besichtigung feststeht.
+        </p>
+        <p>
+          Wir sortieren vor Ort in Wertgegenstände, Verwertbares, Spenden und Entsorgung, transportieren ab und geben die Räume besenrein zurück. Auf Wunsch schließen wir direkt eine <a href="/dienstleistungen/reinigungsservice" class="text-brand font-bold hover:text-[#0d1b2a] transition-colors">Endreinigung</a> an oder übernehmen den <a href="/dienstleistungen/umzugsservice" class="text-brand font-bold hover:text-[#0d1b2a] transition-colors">Umzug</a> der Dinge, die bleiben sollen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24">
+    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-3">Leistungen im Detail</p>
+    <h2 class="text-3xl md:text-5xl font-black uppercase mb-10 md:mb-14 text-[#0d1b2a] max-w-3xl">Das räumen wir für Sie.</h2>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {included.map((i, idx) => (
+        <div class="bg-white border border-slate-200 p-6 md:p-8 hover:border-brand transition-colors">
+          <p class="text-brand font-black italic text-3xl md:text-4xl leading-none mb-4">0{idx + 1}</p>
+          <h3 class="text-base md:text-lg font-black uppercase mb-3 text-[#0d1b2a] leading-tight">{i.h}</h3>
+          <p class="text-sm text-slate-600 font-medium leading-relaxed">{i.p}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24 bg-[#0d1b2a] text-white">
+    <div class="grid md:grid-cols-12 gap-10 md:gap-16">
+      <div class="md:col-span-4">
+        <p class="text-brand text-[10px] md:text-xs font-bold uppercase tracking-widest italic mb-3">Für wen</p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase leading-[0.95]">Angehörige, Verwalter, Betriebe.</h2>
+      </div>
+      <div class="md:col-span-8 grid sm:grid-cols-2 gap-6 md:gap-8 text-slate-300">
+        <div>
+          <p class="text-brand font-black italic text-2xl mb-2 leading-none">Angehörige & Erben</p>
+          <p class="text-sm md:text-base font-medium leading-relaxed">Nachlassauflösung mit Rücksicht: Persönliches wird gesichert, Termine richten sich nach Ihnen, auch wenn Sie nicht vor Ort wohnen.</p>
+        </div>
+        <div>
+          <p class="text-brand font-black italic text-2xl mb-2 leading-none">Hausverwaltungen & Vermieter</p>
+          <p class="text-sm md:text-base font-medium leading-relaxed">Räumung nach Auszug oder Zwangsräumung mit Dokumentation, Entsorgungsnachweis und fester Übergabefrist.</p>
+        </div>
+        <div>
+          <p class="text-brand font-black italic text-2xl mb-2 leading-none">Betreuer & Pflegeeinrichtungen</p>
+          <p class="text-sm md:text-base font-medium leading-relaxed">Wohnungsauflösung beim Wechsel ins Heim, inklusive Transport der Möbel, die mitgehen, und Abmeldung mit dem Vermieter.</p>
+        </div>
+        <div>
+          <p class="text-brand font-black italic text-2xl mb-2 leading-none">Gewerbe</p>
+          <p class="text-sm md:text-base font-medium leading-relaxed">Büro-, Lager- und Ladenauflösungen außerhalb der Geschäftszeiten, mit Demontage und Aktenvernichtung nach Absprache.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24">
+    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-3">Ablauf</p>
+    <h2 class="text-3xl md:text-5xl font-black uppercase mb-10 md:mb-14 text-[#0d1b2a] max-w-3xl">So läuft eine Entrümpelung ab.</h2>
+
+    <div class="grid md:grid-cols-4 gap-8 md:gap-6 border-t border-slate-200 pt-10">
+      {process.map((step) => (
+        <div class="md:border-r md:last:border-r-0 md:border-slate-200 md:pr-6">
+          <p class="text-brand font-black italic text-5xl md:text-6xl mb-4 leading-none">{step.n}</p>
+          <h3 class="text-lg md:text-xl font-black uppercase mb-3 text-[#0d1b2a] leading-tight">{step.h}</h3>
+          <p class="text-sm text-slate-600 font-medium leading-relaxed">{step.p}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24 bg-slate-50">
+    <div class="grid md:grid-cols-12 gap-8 md:gap-16">
+      <div class="md:col-span-4">
+        <p class="text-brand text-[10px] md:text-xs font-bold uppercase tracking-widest italic mb-3">Einsatzgebiet</p>
+        <h2 class="text-3xl md:text-4xl font-black uppercase leading-[0.95] text-[#0d1b2a]">Wo wir entrümpeln.</h2>
+      </div>
+      <div class="md:col-span-8">
+        <p class="text-base md:text-lg text-slate-600 font-medium leading-relaxed mb-6 max-w-2xl">
+          Von Kirn aus sind wir im gesamten Landkreis Bad Kreuznach und entlang der Nahe unterwegs. Für <a href="/dienstleistungen/bad-kreuznach" class="text-brand font-bold hover:text-[#0d1b2a] transition-colors">Bad Kreuznach</a> und <a href="/dienstleistungen/idar-oberstein" class="text-brand font-bold hover:text-[#0d1b2a] transition-colors">Idar-Oberstein</a> haben wir eigene Seiten mit den Besonderheiten vor Ort.
+        </p>
+        <ul class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs md:text-sm font-bold uppercase tracking-wider text-[#0d1b2a]">
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Kirn</li>
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Bad Kreuznach</li>
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Idar-Oberstein</li>
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Bad Sobernheim</li>
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Simmertal</li>
+          <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand rounded-full"></span>Meisenheim</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 md:px-24 py-16 md:py-24">
+    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand italic mb-3">Häufige Fragen</p>
+    <h2 class="text-3xl md:text-5xl font-black uppercase mb-10 md:mb-14 text-[#0d1b2a] max-w-3xl">FAQ – Entrümpelung.</h2>
+
+    <div class="divide-y divide-slate-200 border-y border-slate-200 max-w-4xl">
+      {faqs.map((f) => (
+        <details class="group py-5 md:py-6">
+          <summary class="flex justify-between items-center cursor-pointer list-none gap-6">
+            <h3 class="text-base md:text-lg font-black uppercase text-[#0d1b2a] leading-snug">{f.q}</h3>
+            <span class="text-brand font-black text-2xl shrink-0 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="text-sm md:text-base text-slate-600 font-medium leading-relaxed mt-4 max-w-3xl">{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <p class="mt-8 text-sm text-slate-500 font-medium max-w-3xl">
+      Mehr zum Thema im Ratgeber: <a href="/blog/entruempelung-ablauf-kosten-faktoren" class="text-brand font-bold hover:text-[#0d1b2a] transition-colors">Entrümpelung und Wohnungsauflösung: Ablauf, Aufwand und was den Preis bestimmt</a>.
+    </p>
+  </section>
+
+  <ProjectGallery
+    projects={projects}
+    eyebrow="Referenzen"
+    heading="Entrümpelungsprojekte."
+    intro="Ausgewählte Räumungen aus Kirn und Umgebung. Klicken Sie auf ein Projekt für die vollständige Fotostrecke."
+    showServiceChip={false}
+  />
+
+  <IndividualOfferCTA />
+</Layout>
