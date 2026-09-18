@@ -5,6 +5,8 @@ pubDate: 2026-09-18
 author: "Adam Attar"
 category: "Garten"
 tags: ["Heckenschnitt", "Gartenpflege", "Bundesnaturschutzgesetz", "Nachbarrecht"]
+heroImage: "./images/heckenschnitt-wann-erlaubt.jpg"
+heroImageAlt: "Gärtner schneidet Formgehölze mit der Gartenschere – Heckenschnitt und Formschnitt"
 featured: false
 faq:
   - question: "Wann darf man Hecken nicht schneiden?"

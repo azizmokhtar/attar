@@ -5,6 +5,8 @@ pubDate: 2026-09-18
 author: "Adam Attar"
 category: "Reinigung"
 tags: ["Bauendreinigung", "Bauschlussreinigung", "Neubau", "Übergabe"]
+heroImage: "./images/bauendreinigung-was-gehoert-dazu.jpg"
+heroImageAlt: "Rohbau mit Ziegelwand und Baustaub vor der Bauendreinigung"
 featured: false
 faq:
   - question: "Was ist der Unterschied zwischen Bauendreinigung und Bauzwischenreinigung?"

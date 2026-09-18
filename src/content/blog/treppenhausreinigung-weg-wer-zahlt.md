@@ -5,6 +5,8 @@ pubDate: 2026-09-18
 author: "Adam Attar"
 category: "Reinigung"
 tags: ["Treppenhausreinigung", "WEG", "Hausverwaltung", "Betriebskosten"]
+heroImage: "./images/treppenhausreinigung-weg-wer-zahlt.jpg"
+heroImageAlt: "Reinigungskraft mit Abzieher, Sprühflasche und Mikrofasertuch im Treppenhaus"
 featured: false
 faq:
   - question: "Wer zahlt die Treppenhausreinigung in einer WEG?"

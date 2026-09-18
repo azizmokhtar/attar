@@ -5,6 +5,8 @@ pubDate: 2026-09-18
 author: "Adam Attar"
 category: "Entrümpelung"
 tags: ["Entrümpelung", "Wohnungsauflösung", "Haushaltsauflösung", "Entsorgung"]
+heroImage: "./images/entruempelung-ablauf-kosten-faktoren.jpg"
+heroImageAlt: "Transporter voller Kartons bei einer Wohnungsauflösung in Kirn"
 featured: false
 faq:
   - question: "Wie läuft eine Entrümpelung ab?"

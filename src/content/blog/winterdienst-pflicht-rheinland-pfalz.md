@@ -5,6 +5,8 @@ pubDate: 2026-09-18
 author: "Adam Attar"
 category: "Hausmeister"
 tags: ["Winterdienst", "Räum- und Streupflicht", "Hausmeisterservice", "Verkehrssicherungspflicht"]
+heroImage: "./images/winterdienst-pflicht-rheinland-pfalz.jpg"
+heroImageAlt: "Hausmeister mit Werkzeuggürtel – Objektbetreuung und Winterdienst"
 featured: false
 faq:
   - question: "Wer muss in Rheinland-Pfalz den Gehweg räumen und streuen?"

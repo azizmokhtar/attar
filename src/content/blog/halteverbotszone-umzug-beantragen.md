@@ -5,6 +5,8 @@ pubDate: 2026-09-18
 author: "Adam Attar"
 category: "Umzug"
 tags: ["Halteverbotszone", "Umzug", "Umzugsservice", "Ordnungsamt"]
+heroImage: "./images/halteverbotszone-umzug-beantragen.jpg"
+heroImageAlt: "Umzugskarton wird mit Klebeband verschlossen – Vorbereitung auf den Umzug"
 featured: false
 faq:
   - question: "Wo beantrage ich eine Halteverbotszone für meinen Umzug?"
